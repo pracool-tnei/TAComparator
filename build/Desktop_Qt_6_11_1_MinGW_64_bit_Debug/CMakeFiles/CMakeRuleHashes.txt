@@ -1,0 +1,7 @@
+# Hashes of file build rules.
+ad8877205801aa9249ad529331b84c7e .qt/rcc/qrc_TAComparator_translations.cpp
+62b0d6298cd2886246408a7c501c78af CMakeFiles/TAComparator_autogen
+62b0d6298cd2886246408a7c501c78af CMakeFiles/TAComparator_lrelease
+a3e973741029d99722213346f1e86849 CMakeFiles/TAComparator_lupdate
+abe15aede53bf0b2cef366b360b377cd TAComparator_autogen/timestamp
+c0020ae8836365c1504f99ffc44eb19d TAComparator_en_AS.qm

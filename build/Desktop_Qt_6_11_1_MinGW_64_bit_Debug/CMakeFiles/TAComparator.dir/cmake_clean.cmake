@@ -1,0 +1,42 @@
+file(REMOVE_RECURSE
+  ".qt/rcc/qrc_TAComparator_translations.cpp"
+  "CMakeFiles/TAComparator_autogen.dir/AutogenUsed.txt"
+  "CMakeFiles/TAComparator_autogen.dir/ParseCache.txt"
+  "TAComparator_autogen"
+  "CMakeFiles/TAComparator.dir/TAComparator_autogen/mocs_compilation.cpp.obj"
+  "CMakeFiles/TAComparator.dir/TAComparator_autogen/mocs_compilation.cpp.obj.d"
+  "CMakeFiles/TAComparator.dir/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/.qt/rcc/qrc_TAComparator_translations.cpp.obj"
+  "CMakeFiles/TAComparator.dir/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/.qt/rcc/qrc_TAComparator_translations.cpp.obj.d"
+  "CMakeFiles/TAComparator.dir/main.cpp.obj"
+  "CMakeFiles/TAComparator.dir/main.cpp.obj.d"
+  "CMakeFiles/TAComparator.dir/mainwindow.cpp.obj"
+  "CMakeFiles/TAComparator.dir/mainwindow.cpp.obj.d"
+  "CMakeFiles/TAComparator.dir/src/model/Component.cpp.obj"
+  "CMakeFiles/TAComparator.dir/src/model/Component.cpp.obj.d"
+  "CMakeFiles/TAComparator.dir/src/model/Metadata.cpp.obj"
+  "CMakeFiles/TAComparator.dir/src/model/Metadata.cpp.obj.d"
+  "CMakeFiles/TAComparator.dir/src/model/ObjectGroup.cpp.obj"
+  "CMakeFiles/TAComparator.dir/src/model/ObjectGroup.cpp.obj.d"
+  "CMakeFiles/TAComparator.dir/src/model/Signal.cpp.obj"
+  "CMakeFiles/TAComparator.dir/src/model/Signal.cpp.obj.d"
+  "CMakeFiles/TAComparator.dir/src/model/Study.cpp.obj"
+  "CMakeFiles/TAComparator.dir/src/model/Study.cpp.obj.d"
+  "CMakeFiles/TAComparator.dir/src/parser/DiscoveryParser.cpp.obj"
+  "CMakeFiles/TAComparator.dir/src/parser/DiscoveryParser.cpp.obj.d"
+  "CMakeFiles/TAComparator.dir/src/parser/ItfParser.cpp.obj"
+  "CMakeFiles/TAComparator.dir/src/parser/ItfParser.cpp.obj.d"
+  "CMakeFiles/TAComparator.dir/src/parser/PopulationParser.cpp.obj"
+  "CMakeFiles/TAComparator.dir/src/parser/PopulationParser.cpp.obj.d"
+  "CMakeFiles/TAComparator.dir/src/reader/TextFileReader.cpp.obj"
+  "CMakeFiles/TAComparator.dir/src/reader/TextFileReader.cpp.obj.d"
+  "TAComparator.exe"
+  "TAComparator.exe.manifest"
+  "TAComparator.pdb"
+  "TAComparator_en_AS.qm"
+  "libTAComparator.dll.a"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/TAComparator.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

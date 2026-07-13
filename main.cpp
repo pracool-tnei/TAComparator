@@ -1,0 +1,35 @@
+#include "mainwindow.h"
+
+#include <QApplication>
+#include <QLocale>
+#include <QTranslator>
+
+#include "src/model/Study.h"
+#include "src/parser/ItfParser.h"
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+
+    QTranslator translator;
+    const QStringList uiLanguages = QLocale::system().uiLanguages();
+    for (const QString &locale : uiLanguages) {
+        const QString baseName = "TAComparator_" + QLocale(locale).name();
+        if (translator.load(":/i18n/" + baseName)) {
+            a.installTranslator(&translator);
+            break;
+        }
+    }
+    MainWindow w;
+    w.show();
+
+    Study study;
+
+    ItfParser parser;
+
+    parser.parse("samples/first.itf", study);
+
+
+
+    return QApplication::exec();
+}

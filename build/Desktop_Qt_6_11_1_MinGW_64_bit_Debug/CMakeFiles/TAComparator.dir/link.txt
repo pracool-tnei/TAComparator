@@ -1,0 +1,3 @@
+C:\Qt\Tools\CMake_64\bin\cmake.exe -E rm -f CMakeFiles\TAComparator.dir/objects.a
+C:\Qt\Tools\mingw1310_64\bin\ar.exe qc CMakeFiles\TAComparator.dir/objects.a @CMakeFiles\TAComparator.dir\objects1.rsp
+C:\Qt\Tools\mingw1310_64\bin\g++.exe -g -mwindows -Wl,--whole-archive CMakeFiles\TAComparator.dir/objects.a -Wl,--no-whole-archive -o TAComparator.exe -Wl,--out-implib,libTAComparator.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\TAComparator.dir\linkLibs.rsp
