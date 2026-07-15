@@ -9,7 +9,7 @@
 
 bool ItfParser::parse(const QString& fileName, Study& study)
 {
-    study.mFileName = fileName;
+    study.setFileName(fileName);
 
     DiscoveryParser discoveryParser;
 

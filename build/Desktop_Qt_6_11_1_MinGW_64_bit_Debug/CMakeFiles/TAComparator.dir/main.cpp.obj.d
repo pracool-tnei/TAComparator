@@ -386,6 +386,16 @@ CMakeFiles/TAComparator.dir/main.cpp.obj: \
  C:/Qt/6.11.1/mingw_64/include/QtGui/qcursor.h \
  C:/Qt/6.11.1/mingw_64/include/QtGui/qbitmap.h \
  C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtabwidget.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QString \
+ C:\Users\prakul.p\Documents\Workspace\github\TAComparator\src/model/Study.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QList \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QMap \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QStringList \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QVector \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qvector.h \
+ C:\Users\prakul.p\Documents\Workspace\github\TAComparator\src/model/ObjectGroup.h \
+ C:\Users\prakul.p\Documents\Workspace\github\TAComparator\src/model/Component.h \
+ C:\Users\prakul.p\Documents\Workspace\github\TAComparator\src/model/Signal.h \
  C:/Qt/6.11.1/mingw_64/include/QtWidgets/QApplication \
  C:/Qt/6.11.1/mingw_64/include/QtWidgets/qapplication.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qcoreapplication.h \
@@ -403,12 +413,4 @@ CMakeFiles/TAComparator.dir/main.cpp.obj: \
  C:/Qt/6.11.1/mingw_64/include/QtCore/QLocale \
  C:/Qt/6.11.1/mingw_64/include/QtCore/QTranslator \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qtranslator.h \
- C:\Users\prakul.p\Documents\Workspace\github\TAComparator\src/model/Study.h \
- C:/Qt/6.11.1/mingw_64/include/QtCore/QMap \
- C:/Qt/6.11.1/mingw_64/include/QtCore/QString \
- C:\Users\prakul.p\Documents\Workspace\github\TAComparator\src/model/ObjectGroup.h \
- C:\Users\prakul.p\Documents\Workspace\github\TAComparator\src/model/Component.h \
- C:\Users\prakul.p\Documents\Workspace\github\TAComparator\src/model/Signal.h \
- C:/Qt/6.11.1/mingw_64/include/QtCore/QVector \
- C:/Qt/6.11.1/mingw_64/include/QtCore/qvector.h \
  C:\Users\prakul.p\Documents\Workspace\github\TAComparator\src/parser/ItfParser.h

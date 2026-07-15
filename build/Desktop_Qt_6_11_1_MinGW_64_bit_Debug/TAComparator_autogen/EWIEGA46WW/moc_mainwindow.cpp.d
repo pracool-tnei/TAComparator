@@ -1,5 +1,10 @@
 C:/Users/prakul.p/Documents/Workspace/github/TAComparator/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/TAComparator_autogen/EWIEGA46WW/moc_mainwindow.cpp: C:/Users/prakul.p/Documents/Workspace/github/TAComparator/mainwindow.h \
   C:/Users/prakul.p/Documents/Workspace/github/TAComparator/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/TAComparator_autogen/moc_predefs.h \
+  C:/Qt/6.11.1/mingw_64/include/QtCore/QList \
+  C:/Qt/6.11.1/mingw_64/include/QtCore/QMap \
+  C:/Qt/6.11.1/mingw_64/include/QtCore/QString \
+  C:/Qt/6.11.1/mingw_64/include/QtCore/QStringList \
+  C:/Qt/6.11.1/mingw_64/include/QtCore/QVector \
   C:/Qt/6.11.1/mingw_64/include/QtCore/q17memory.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/q20bit.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/q20functional.h \
@@ -125,6 +130,7 @@ C:/Users/prakul.p/Documents/Workspace/github/TAComparator/build/Desktop_Qt_6_11_
   C:/Qt/6.11.1/mingw_64/include/QtCore/qutf8stringview.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/qvariant.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/qvarlengtharray.h \
+  C:/Qt/6.11.1/mingw_64/include/QtCore/qvector.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/qyieldcpu.h \
@@ -374,4 +380,8 @@ C:/Users/prakul.p/Documents/Workspace/github/TAComparator/build/Desktop_Qt_6_11_
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/sys/types.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/time.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/vadefs.h \
-  C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h
+  C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
+  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Component.h \
+  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/ObjectGroup.h \
+  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Signal.h \
+  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Study.h

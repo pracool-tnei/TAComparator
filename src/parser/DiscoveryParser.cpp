@@ -104,7 +104,7 @@ void DiscoveryParser::parseDefineBlock(TextFileReader& reader,
 
     mStudy->addObjectGroup(mCurrentObject);
 
-    ObjectGroup* group = mStudy->objectGroup(mCurrentObject);
+    ObjectGroup* group = mStudy->getObjectGroup(mCurrentObject);
 
     if (!group)
         return;
@@ -173,7 +173,7 @@ void DiscoveryParser::parseSystemMapRecord(const QString& objectType,
 
     QString displayName = name.isEmpty() ? qualName : name;
 
-    ObjectGroup* group = mStudy->objectGroup(objectType);
+    ObjectGroup* group = mStudy->getObjectGroup(objectType);
 
     if (!group)
         return;

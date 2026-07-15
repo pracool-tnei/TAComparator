@@ -282,16 +282,22 @@ CMakeFiles/TAComparator.dir/src/parser/PopulationParser.cpp.obj: \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qstringbuilder.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qstringconverter.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qstringconverter_base.h \
- C:/Qt/6.11.1/mingw_64/include/QtCore/QDebug \
- C:/Qt/6.11.1/mingw_64/include/QtCore/qdebug.h \
- C:/Qt/6.11.1/mingw_64/include/QtCore/qfloat16.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QStringList \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qstringlist.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qlist.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qhashfunctions.h \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/numeric \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_numeric.h \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/glue_numeric_defs.h \
- C:/Qt/6.11.1/mingw_64/include/QtCore/qmath.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qiterator.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qbytearraylist.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qalgorithms.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/q20bit.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qstringmatcher.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QDebug \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qdebug.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qfloat16.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qmath.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qtformat_impl.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qtextstream.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qiodevicebase.h \
@@ -327,25 +333,25 @@ CMakeFiles/TAComparator.dir/src/parser/PopulationParser.cpp.obj: \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_multiset.h \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/unordered_set \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/unordered_set.h \
- C:/Qt/6.11.1/mingw_64/include/QtCore/qlist.h \
- C:/Qt/6.11.1/mingw_64/include/QtCore/qiterator.h \
- C:/Qt/6.11.1/mingw_64/include/QtCore/qbytearraylist.h \
- C:/Qt/6.11.1/mingw_64/include/QtCore/qstringlist.h \
- C:/Qt/6.11.1/mingw_64/include/QtCore/qstringmatcher.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qmap.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qshareddata_impl.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qset.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qhash.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qvarlengtharray.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qalloc.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QRegularExpression \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qregularexpression.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qvariant.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/q23utility.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/q20utility.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qobject.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qobject_impl.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qbindingstorage.h \
  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/reader/TextFileReader.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/QFile \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qfile.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qfiledevice.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qiodevice.h \
- C:/Qt/6.11.1/mingw_64/include/QtCore/qobject.h \
- C:/Qt/6.11.1/mingw_64/include/QtCore/qobject_impl.h \
- C:/Qt/6.11.1/mingw_64/include/QtCore/qbindingstorage.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qspan.h \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cassert \
  C:/Qt/6.11.1/mingw_64/include/QtCore/q20iterator.h \
@@ -381,9 +387,10 @@ CMakeFiles/TAComparator.dir/src/parser/PopulationParser.cpp.obj: \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/fs_ops.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/QTextStream \
  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Study.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QList \
  C:/Qt/6.11.1/mingw_64/include/QtCore/QMap \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QVector \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qvector.h \
  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/ObjectGroup.h \
  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Component.h \
- C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Signal.h \
- C:/Qt/6.11.1/mingw_64/include/QtCore/QVector \
- C:/Qt/6.11.1/mingw_64/include/QtCore/qvector.h
+ C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Signal.h

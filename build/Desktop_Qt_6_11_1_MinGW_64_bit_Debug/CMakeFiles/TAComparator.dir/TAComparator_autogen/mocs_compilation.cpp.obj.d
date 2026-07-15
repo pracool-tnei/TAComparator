@@ -387,6 +387,21 @@ CMakeFiles/TAComparator.dir/TAComparator_autogen/mocs_compilation.cpp.obj: \
  C:/Qt/6.11.1/mingw_64/include/QtGui/qcursor.h \
  C:/Qt/6.11.1/mingw_64/include/QtGui/qbitmap.h \
  C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtabwidget.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QString \
+ C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Study.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QList \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QMap \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QStringList \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QVector \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qvector.h \
+ C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/ObjectGroup.h \
+ C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Component.h \
+ C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Signal.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qtmochelpers.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qtmocconstants.h \
- C:/Qt/6.11.1/mingw_64/include/QtCore/q20algorithm.h
+ C:/Qt/6.11.1/mingw_64/include/QtCore/q20algorithm.h \
+ C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\TAComparator_autogen\YPKJ5OE7LN/moc_PlotWidget.cpp \
+ C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotWidget.h \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/QWidget \
+ C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\TAComparator_autogen\YPKJ5OE7LN/moc_StudyBrowserWidget.cpp \
+ C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/StudyBrowserWidget.h

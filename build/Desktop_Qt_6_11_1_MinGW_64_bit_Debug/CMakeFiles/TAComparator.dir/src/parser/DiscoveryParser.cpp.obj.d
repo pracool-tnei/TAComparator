@@ -295,6 +295,7 @@ CMakeFiles/TAComparator.dir/src/parser/DiscoveryParser.cpp.obj: \
  C:/Qt/6.11.1/mingw_64/include/QtCore/q20bit.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qstringmatcher.h \
  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Study.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QList \
  C:/Qt/6.11.1/mingw_64/include/QtCore/QMap \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qmap.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qscopeguard.h \
@@ -304,11 +305,11 @@ CMakeFiles/TAComparator.dir/src/parser/DiscoveryParser.cpp.obj: \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_tree.h \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_map.h \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_multimap.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QVector \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qvector.h \
  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/ObjectGroup.h \
  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Component.h \
  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Signal.h \
- C:/Qt/6.11.1/mingw_64/include/QtCore/QVector \
- C:/Qt/6.11.1/mingw_64/include/QtCore/qvector.h \
  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/reader/TextFileReader.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/QFile \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qfile.h \

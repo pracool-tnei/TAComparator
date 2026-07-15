@@ -260,11 +260,41 @@ CMakeFiles/TAComparator.dir/src/model/Signal.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TAComparator.dir/src/model/Signal.cpp.s"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\prakul.p\Documents\Workspace\github\TAComparator\src\model\Signal.cpp -o CMakeFiles\TAComparator.dir\src\model\Signal.cpp.s
 
+CMakeFiles/TAComparator.dir/src/ui/StudyBrowserWidget.cpp.obj: CMakeFiles/TAComparator.dir/flags.make
+CMakeFiles/TAComparator.dir/src/ui/StudyBrowserWidget.cpp.obj: CMakeFiles/TAComparator.dir/includes_CXX.rsp
+CMakeFiles/TAComparator.dir/src/ui/StudyBrowserWidget.cpp.obj: C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/StudyBrowserWidget.cpp
+CMakeFiles/TAComparator.dir/src/ui/StudyBrowserWidget.cpp.obj: CMakeFiles/TAComparator.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/TAComparator.dir/src/ui/StudyBrowserWidget.cpp.obj"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TAComparator.dir/src/ui/StudyBrowserWidget.cpp.obj -MF CMakeFiles\TAComparator.dir\src\ui\StudyBrowserWidget.cpp.obj.d -o CMakeFiles\TAComparator.dir\src\ui\StudyBrowserWidget.cpp.obj -c C:\Users\prakul.p\Documents\Workspace\github\TAComparator\src\ui\StudyBrowserWidget.cpp
+
+CMakeFiles/TAComparator.dir/src/ui/StudyBrowserWidget.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TAComparator.dir/src/ui/StudyBrowserWidget.cpp.i"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\prakul.p\Documents\Workspace\github\TAComparator\src\ui\StudyBrowserWidget.cpp > CMakeFiles\TAComparator.dir\src\ui\StudyBrowserWidget.cpp.i
+
+CMakeFiles/TAComparator.dir/src/ui/StudyBrowserWidget.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TAComparator.dir/src/ui/StudyBrowserWidget.cpp.s"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\prakul.p\Documents\Workspace\github\TAComparator\src\ui\StudyBrowserWidget.cpp -o CMakeFiles\TAComparator.dir\src\ui\StudyBrowserWidget.cpp.s
+
+CMakeFiles/TAComparator.dir/src/ui/PlotWidget.cpp.obj: CMakeFiles/TAComparator.dir/flags.make
+CMakeFiles/TAComparator.dir/src/ui/PlotWidget.cpp.obj: CMakeFiles/TAComparator.dir/includes_CXX.rsp
+CMakeFiles/TAComparator.dir/src/ui/PlotWidget.cpp.obj: C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotWidget.cpp
+CMakeFiles/TAComparator.dir/src/ui/PlotWidget.cpp.obj: CMakeFiles/TAComparator.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/TAComparator.dir/src/ui/PlotWidget.cpp.obj"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TAComparator.dir/src/ui/PlotWidget.cpp.obj -MF CMakeFiles\TAComparator.dir\src\ui\PlotWidget.cpp.obj.d -o CMakeFiles\TAComparator.dir\src\ui\PlotWidget.cpp.obj -c C:\Users\prakul.p\Documents\Workspace\github\TAComparator\src\ui\PlotWidget.cpp
+
+CMakeFiles/TAComparator.dir/src/ui/PlotWidget.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TAComparator.dir/src/ui/PlotWidget.cpp.i"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\prakul.p\Documents\Workspace\github\TAComparator\src\ui\PlotWidget.cpp > CMakeFiles\TAComparator.dir\src\ui\PlotWidget.cpp.i
+
+CMakeFiles/TAComparator.dir/src/ui/PlotWidget.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TAComparator.dir/src/ui/PlotWidget.cpp.s"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\prakul.p\Documents\Workspace\github\TAComparator\src\ui\PlotWidget.cpp -o CMakeFiles\TAComparator.dir\src\ui\PlotWidget.cpp.s
+
 CMakeFiles/TAComparator.dir/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/.qt/rcc/qrc_TAComparator_translations.cpp.obj: CMakeFiles/TAComparator.dir/flags.make
 CMakeFiles/TAComparator.dir/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/.qt/rcc/qrc_TAComparator_translations.cpp.obj: CMakeFiles/TAComparator.dir/includes_CXX.rsp
 CMakeFiles/TAComparator.dir/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/.qt/rcc/qrc_TAComparator_translations.cpp.obj: .qt/rcc/qrc_TAComparator_translations.cpp
 CMakeFiles/TAComparator.dir/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/.qt/rcc/qrc_TAComparator_translations.cpp.obj: CMakeFiles/TAComparator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/TAComparator.dir/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/.qt/rcc/qrc_TAComparator_translations.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/TAComparator.dir/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/.qt/rcc/qrc_TAComparator_translations.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TAComparator.dir/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/.qt/rcc/qrc_TAComparator_translations.cpp.obj -MF CMakeFiles\TAComparator.dir\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\.qt\rcc\qrc_TAComparator_translations.cpp.obj.d -o CMakeFiles\TAComparator.dir\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\.qt\rcc\qrc_TAComparator_translations.cpp.obj -c C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\.qt\rcc\qrc_TAComparator_translations.cpp
 
 CMakeFiles/TAComparator.dir/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/.qt/rcc/qrc_TAComparator_translations.cpp.i: cmake_force
@@ -289,6 +319,8 @@ TAComparator_OBJECTS = \
 "CMakeFiles/TAComparator.dir/src/model/Component.cpp.obj" \
 "CMakeFiles/TAComparator.dir/src/model/Study.cpp.obj" \
 "CMakeFiles/TAComparator.dir/src/model/Signal.cpp.obj" \
+"CMakeFiles/TAComparator.dir/src/ui/StudyBrowserWidget.cpp.obj" \
+"CMakeFiles/TAComparator.dir/src/ui/PlotWidget.cpp.obj" \
 "CMakeFiles/TAComparator.dir/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/.qt/rcc/qrc_TAComparator_translations.cpp.obj"
 
 # External object files for target TAComparator
@@ -306,6 +338,8 @@ TAComparator.exe: CMakeFiles/TAComparator.dir/src/model/Metadata.cpp.obj
 TAComparator.exe: CMakeFiles/TAComparator.dir/src/model/Component.cpp.obj
 TAComparator.exe: CMakeFiles/TAComparator.dir/src/model/Study.cpp.obj
 TAComparator.exe: CMakeFiles/TAComparator.dir/src/model/Signal.cpp.obj
+TAComparator.exe: CMakeFiles/TAComparator.dir/src/ui/StudyBrowserWidget.cpp.obj
+TAComparator.exe: CMakeFiles/TAComparator.dir/src/ui/PlotWidget.cpp.obj
 TAComparator.exe: CMakeFiles/TAComparator.dir/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/.qt/rcc/qrc_TAComparator_translations.cpp.obj
 TAComparator.exe: CMakeFiles/TAComparator.dir/build.make
 TAComparator.exe: C:/Qt/6.11.1/mingw_64/lib/libQt6Widgets.a
@@ -316,7 +350,7 @@ TAComparator.exe: TAComparator.exe.manifest
 TAComparator.exe: CMakeFiles/TAComparator.dir/linkLibs.rsp
 TAComparator.exe: CMakeFiles/TAComparator.dir/objects1.rsp
 TAComparator.exe: CMakeFiles/TAComparator.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable TAComparator.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX executable TAComparator.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\TAComparator.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

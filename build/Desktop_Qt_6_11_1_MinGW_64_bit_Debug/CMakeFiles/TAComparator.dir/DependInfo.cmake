@@ -21,6 +21,8 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/parser/ItfParser.cpp" "CMakeFiles/TAComparator.dir/src/parser/ItfParser.cpp.obj" "gcc" "CMakeFiles/TAComparator.dir/src/parser/ItfParser.cpp.obj.d"
   "C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/parser/PopulationParser.cpp" "CMakeFiles/TAComparator.dir/src/parser/PopulationParser.cpp.obj" "gcc" "CMakeFiles/TAComparator.dir/src/parser/PopulationParser.cpp.obj.d"
   "C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/reader/TextFileReader.cpp" "CMakeFiles/TAComparator.dir/src/reader/TextFileReader.cpp.obj" "gcc" "CMakeFiles/TAComparator.dir/src/reader/TextFileReader.cpp.obj.d"
+  "C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotWidget.cpp" "CMakeFiles/TAComparator.dir/src/ui/PlotWidget.cpp.obj" "gcc" "CMakeFiles/TAComparator.dir/src/ui/PlotWidget.cpp.obj.d"
+  "C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/StudyBrowserWidget.cpp" "CMakeFiles/TAComparator.dir/src/ui/StudyBrowserWidget.cpp.obj" "gcc" "CMakeFiles/TAComparator.dir/src/ui/StudyBrowserWidget.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

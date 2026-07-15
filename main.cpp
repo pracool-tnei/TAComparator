@@ -22,14 +22,5 @@ int main(int argc, char *argv[])
     }
     MainWindow w;
     w.show();
-
-    Study study;
-
-    ItfParser parser;
-
-    parser.parse("samples/first.itf", study);
-
-
-
     return QApplication::exec();
 }

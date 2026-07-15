@@ -18,6 +18,10 @@ qt_add_executable(TAComparator
     src/reader/TextFileReader.cpp
     src/model/ObjectGroup.cpp src/model/Metadata.h src/model/Metadata.cpp src/model/Component.h src/model/Component.cpp
     src/model/Study.cpp src/model/Signal.cpp
+    src/ui/StudyBrowserWidget.h
+    src/ui/StudyBrowserWidget.cpp
+    src/ui/PlotWidget.h
+    src/ui/PlotWidget.cpp
 )
 
 qt_add_translations(

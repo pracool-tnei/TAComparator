@@ -563,6 +563,54 @@ src/reader/TextFileReader.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/reader/TextFileReader.cpp.s
 .PHONY : src/reader/TextFileReader.cpp.s
 
+src/ui/PlotWidget.obj: src/ui/PlotWidget.cpp.obj
+.PHONY : src/ui/PlotWidget.obj
+
+# target to build an object file
+src/ui/PlotWidget.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/ui/PlotWidget.cpp.obj
+.PHONY : src/ui/PlotWidget.cpp.obj
+
+src/ui/PlotWidget.i: src/ui/PlotWidget.cpp.i
+.PHONY : src/ui/PlotWidget.i
+
+# target to preprocess a source file
+src/ui/PlotWidget.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/ui/PlotWidget.cpp.i
+.PHONY : src/ui/PlotWidget.cpp.i
+
+src/ui/PlotWidget.s: src/ui/PlotWidget.cpp.s
+.PHONY : src/ui/PlotWidget.s
+
+# target to generate assembly for a file
+src/ui/PlotWidget.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/ui/PlotWidget.cpp.s
+.PHONY : src/ui/PlotWidget.cpp.s
+
+src/ui/StudyBrowserWidget.obj: src/ui/StudyBrowserWidget.cpp.obj
+.PHONY : src/ui/StudyBrowserWidget.obj
+
+# target to build an object file
+src/ui/StudyBrowserWidget.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/ui/StudyBrowserWidget.cpp.obj
+.PHONY : src/ui/StudyBrowserWidget.cpp.obj
+
+src/ui/StudyBrowserWidget.i: src/ui/StudyBrowserWidget.cpp.i
+.PHONY : src/ui/StudyBrowserWidget.i
+
+# target to preprocess a source file
+src/ui/StudyBrowserWidget.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/ui/StudyBrowserWidget.cpp.i
+.PHONY : src/ui/StudyBrowserWidget.cpp.i
+
+src/ui/StudyBrowserWidget.s: src/ui/StudyBrowserWidget.cpp.s
+.PHONY : src/ui/StudyBrowserWidget.s
+
+# target to generate assembly for a file
+src/ui/StudyBrowserWidget.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/ui/StudyBrowserWidget.cpp.s
+.PHONY : src/ui/StudyBrowserWidget.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -621,6 +669,12 @@ help:
 	@echo ... src/reader/TextFileReader.obj
 	@echo ... src/reader/TextFileReader.i
 	@echo ... src/reader/TextFileReader.s
+	@echo ... src/ui/PlotWidget.obj
+	@echo ... src/ui/PlotWidget.i
+	@echo ... src/ui/PlotWidget.s
+	@echo ... src/ui/StudyBrowserWidget.obj
+	@echo ... src/ui/StudyBrowserWidget.i
+	@echo ... src/ui/StudyBrowserWidget.s
 .PHONY : help
 
 

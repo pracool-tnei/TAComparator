@@ -88,12 +88,12 @@ CMakeFiles/TAComparator.dir/all: CMakeFiles/TAComparator_autogen_timestamp_deps.
 CMakeFiles/TAComparator.dir/all: CMakeFiles/TAComparator_autogen.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 "Built target TAComparator"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18 "Built target TAComparator"
 .PHONY : CMakeFiles/TAComparator.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/TAComparator.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\CMakeFiles 17
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\CMakeFiles 19
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/TAComparator.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\CMakeFiles 0
 .PHONY : CMakeFiles/TAComparator.dir/rule
@@ -166,7 +166,7 @@ CMakeFiles/update_translations.dir/clean:
 CMakeFiles/TAComparator_lrelease.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator_lrelease.dir\build.make CMakeFiles/TAComparator_lrelease.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator_lrelease.dir\build.make CMakeFiles/TAComparator_lrelease.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\CMakeFiles --progress-num=18 "Built target TAComparator_lrelease"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\CMakeFiles --progress-num=20 "Built target TAComparator_lrelease"
 .PHONY : CMakeFiles/TAComparator_lrelease.dir/all
 
 # Build rule for subdir invocation for target.
@@ -244,7 +244,7 @@ CMakeFiles/TAComparator_autogen_timestamp_deps.dir/clean:
 CMakeFiles/TAComparator_autogen.dir/all: CMakeFiles/TAComparator_autogen_timestamp_deps.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator_autogen.dir\build.make CMakeFiles/TAComparator_autogen.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator_autogen.dir\build.make CMakeFiles/TAComparator_autogen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\CMakeFiles --progress-num=17 "Built target TAComparator_autogen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\CMakeFiles --progress-num=19 "Built target TAComparator_autogen"
 .PHONY : CMakeFiles/TAComparator_autogen.dir/all
 
 # Build rule for subdir invocation for target.
