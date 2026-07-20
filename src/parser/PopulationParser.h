@@ -32,6 +32,8 @@ private:
 
 	void populateGovernorOutput(const QStringList& tokens);
 
+	void populateIndMachOutput(const QStringList& tokens);
+
 	void populateRunStep(const QStringList& tokens);
 
 	//helper function for debugging prints
@@ -62,6 +64,8 @@ private:
 
 	int mGovernorOutputRowsStored = 0;
 	int mGovernorOutputRowsSkipped = 0;
+
+	int mIndMachOutputRowsStored = 0;
 
 	int mRunStepRowsStored = 0;
 };

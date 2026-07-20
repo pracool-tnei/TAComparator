@@ -410,6 +410,12 @@
 			null
 		],
 		[
+			"C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/core/Logger.h",
+			"MU",
+			"PRMOGMWJPH/moc_Logger.cpp",
+			null
+		],
+		[
 			"C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Component.h",
 			"MU",
 			"VNQA4LF4BW/moc_Component.cpp",
@@ -461,6 +467,36 @@
 			"C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/reader/TextFileReader.h",
 			"MU",
 			"RFGUYJPF35/moc_TextFileReader.cpp",
+			null
+		],
+		[
+			"C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/FilePlotSettings.h",
+			"MU",
+			"YPKJ5OE7LN/moc_FilePlotSettings.cpp",
+			null
+		],
+		[
+			"C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/FileSelectionWidget.h",
+			"MU",
+			"YPKJ5OE7LN/moc_FileSelectionWidget.cpp",
+			null
+		],
+		[
+			"C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotBrowserWidget.h",
+			"MU",
+			"YPKJ5OE7LN/moc_PlotBrowserWidget.cpp",
+			null
+		],
+		[
+			"C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotDisplayMapper.h",
+			"MU",
+			"YPKJ5OE7LN/moc_PlotDisplayMapper.cpp",
+			null
+		],
+		[
+			"C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotDockWidget.h",
+			"MU",
+			"YPKJ5OE7LN/moc_PlotDockWidget.cpp",
 			null
 		],
 		[
@@ -561,6 +597,11 @@
 			null
 		],
 		[
+			"C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/core/Logger.cpp",
+			"MU",
+			null
+		],
+		[
 			"C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Component.cpp",
 			"MU",
 			null
@@ -602,6 +643,31 @@
 		],
 		[
 			"C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/reader/TextFileReader.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/FilePlotSettings.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/FileSelectionWidget.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotBrowserWidget.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotDisplayMapper.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotDockWidget.cpp",
 			"MU",
 			null
 		],

@@ -92,13 +92,13 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 34,
+				"line" : 41,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 28,
+				"line" : 35,
 				"parent" : 0
 			},
 			{
@@ -517,18 +517,26 @@
 				19,
 				20,
 				21,
-				26
+				23,
+				25,
+				27,
+				28,
+				30,
+				32,
+				34,
+				36,
+				42
 			]
 		}
 	],
 	"dependencies" : 
 	[
 		{
-			"id" : "TAComparator_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
-		},
-		{
 			"backtrace" : 0,
 			"id" : "TAComparator_autogen::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "TAComparator_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "TAComparator::@6890427a1f51a3e7e1df",
@@ -639,7 +647,7 @@
 			"sourceIndexes" : 
 			[
 				0,
-				27
+				43
 			]
 		},
 		{
@@ -657,7 +665,15 @@
 				19,
 				20,
 				21,
-				26
+				23,
+				25,
+				27,
+				28,
+				30,
+				32,
+				34,
+				36,
+				42
 			]
 		},
 		{
@@ -673,32 +689,40 @@
 				9,
 				10,
 				11,
-				15
+				15,
+				22,
+				24,
+				26,
+				29,
+				31,
+				33,
+				35,
+				37
 			]
 		},
 		{
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				22,
-				23,
-				25
+				38,
+				39,
+				41
 			]
 		},
 		{
 			"name" : "Resources",
 			"sourceIndexes" : 
 			[
-				24
+				40
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				28,
-				29,
-				30
+				44,
+				45,
+				46
 			]
 		}
 	],
@@ -826,6 +850,94 @@
 			"compileGroupIndex" : 0,
 			"path" : "src/model/Signal.cpp",
 			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"path" : "src/ui/StudyBrowserWidget.h",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "src/ui/StudyBrowserWidget.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"path" : "src/ui/PlotWidget.h",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "src/ui/PlotWidget.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"path" : "src/core/Logger.h",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "src/core/Logger.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "src/ui/FilePlotSettings.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"path" : "src/ui/FilePlotSettings.h",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "src/ui/FileSelectionWidget.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"path" : "src/ui/FileSelectionWidget.h",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "src/ui/PlotBrowserWidget.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"path" : "src/ui/PlotBrowserWidget.h",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "src/ui/PlotDockWidget.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"path" : "src/ui/PlotDockWidget.h",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "src/ui/PlotDisplayMapper.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"path" : "src/ui/PlotDisplayMapper.h",
+			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 47,

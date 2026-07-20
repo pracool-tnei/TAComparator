@@ -55,6 +55,8 @@ bool DiscoveryParser::parse(const QString& fileName, Study& study)
         if (line.isEmpty())
             continue;
 
+		parseHeaderMetadataLine(line);
+
         if (isDefineLine(line))
         {
             parseDefineBlock(reader, line);
@@ -210,6 +212,40 @@ void DiscoveryParser::parseFieldLine(const QString& line)
     }
 }
 
+void DiscoveryParser::parseHeaderMetadataLine(const QString& line)
+{
+    if (!mStudy)
+    {
+        return;
+    }
+
+    //
+    // Example:
+    // Network: s "Dynamic Plugin Profile Test Example (Refinery)"
+    //
+    QRegularExpression networkRegex(
+        R"(^Network\s*:\s*(?:\w+\s+)?\"([^\"]*)\")");
+
+    QRegularExpressionMatch match =
+        networkRegex.match(line);
+
+    if (!match.hasMatch())
+    {
+        return;
+    }
+
+    const QString networkName =
+        match.captured(1).trimmed();
+
+    if (networkName.isEmpty())
+    {
+        return;
+    }
+
+    mStudy->setNetworkName(networkName);
+
+    qDebug() << "Network:" << networkName;
+}
 
 bool DiscoveryParser::isHeaderLine(const QString& line) const
 {

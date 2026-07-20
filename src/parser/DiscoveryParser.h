@@ -24,6 +24,8 @@ private:
 
     void parseSystemMapRecord(const QString& objectType,
                               const QString& line);
+	
+	void parseHeaderMetadataLine(const QString& line);
 
     bool isHeaderLine(const QString& line) const;
     bool isDefineLine(const QString& line) const;

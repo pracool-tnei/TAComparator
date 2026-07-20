@@ -18,10 +18,13 @@ qt_add_executable(TAComparator
     src/reader/TextFileReader.cpp
     src/model/ObjectGroup.cpp src/model/Metadata.h src/model/Metadata.cpp src/model/Component.h src/model/Component.cpp
     src/model/Study.cpp src/model/Signal.cpp
-    src/ui/StudyBrowserWidget.h
-    src/ui/StudyBrowserWidget.cpp
-    src/ui/PlotWidget.h
-    src/ui/PlotWidget.cpp
+    src/ui/StudyBrowserWidget.h src/ui/StudyBrowserWidget.cpp src/ui/PlotWidget.h src/ui/PlotWidget.cpp
+    src/core/Logger.h
+    src/core/Logger.cpp
+    src/ui/FilePlotSettings.cpp src/ui/FilePlotSettings.h src/ui/FileSelectionWidget.cpp src/ui/FileSelectionWidget.h
+    src/ui/PlotBrowserWidget.cpp src/ui/PlotBrowserWidget.h
+    src/ui/PlotDockWidget.cpp src/ui/PlotDockWidget.h
+    src/ui/PlotDisplayMapper.cpp src/ui/PlotDisplayMapper.h
 )
 
 qt_add_translations(

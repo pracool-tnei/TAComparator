@@ -215,6 +215,14 @@ QString Study::getTargetGroupForStudyType(const QString& studyType) const
     {
         candidateGroup = "Generator";
     }
+	else if (candidateGroup == "IM")
+    {
+        candidateGroup = "IndMach";
+    }
+    else if (candidateGroup == "Gov")
+    {
+        candidateGroup = "Governor";
+    }
 
     const ObjectGroup* targetGroup = getObjectGroup(candidateGroup);
 
@@ -301,6 +309,16 @@ void Study::addTimeValue(double time)
 QVector<double> Study::getTimeValues() const
 {
     return mTimeValues;
+}
+
+void Study::setNetworkName(const QString& networkName)
+{
+    mNetworkName = networkName.trimmed();
+}
+
+QString Study::getNetworkName() const
+{
+    return mNetworkName;
 }
 
 void Study::dump() const

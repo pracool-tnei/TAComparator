@@ -39,16 +39,46 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
         "MainWindow",
-        "openPrimaryItfFile",
+        "addStudyFiles",
         "",
-        "openCompareItfFile"
+        "clearStudyFiles",
+        "addPlotWindow",
+        "resetPlotLayout",
+        "onFileSelectionSettingsChanged",
+        "showQuickHelp",
+        "showAbout",
+        "exportAllPlotsAsPng",
+        "exportAllPlotsAsPdf",
+        "exportSelectedPlotAsPng",
+        "useIpsaFriendlyNames",
+        "useRawItfNames"
     };
 
     QtMocHelpers::UintData qt_methods {
-        // Slot 'openPrimaryItfFile'
+        // Slot 'addStudyFiles'
         QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'openCompareItfFile'
+        // Slot 'clearStudyFiles'
         QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'addPlotWindow'
+        QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'resetPlotLayout'
+        QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onFileSelectionSettingsChanged'
+        QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'showQuickHelp'
+        QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'showAbout'
+        QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'exportAllPlotsAsPng'
+        QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'exportAllPlotsAsPdf'
+        QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'exportSelectedPlotAsPng'
+        QtMocHelpers::SlotData<void()>(11, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'useIpsaFriendlyNames'
+        QtMocHelpers::SlotData<void()>(12, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'useRawItfNames'
+        QtMocHelpers::SlotData<void()>(13, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -72,8 +102,18 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     auto *_t = static_cast<MainWindow *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->openPrimaryItfFile(); break;
-        case 1: _t->openCompareItfFile(); break;
+        case 0: _t->addStudyFiles(); break;
+        case 1: _t->clearStudyFiles(); break;
+        case 2: _t->addPlotWindow(); break;
+        case 3: _t->resetPlotLayout(); break;
+        case 4: _t->onFileSelectionSettingsChanged(); break;
+        case 5: _t->showQuickHelp(); break;
+        case 6: _t->showAbout(); break;
+        case 7: _t->exportAllPlotsAsPng(); break;
+        case 8: _t->exportAllPlotsAsPdf(); break;
+        case 9: _t->exportSelectedPlotAsPng(); break;
+        case 10: _t->useIpsaFriendlyNames(); break;
+        case 11: _t->useRawItfNames(); break;
         default: ;
         }
     }
@@ -99,14 +139,14 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 12)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 12;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 12)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 2;
+        _id -= 12;
     }
     return _id;
 }

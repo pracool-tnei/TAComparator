@@ -7,9 +7,17 @@
 #include "src/model/Study.h"
 #include "src/parser/ItfParser.h"
 
+#include "src/core/Logger.h"
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+	Logger::instance().setMinimumLevel(Logger::Level::Debug);
+    Logger::instance().setLogToConsole(true);
+    Logger::instance().setLogToFile(true);
+    Logger::instance().setLogFilePath("TAComparator.log");
+    Logger::instance().install();
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();

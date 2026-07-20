@@ -1,6 +1,8 @@
 TAComparator_autogen/timestamp: \
 	C:/Qt/6.11.1/mingw_64/include/QtCore/QList \
 	C:/Qt/6.11.1/mingw_64/include/QtCore/QMap \
+	C:/Qt/6.11.1/mingw_64/include/QtCore/QPoint \
+	C:/Qt/6.11.1/mingw_64/include/QtCore/QSize \
 	C:/Qt/6.11.1/mingw_64/include/QtCore/QString \
 	C:/Qt/6.11.1/mingw_64/include/QtCore/QStringList \
 	C:/Qt/6.11.1/mingw_64/include/QtCore/QVector \
@@ -133,6 +135,8 @@ TAComparator_autogen/timestamp: \
 	C:/Qt/6.11.1/mingw_64/include/QtCore/qversiontagging.h \
 	C:/Qt/6.11.1/mingw_64/include/QtCore/qxptype_traits.h \
 	C:/Qt/6.11.1/mingw_64/include/QtCore/qyieldcpu.h \
+	C:/Qt/6.11.1/mingw_64/include/QtGui/QColor \
+	C:/Qt/6.11.1/mingw_64/include/QtGui/QPixmap \
 	C:/Qt/6.11.1/mingw_64/include/QtGui/qaction.h \
 	C:/Qt/6.11.1/mingw_64/include/QtGui/qbitmap.h \
 	C:/Qt/6.11.1/mingw_64/include/QtGui/qbrush.h \
@@ -159,8 +163,10 @@ TAComparator_autogen/timestamp: \
 	C:/Qt/6.11.1/mingw_64/include/QtGui/qtransform.h \
 	C:/Qt/6.11.1/mingw_64/include/QtGui/qwindowdefs.h \
 	C:/Qt/6.11.1/mingw_64/include/QtGui/qwindowdefs_win.h \
+	C:/Qt/6.11.1/mingw_64/include/QtWidgets/QDockWidget \
 	C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMainWindow \
 	C:/Qt/6.11.1/mingw_64/include/QtWidgets/QWidget \
+	C:/Qt/6.11.1/mingw_64/include/QtWidgets/qdockwidget.h \
 	C:/Qt/6.11.1/mingw_64/include/QtWidgets/qmainwindow.h \
 	C:/Qt/6.11.1/mingw_64/include/QtWidgets/qsizepolicy.h \
 	C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtabwidget.h \
@@ -609,6 +615,8 @@ TAComparator_autogen/timestamp: \
 	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/main.cpp \
 	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/mainwindow.cpp \
 	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/mainwindow.h \
+	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/core/Logger.cpp \
+	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/core/Logger.h \
 	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Component.cpp \
 	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Component.h \
 	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Metadata.cpp \
@@ -627,6 +635,16 @@ TAComparator_autogen/timestamp: \
 	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/parser/PopulationParser.h \
 	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/reader/TextFileReader.cpp \
 	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/reader/TextFileReader.h \
+	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/FilePlotSettings.cpp \
+	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/FilePlotSettings.h \
+	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/FileSelectionWidget.cpp \
+	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/FileSelectionWidget.h \
+	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotBrowserWidget.cpp \
+	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotBrowserWidget.h \
+	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotDisplayMapper.cpp \
+	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotDisplayMapper.h \
+	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotDockWidget.cpp \
+	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotDockWidget.h \
 	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotWidget.cpp \
 	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotWidget.h \
 	C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/StudyBrowserWidget.cpp \

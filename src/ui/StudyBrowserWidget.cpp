@@ -9,9 +9,38 @@
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QLabel>
-#include <QVBoxLayout>
+#include <QFormLayout>
 #include <QFont>
+#include <QSizePolicy>
+#include <QCheckBox>
+#include <QCheckBox>
+#include <QSizePolicy>
 
+namespace
+{
+    struct ColorOption
+    {
+        QString mName;
+        QColor mColor;
+    };
+
+    QVector<ColorOption> comparisonColorOptions()
+    {
+        return
+        {
+            { "Blue", QColor(0, 90, 180) },
+            { "Red", QColor(190, 60, 50) },
+            { "Green", QColor(40, 140, 80) },
+            { "Purple", QColor(120, 80, 170) },
+            { "Orange", QColor(200, 130, 30) },
+            { "Cyan", QColor(0, 150, 170) },
+            { "Magenta", QColor(180, 70, 140) },
+            { "Brown", QColor(130, 90, 50) },
+            { "Dark Gray", QColor(80, 80, 80) },
+            { "Black", QColor(0, 0, 0) }
+        };
+    }
+}
 
 StudyBrowserWidget::StudyBrowserWidget(QWidget* parent)
     : QWidget(parent)
@@ -35,30 +64,22 @@ StudyBrowserWidget::StudyBrowserWidget(QWidget* parent)
 	titleFont.setPointSize(titleFont.pointSize() + 1);
 	titleLabel->setFont(titleFont);
 
-	QLabel* fileALabel = new QLabel("Primary file", mFileInfoFrame);
-	QLabel* fileBLabel = new QLabel("Compare file", mFileInfoFrame);
-	QLabel* timeLabel = new QLabel("Time points", mFileInfoFrame);
-	QLabel* studyTypeLabel = new QLabel("Study types", mFileInfoFrame);
-
-	mFileNameValueLabel = new QLabel("No file loaded", mFileInfoFrame);
-	mCompareFileNameValueLabel = new QLabel("No compare file", mFileInfoFrame);
-	mTimePointValueLabel = new QLabel("-", mFileInfoFrame);
-	mStudyTypeValueLabel = new QLabel("-", mFileInfoFrame);
-
+	QLabel* fileCountLabel = new QLabel("Files", mFileInfoFrame);
+	QLabel* loadedFilesLabel = new QLabel("Loaded files", mFileInfoFrame);
+	
+	mFileCountValueLabel = new QLabel("0 / 5", mFileInfoFrame);
+	
+	mLoadedFilesValueLabel = new QLabel("No file loaded", mFileInfoFrame);
+	mLoadedFilesValueLabel->setWordWrap(true);
+	
 	fileInfoLayout->addWidget(titleLabel, 0, 0, 1, 2);
-
-	fileInfoLayout->addWidget(fileALabel, 1, 0);
-	fileInfoLayout->addWidget(mFileNameValueLabel, 1, 1);
-
-	fileInfoLayout->addWidget(fileBLabel, 2, 0);
-	fileInfoLayout->addWidget(mCompareFileNameValueLabel, 2, 1);
-
-	fileInfoLayout->addWidget(timeLabel, 3, 0);
-	fileInfoLayout->addWidget(mTimePointValueLabel, 3, 1);
-
-	fileInfoLayout->addWidget(studyTypeLabel, 4, 0);
-	fileInfoLayout->addWidget(mStudyTypeValueLabel, 4, 1);
-
+	
+	fileInfoLayout->addWidget(fileCountLabel, 1, 0);
+	fileInfoLayout->addWidget(mFileCountValueLabel, 1, 1);
+	
+	fileInfoLayout->addWidget(loadedFilesLabel, 2, 0);
+	fileInfoLayout->addWidget(mLoadedFilesValueLabel, 2, 1);
+	
 	fileInfoLayout->setColumnStretch(1, 1);
 
 #endif
@@ -76,33 +97,104 @@ StudyBrowserWidget::StudyBrowserWidget(QWidget* parent)
 
     mSummaryLabel->setWordWrap(true);
 
-    QVBoxLayout* mainLayout = new QVBoxLayout(this);
+	QHBoxLayout* mainLayout = new QHBoxLayout(this);
+	mainLayout->setContentsMargins(8, 8, 8, 8);
+	mainLayout->setSpacing(8);
+	
+	QFrame* leftPanel = new QFrame(this);
+	leftPanel->setFrameShape(QFrame::StyledPanel);
+	leftPanel->setMinimumWidth(330);
+	leftPanel->setMaximumWidth(390);
+	
+	QVBoxLayout* leftLayout = new QVBoxLayout(leftPanel);
+	leftLayout->setContentsMargins(10, 10, 10, 10);
+	leftLayout->setSpacing(10);
+	
+	leftLayout->addWidget(mFileInfoFrame);
+	
+	//
+	// Selection card
+	//
+	QFrame* selectionFrame = new QFrame(leftPanel);
+	selectionFrame->setFrameShape(QFrame::StyledPanel);
+	
+	QVBoxLayout* selectionLayout = new QVBoxLayout(selectionFrame);
+	selectionLayout->setContentsMargins(10, 10, 10, 10);
+	selectionLayout->setSpacing(8);
+	
+	QLabel* selectionTitleLabel = new QLabel("Selection", selectionFrame);
+	
+	QFont selectionTitleFont = selectionTitleLabel->font();
+	selectionTitleFont.setBold(true);
+	selectionTitleLabel->setFont(selectionTitleFont);
+	
+	QFormLayout* selectionFormLayout = new QFormLayout;
+	selectionFormLayout->setLabelAlignment(Qt::AlignLeft);
+	selectionFormLayout->setFormAlignment(Qt::AlignTop);
+	selectionFormLayout->setHorizontalSpacing(12);
+	selectionFormLayout->setVerticalSpacing(8);
+	selectionFormLayout->setFieldGrowthPolicy(QFormLayout::AllNonFixedFieldsGrow);
+	
+	selectionFormLayout->addRow("Study Type", mStudyTypeCombo);
+	selectionFormLayout->addRow("Component", mComponentCombo);
+	selectionFormLayout->addRow("Signal", mSignalCombo);
+	selectionFormLayout->addRow("Plot Type", mPlotTypeCombo);
+	
+	selectionLayout->addWidget(selectionTitleLabel);
+	selectionLayout->addLayout(selectionFormLayout);
+	
+	leftLayout->addWidget(selectionFrame);
 
-    QHBoxLayout* studyTypeLayout = new QHBoxLayout();
-	studyTypeLayout->addWidget(new QLabel("Study Type:", this));
-	studyTypeLayout->addWidget(mStudyTypeCombo);
+//chekbox for file selection
+	mFileSelectionFrame = new QFrame(leftPanel);
+	mFileSelectionFrame->setFrameShape(QFrame::StyledPanel);
+	
+	mFileSelectionLayout = new QVBoxLayout(mFileSelectionFrame);
+	mFileSelectionLayout->setContentsMargins(10, 10, 10, 10);
+	mFileSelectionLayout->setSpacing(6);
+	
+	QLabel* fileSelectionTitle = new QLabel("Files to Plot", mFileSelectionFrame);
+	
+	QFont fileSelectionTitleFont = fileSelectionTitle->font();
+	fileSelectionTitleFont.setBold(true);
+	fileSelectionTitle->setFont(fileSelectionTitleFont);
+	
+	mFileSelectionLayout->addWidget(fileSelectionTitle);
+	
+	leftLayout->addWidget(mFileSelectionFrame);
 
-    QHBoxLayout* componentLayout = new QHBoxLayout();
-    componentLayout->addWidget(new QLabel("Component:", this));
-    componentLayout->addWidget(mComponentCombo);
-
-    QHBoxLayout* signalLayout = new QHBoxLayout();
-    signalLayout->addWidget(new QLabel("Signal:", this));
-    signalLayout->addWidget(mSignalCombo);
-
-	QHBoxLayout* plotTypeLayout = new QHBoxLayout;
-	plotTypeLayout->addWidget(new QLabel("Plot Type:", this));
-	plotTypeLayout->addWidget(mPlotTypeCombo);
-
-	mainLayout->addWidget(mFileInfoFrame);
-
-	mainLayout->addLayout(studyTypeLayout);
-	mainLayout->addLayout(componentLayout);
-	mainLayout->addLayout(signalLayout);
-	mainLayout->addLayout(plotTypeLayout);
-
-	mainLayout->addWidget(mSummaryLabel);
+	
+	//
+	// Plot status card
+	//
+	QFrame* statusFrame = new QFrame(leftPanel);
+	statusFrame->setFrameShape(QFrame::StyledPanel);
+	
+	QVBoxLayout* statusLayout = new QVBoxLayout(statusFrame);
+	statusLayout->setContentsMargins(10, 10, 10, 10);
+	statusLayout->setSpacing(8);
+	
+	QLabel* statusTitleLabel = new QLabel("Plot Status", statusFrame);
+	
+	QFont statusTitleFont = statusTitleLabel->font();
+	statusTitleFont.setBold(true);
+	statusTitleLabel->setFont(statusTitleFont);
+	
+	mSummaryLabel->setWordWrap(true);
+	mSummaryLabel->setText("No signal selected.");
+	
+	statusLayout->addWidget(statusTitleLabel);
+	statusLayout->addWidget(mSummaryLabel);
+	
+	leftLayout->addWidget(statusFrame);
+	leftLayout->addStretch();
+	
+	mPlotWidget->setSizePolicy(QSizePolicy::Expanding,
+							   QSizePolicy::Expanding);
+	
+	mainLayout->addWidget(leftPanel);
 	mainLayout->addWidget(mPlotWidget, 1);
+
 
     connect(mStudyTypeCombo,
 	        &QComboBox::currentIndexChanged,
@@ -126,16 +218,40 @@ StudyBrowserWidget::StudyBrowserWidget(QWidget* parent)
 
 void StudyBrowserWidget::setStudy(const Study* study)
 {
-    setStudies(study, nullptr);
+    QVector<const Study*> studies;
+
+    if (study)
+    {
+        studies.append(study);
+    }
+
+    setStudies(studies);
 }
 
 void StudyBrowserWidget::setStudies(const Study* primaryStudy,
                                     const Study* compareStudy)
 {
-    mPrimaryStudy = primaryStudy;
-    mCompareStudy = compareStudy;
+    QVector<const Study*> studies;
+
+    if (primaryStudy)
+    {
+        studies.append(primaryStudy);
+    }
+
+    if (compareStudy)
+    {
+        studies.append(compareStudy);
+    }
+
+    setStudies(studies);
+}
+
+void StudyBrowserWidget::setStudies(const QVector<const Study*>& studies)
+{
+    mStudies = studies;
 
     updateFileInfo();
+    rebuildFileSelection();
     populateStudyTypes();
 }
 
@@ -147,13 +263,19 @@ void StudyBrowserWidget::populateStudyTypes()
     mSummaryLabel->clear();
 
     if (mPlotWidget)
+    {
         mPlotWidget->clear();
+    }
 
-    if (!mPrimaryStudy)
+    const Study* study = referenceStudy();
+
+    if (!study)
+    {
         return;
+    }
 
     const QStringList studyTypes =
-        mPrimaryStudy->getStudyTypeNames();
+        study->getStudyTypeNames();
 
     for (const QString& studyType : studyTypes)
     {
@@ -170,27 +292,35 @@ void StudyBrowserWidget::populateComponents()
     mSummaryLabel->clear();
 
     if (mPlotWidget)
+    {
         mPlotWidget->clear();
+    }
 
-    if (!mPrimaryStudy)
+    const Study* study = referenceStudy();
+
+    if (!study)
+    {
         return;
+    }
 
     const QString studyType =
         mStudyTypeCombo->currentText();
 
     const QString targetGroup =
-        mPrimaryStudy->getTargetGroupForStudyType(studyType);
+        study->getTargetGroupForStudyType(studyType);
 
     if (targetGroup.isEmpty())
+    {
         return;
+    }
 
     const QList<int> componentIds =
-        mPrimaryStudy->getComponentIds(targetGroup);
+        study->getComponentIds(targetGroup);
 
     for (int componentId : componentIds)
     {
         const QString componentName =
-            mPrimaryStudy->getComponentName(targetGroup, componentId);
+            study->getComponentName(targetGroup, componentId);
 
         const QString displayText =
             QString("[%1] %2")
@@ -205,162 +335,186 @@ void StudyBrowserWidget::populateComponents()
 
 void StudyBrowserWidget::populateSignals()
 {
+    const QString previouslySelectedSignal =
+        mSignalCombo->currentText();
+
+    mSignalCombo->blockSignals(true);
     mSignalCombo->clear();
-    mSummaryLabel->clear();
 
-    if (mPlotWidget)
-        mPlotWidget->clear();
+    const Study* study = referenceStudy();
 
-    if (!mPrimaryStudy)
+    if (!study)
+    {
+        mSignalCombo->blockSignals(false);
+
+        mSummaryLabel->clear();
+
+        if (mPlotWidget)
+        {
+            mPlotWidget->clear();
+        }
+
         return;
+    }
 
     const QString studyType =
         mStudyTypeCombo->currentText();
 
     if (studyType.isEmpty())
+    {
+        mSignalCombo->blockSignals(false);
+
+        mSummaryLabel->clear();
+
+        if (mPlotWidget)
+        {
+            mPlotWidget->clear();
+        }
+
         return;
+    }
 
     const QStringList signalNames =
-        mPrimaryStudy->getSignalSchemaNames(studyType, false);
+        study->getSignalSchemaNames(studyType, false);
 
     for (const QString& signalName : signalNames)
     {
         mSignalCombo->addItem(signalName);
     }
 
+    const int previousSignalIndex =
+        mSignalCombo->findText(previouslySelectedSignal);
+
+    if (previousSignalIndex >= 0)
+    {
+        mSignalCombo->setCurrentIndex(previousSignalIndex);
+    }
+    else if (mSignalCombo->count() > 0)
+    {
+        mSignalCombo->setCurrentIndex(0);
+    }
+
+    mSignalCombo->blockSignals(false);
+
     updateSignalSummary();
 }
 
 void StudyBrowserWidget::updateSignalSummary()
 {
-    if (!mPrimaryStudy)
+    const Study* reference = referenceStudy();
+
+    if (!reference)
+    {
         return;
+    }
 
     const QString studyType =
         mStudyTypeCombo->currentText();
 
-    const QString targetGroup =
-        mPrimaryStudy->getTargetGroupForStudyType(studyType);
+    const QString referenceTargetGroup =
+        reference->getTargetGroupForStudyType(studyType);
 
     const int componentId =
         mComponentCombo->currentData().toInt();
+
+    const QString componentText =
+        mComponentCombo->currentText();
 
     const QString signalName =
         mSignalCombo->currentText();
 
     if (studyType.isEmpty() ||
-        targetGroup.isEmpty() ||
+        referenceTargetGroup.isEmpty() ||
         signalName.isEmpty())
     {
         mSummaryLabel->clear();
 
         if (mPlotWidget)
+        {
             mPlotWidget->clear();
+        }
 
         return;
     }
 
-    const QVector<double> primaryTimeValues =
-        mPrimaryStudy->getTimeValues();
-
-    const QVector<double> primarySignalValues =
-        mPrimaryStudy->getSignalValues(targetGroup,
-                                       componentId,
-                                       signalName);
-
-    QString summary;
-
-    summary += QString("Study Type: %1\n")
-                   .arg(studyType);
-
-    summary += QString("Target Group: %1\n")
-                   .arg(targetGroup);
-
-    summary += QString("Component ID: %1\n")
-                   .arg(componentId);
-
-    summary += QString("Signal: %1\n")
-                   .arg(signalName);
-
-    summary += "\nPrimary file:\n";
-    summary += QString("  Time count: %1\n")
-                   .arg(primaryTimeValues.size());
-
-    summary += QString("  Signal value count: %1\n")
-                   .arg(primarySignalValues.size());
-
-    if (!primarySignalValues.isEmpty())
-    {
-        summary += QString("  First value: %1\n")
-                       .arg(primarySignalValues.first());
-
-        summary += QString("  Last value: %1\n")
-                       .arg(primarySignalValues.last());
-    }
-
     QVector<PlotSeries> seriesList;
 
-    const QFileInfo primaryFileInfo(mPrimaryStudy->getFileName());
+    int availableFileCount = 0;
+    QStringList unavailableFiles;
 
-    PlotSeries primarySeries;
-    primarySeries.mName =
-        primaryFileInfo.fileName().isEmpty()
-            ? "Primary"
-            : primaryFileInfo.fileName();
-
-    primarySeries.mXValues = primaryTimeValues;
-    primarySeries.mYValues = primarySignalValues;
-
-    seriesList.append(primarySeries);
-
-    if (mCompareStudy)
+	const QVector<int> selectedIndexes = selectedStudyIndexes();
+	
+	for (int selectedIndex : selectedIndexes)
     {
-        const QVector<double> compareTimeValues =
-            mCompareStudy->getTimeValues();
+        if (selectedIndex < 0 || selectedIndex >= mStudies.size())
+		    continue;
 
-        const QVector<double> compareSignalValues =
-            mCompareStudy->getSignalValues(targetGroup,
-                                           componentId,
-                                           signalName);
+		const Study* study = mStudies[selectedIndex];
 
-        summary += "\nCompare file:\n";
-        summary += QString("  Time count: %1\n")
-                       .arg(compareTimeValues.size());
-
-        summary += QString("  Signal value count: %1\n")
-                       .arg(compareSignalValues.size());
-
-        if (!compareSignalValues.isEmpty())
+        if (!study)
         {
-            summary += QString("  First value: %1\n")
-                           .arg(compareSignalValues.first());
+            continue;
+        }
 
-            summary += QString("  Last value: %1\n")
-                           .arg(compareSignalValues.last());
+        const QString targetGroup =
+            study->getTargetGroupForStudyType(studyType);
+
+        const QVector<double> timeValues =
+            study->getTimeValues();
+
+        const QVector<double> signalValues =
+            study->getSignalValues(targetGroup,
+                                   componentId,
+                                   signalName);
+
+        const QString fileName =
+            studyDisplayName(study);
+
+        if (!timeValues.isEmpty() &&
+            !signalValues.isEmpty() &&
+            timeValues.size() == signalValues.size())
+        {
+            PlotSeries series;
+			series.mName = fileName;
+			series.mXValues = timeValues;
+			series.mYValues = signalValues;
+			series.mColor = colorForFileIndex(selectedIndex);
+			series.mLineThickness = thicknessForFileIndex(selectedIndex);
+
+			seriesList.append(series);
+            availableFileCount++;
         }
         else
         {
-            summary += "  Selected signal not available.\n";
-        }
-
-        if (!compareTimeValues.isEmpty() &&
-            !compareSignalValues.isEmpty() &&
-            compareTimeValues.size() == compareSignalValues.size())
-        {
-            const QFileInfo compareFileInfo(mCompareStudy->getFileName());
-
-            PlotSeries compareSeries;
-            compareSeries.mName =
-                compareFileInfo.fileName().isEmpty()
-                    ? "Compare"
-                    : compareFileInfo.fileName();
-
-            compareSeries.mXValues = compareTimeValues;
-            compareSeries.mYValues = compareSignalValues;
-
-            seriesList.append(compareSeries);
+            unavailableFiles.append(fileName);
         }
     }
+
+	QString summary;
+	
+	summary += QString("Plotted: %1 / %2 file(s)\n")
+				   .arg(availableFileCount)
+				   .arg(selectedIndexes.size());
+
+    if (!unavailableFiles.isEmpty())
+    {
+        summary += "\nUnavailable in:\n";
+
+        for (const QString& fileName : unavailableFiles)
+        {
+            summary += QString("  - %1\n").arg(fileName);
+        }
+    }
+
+	if (selectedIndexes.isEmpty())
+	{
+	    mSummaryLabel->setText("No files selected for plotting.");
+
+	    if (mPlotWidget)
+	        mPlotWidget->clear();
+
+	    return;
+	}
 
     mSummaryLabel->setText(summary);
 
@@ -371,65 +525,45 @@ void StudyBrowserWidget::updateSignalSummary()
             .arg(signalName);
 
     if (mPlotWidget)
-	{
-	    mPlotWidget->setPlotType(currentPlotType());
+    {
+        mPlotWidget->setPlotType(currentPlotType());
 
-	    mPlotWidget->setSeries(seriesList,
-	                           title,
-	                           "Time",
-	                           signalName);
-	}
+        mPlotWidget->setSeries(seriesList,
+                               title,
+                               "Time",
+                               signalName);
+    }
 }
 
 void StudyBrowserWidget::updateFileInfo()
 {
-    if (!mFileNameValueLabel ||
-        !mCompareFileNameValueLabel ||
-        !mTimePointValueLabel ||
-        !mStudyTypeValueLabel)
+    if (!mFileCountValueLabel ||
+        !mLoadedFilesValueLabel)
     {
         return;
     }
 
-    if (!mPrimaryStudy)
+    if (mStudies.isEmpty())
     {
-        mFileNameValueLabel->setText("No file loaded");
-        mCompareFileNameValueLabel->setText("No compare file");
-        mTimePointValueLabel->setText("-");
-        mStudyTypeValueLabel->setText("-");
+        mFileCountValueLabel->setText("0 / 5");
+        mLoadedFilesValueLabel->setText("No file loaded");
         return;
     }
 
-    const QFileInfo primaryFileInfo(mPrimaryStudy->getFileName());
+    mFileCountValueLabel->setText(
+        QString("%1 / 5").arg(mStudies.size()));
 
-    const QString primaryFileName =
-        primaryFileInfo.fileName().isEmpty()
-            ? mPrimaryStudy->getFileName()
-            : primaryFileInfo.fileName();
+    QStringList fileNames;
 
-    mFileNameValueLabel->setText(primaryFileName);
-
-    if (mCompareStudy)
+    for (int i = 0; i < mStudies.size(); ++i)
     {
-        const QFileInfo compareFileInfo(mCompareStudy->getFileName());
-
-        const QString compareFileName =
-            compareFileInfo.fileName().isEmpty()
-                ? mCompareStudy->getFileName()
-                : compareFileInfo.fileName();
-
-        mCompareFileNameValueLabel->setText(compareFileName);
-    }
-    else
-    {
-        mCompareFileNameValueLabel->setText("No compare file");
+        fileNames.append(
+            QString("%1. %2")
+                .arg(i + 1)
+                .arg(studyDisplayName(mStudies[i])));
     }
 
-    mTimePointValueLabel->setText(
-        QString::number(mPrimaryStudy->getTimeValues().size()));
-
-    mStudyTypeValueLabel->setText(
-        QString::number(mPrimaryStudy->getStudyTypeNames().size()));
+    mLoadedFilesValueLabel->setText(fileNames.join("\n"));
 }
 
 PlotType StudyBrowserWidget::currentPlotType() const
@@ -439,6 +573,196 @@ PlotType StudyBrowserWidget::currentPlotType() const
 
     return static_cast<PlotType>(
         mPlotTypeCombo->currentData().toInt());
+}
+
+const Study* StudyBrowserWidget::referenceStudy() const
+{
+    if (mStudies.isEmpty())
+    {
+        return nullptr;
+    }
+
+    return mStudies.first();
+}
+
+QVector<int> StudyBrowserWidget::selectedStudyIndexes() const
+{
+    QVector<int> indexes;
+
+    for (int i = 0; i < mFileCheckBoxes.size(); ++i)
+    {
+        if (mFileCheckBoxes[i] &&
+            mFileCheckBoxes[i]->isChecked())
+        {
+            indexes.append(i);
+        }
+    }
+
+    return indexes;
+}
+
+QString StudyBrowserWidget::studyDisplayName(const Study* study) const
+{
+    if (!study)
+    {
+        return QString();
+    }
+
+    const QFileInfo fileInfo(study->getFileName());
+
+    if (!fileInfo.fileName().isEmpty())
+    {
+        return fileInfo.fileName();
+    }
+
+    return study->getFileName();
+}
+
+void StudyBrowserWidget::rebuildFileSelection()
+{
+    if (!mFileSelectionLayout)
+    {
+        return;
+    }
+
+    for (QWidget* rowWidget : mFileSelectionRows)
+    {
+        mFileSelectionLayout->removeWidget(rowWidget);
+        rowWidget->deleteLater();
+    }
+
+    mFileSelectionRows.clear();
+    mFileCheckBoxes.clear();
+    mFileColorCombos.clear();
+    mFileThicknessCombos.clear();
+
+    for (int i = 0; i < mStudies.size(); ++i)
+    {
+        const Study* study = mStudies[i];
+
+        QWidget* rowWidget = new QWidget(mFileSelectionFrame);
+
+        QHBoxLayout* rowLayout = new QHBoxLayout(rowWidget);
+        rowLayout->setContentsMargins(0, 0, 0, 0);
+        rowLayout->setSpacing(6);
+
+        QCheckBox* checkBox =
+            new QCheckBox(studyDisplayName(study), rowWidget);
+
+        checkBox->setChecked(i == 0);
+        checkBox->setSizePolicy(QSizePolicy::Expanding,
+                                QSizePolicy::Preferred);
+
+        QComboBox* colorCombo = new QComboBox(rowWidget);
+        configureColorCombo(colorCombo, i);
+        colorCombo->setMaximumWidth(100);
+
+        QComboBox* thicknessCombo = new QComboBox(rowWidget);
+        thicknessCombo->addItem("1 px", 1);
+        thicknessCombo->addItem("2 px", 2);
+        thicknessCombo->addItem("3 px", 3);
+        thicknessCombo->addItem("4 px", 4);
+        thicknessCombo->addItem("5 px", 5);
+        thicknessCombo->setCurrentIndex(1);
+        thicknessCombo->setMaximumWidth(75);
+
+        connect(checkBox,
+                &QCheckBox::toggled,
+                this,
+                [this](bool)
+                {
+                    onFileSelectionChanged();
+                });
+
+        connect(colorCombo,
+                QOverload<int>::of(&QComboBox::currentIndexChanged),
+                this,
+                [this](int)
+                {
+                    onFileStyleChanged();
+                });
+
+        connect(thicknessCombo,
+                QOverload<int>::of(&QComboBox::currentIndexChanged),
+                this,
+                [this](int)
+                {
+                    onFileStyleChanged();
+                });
+
+        rowLayout->addWidget(checkBox, 1);
+        rowLayout->addWidget(colorCombo);
+        rowLayout->addWidget(thicknessCombo);
+
+        mFileSelectionRows.append(rowWidget);
+        mFileCheckBoxes.append(checkBox);
+        mFileColorCombos.append(colorCombo);
+        mFileThicknessCombos.append(thicknessCombo);
+
+        mFileSelectionLayout->addWidget(rowWidget);
+    }
+}
+
+void StudyBrowserWidget::configureColorCombo(QComboBox* combo,
+                                             int fileIndex) const
+{
+    if (!combo)
+    {
+        return;
+    }
+
+    combo->clear();
+
+    const QVector<ColorOption> colors =
+        comparisonColorOptions();
+
+    for (const ColorOption& option : colors)
+    {
+        combo->addItem(option.mName, option.mColor);
+    }
+
+    if (!colors.isEmpty())
+    {
+        combo->setCurrentIndex(fileIndex % colors.size());
+    }
+}
+
+QColor StudyBrowserWidget::colorForFileIndex(int fileIndex) const
+{
+    if (fileIndex >= 0 &&
+        fileIndex < mFileColorCombos.size() &&
+        mFileColorCombos[fileIndex])
+    {
+        const QColor color =
+            mFileColorCombos[fileIndex]->currentData().value<QColor>();
+
+        if (color.isValid())
+        {
+            return color;
+        }
+    }
+
+    const QVector<ColorOption> colors =
+        comparisonColorOptions();
+
+    if (!colors.isEmpty())
+    {
+        return colors[fileIndex % colors.size()].mColor;
+    }
+
+    return QColor();
+}
+
+int StudyBrowserWidget::thicknessForFileIndex(int fileIndex) const
+{
+    if (fileIndex >= 0 &&
+        fileIndex < mFileThicknessCombos.size() &&
+        mFileThicknessCombos[fileIndex])
+    {
+        return mFileThicknessCombos[fileIndex]->currentData().toInt();
+    }
+
+    return 2;
 }
 
 void StudyBrowserWidget::onStudyTypeChanged()
@@ -457,6 +781,16 @@ void StudyBrowserWidget::onSignalChanged()
 }
 
 void StudyBrowserWidget::onPlotTypeChanged()
+{
+    updateSignalSummary();
+}
+
+void StudyBrowserWidget::onFileSelectionChanged()
+{
+    updateSignalSummary();
+}
+
+void StudyBrowserWidget::onFileStyleChanged()
 {
     updateSignalSummary();
 }

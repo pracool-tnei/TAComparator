@@ -81,6 +81,8 @@ bool PopulationParser::parse(const QString& fileName, Study& study)
 	mGovernorOutputRowsStored = 0;
 	mGovernorOutputRowsSkipped = 0;
 
+	mIndMachOutputRowsStored = 0;
+
     QString line;
 
     //
@@ -278,6 +280,18 @@ void PopulationParser::parseDataLine(const QString& recordName,
         populateAVROutput(tokens);
         return;
     }
+	
+	if (recordName == "GovernorOutput")
+	{
+		populateGovernorOutput(tokens);
+		return;
+	}
+
+	if (recordName == "IndMachOutput")
+	{
+	    populateIndMachOutput(tokens);
+	    return;
+	}
 
     //
     // Other records are intentionally skipped for now.
@@ -645,6 +659,71 @@ void PopulationParser::populateGovernorOutput(const QStringList& tokens)
     mGovernorOutputRowsStored++;
 }
 
+void PopulationParser::populateIndMachOutput(const QStringList& tokens)
+{
+    ObjectGroup* recordGroup = mStudy->getObjectGroup("IndMachOutput");
+    ObjectGroup* indMachGroup = mStudy->getObjectGroup("IndMach");
+
+    if (!recordGroup || !indMachGroup)
+        return;
+
+    if (tokens.size() != recordGroup->mSignalOrder.size())
+    {
+        qDebug() << "WARNING: IndMachOutput token count mismatch."
+                 << "tokens:" << tokens.size()
+                 << "expected:" << recordGroup->mSignalOrder.size();
+        return;
+    }
+
+    bool idOk = false;
+    int indMachId = tokens[0].toInt(&idOk);
+
+    if (!idOk)
+    {
+        qDebug() << "WARNING: Invalid IMID in IndMachOutput:"
+                 << tokens[0];
+        return;
+    }
+
+    auto componentIt = indMachGroup->mComponents.find(indMachId);
+
+    if (componentIt == indMachGroup->mComponents.end())
+    {
+        qDebug() << "WARNING: IndMach component not found for IMID:"
+                 << indMachId;
+        return;
+    }
+
+    Component& component = componentIt.value();
+
+    for (int i = 1; i < tokens.size(); ++i)
+    {
+        const QString signalName = recordGroup->mSignalOrder[i];
+
+        bool valueOk = false;
+        double value = tokens[i].toDouble(&valueOk);
+
+        if (!valueOk)
+        {
+            qDebug() << "WARNING: Invalid numeric value in IndMachOutput."
+                     << "IMID:" << indMachId
+                     << "Signal:" << signalName
+                     << "Value:" << tokens[i];
+            continue;
+        }
+
+        if (!component.mSignals.contains(signalName))
+        {
+            component.mSignals.insert(signalName,
+                                      Signal(signalName));
+        }
+
+        component.mSignals[signalName].mValues.append(value);
+    }
+
+    mIndMachOutputRowsStored++;
+}
+
 void PopulationParser::populateRunStep(const QStringList& tokens)
 {
     ObjectGroup* recordGroup = mStudy->getObjectGroup("RunStep");
@@ -987,6 +1066,8 @@ void PopulationParser::printPopulationSummary() const
 	printPopulationSummaryGenerator();
 
 	printPopulationSummaryAVR();
+
+	printPopulationSummaryGovernor();
 
 #if 0
 	qDebug() << "";

@@ -47,6 +47,10 @@ public:
     void addTimeValue(double time);
     QVector<double> getTimeValues() const;
 
+	void setNetworkName(const QString& networkName);
+	QString getNetworkName() const;
+	
+
     void dump() const;
 
 private:
@@ -56,4 +60,6 @@ private:
     QVector<double> mTimeValues;
 
     QMap<QString, ObjectGroup> mObjectGroups;
+
+	QString mNetworkName;
 };

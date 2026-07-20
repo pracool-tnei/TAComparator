@@ -388,20 +388,39 @@ CMakeFiles/TAComparator.dir/TAComparator_autogen/mocs_compilation.cpp.obj: \
  C:/Qt/6.11.1/mingw_64/include/QtGui/qbitmap.h \
  C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtabwidget.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/QString \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QVector \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qvector.h \
  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Study.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/QList \
  C:/Qt/6.11.1/mingw_64/include/QtCore/QMap \
  C:/Qt/6.11.1/mingw_64/include/QtCore/QStringList \
- C:/Qt/6.11.1/mingw_64/include/QtCore/QVector \
- C:/Qt/6.11.1/mingw_64/include/QtCore/qvector.h \
  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/ObjectGroup.h \
  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Component.h \
  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Signal.h \
+ C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotDisplayMapper.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qtmochelpers.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qtmocconstants.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/q20algorithm.h \
- C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\TAComparator_autogen\YPKJ5OE7LN/moc_PlotWidget.cpp \
- C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotWidget.h \
+ C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\TAComparator_autogen\YPKJ5OE7LN/moc_FileSelectionWidget.cpp \
+ C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/FileSelectionWidget.h \
  C:/Qt/6.11.1/mingw_64/include/QtWidgets/QWidget \
+ C:/Qt/6.11.1/mingw_64/include/QtGui/QColor \
+ C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/FilePlotSettings.h \
+ C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\TAComparator_autogen\YPKJ5OE7LN/moc_PlotBrowserWidget.cpp \
+ C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotBrowserWidget.h \
+ C:/Qt/6.11.1/mingw_64/include/QtGui/QPixmap \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QSize \
+ C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotWidget.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QPoint \
+ C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\TAComparator_autogen\YPKJ5OE7LN/moc_PlotDockWidget.cpp \
+ C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotDockWidget.h \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/QDockWidget \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/qdockwidget.h \
+ C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\TAComparator_autogen\YPKJ5OE7LN/moc_PlotWidget.cpp \
  C:\Users\prakul.p\Documents\Workspace\github\TAComparator\build\Desktop_Qt_6_11_1_MinGW_64_bit_Debug\TAComparator_autogen\YPKJ5OE7LN/moc_StudyBrowserWidget.cpp \
- C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/StudyBrowserWidget.h
+ C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/StudyBrowserWidget.h \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/QVBoxLayout \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/qboxlayout.h \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/qlayout.h \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/qlayoutitem.h \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/qgridlayout.h

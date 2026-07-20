@@ -347,6 +347,30 @@ mainwindow.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/mainwindow.cpp.s
 .PHONY : mainwindow.cpp.s
 
+src/core/Logger.obj: src/core/Logger.cpp.obj
+.PHONY : src/core/Logger.obj
+
+# target to build an object file
+src/core/Logger.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/core/Logger.cpp.obj
+.PHONY : src/core/Logger.cpp.obj
+
+src/core/Logger.i: src/core/Logger.cpp.i
+.PHONY : src/core/Logger.i
+
+# target to preprocess a source file
+src/core/Logger.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/core/Logger.cpp.i
+.PHONY : src/core/Logger.cpp.i
+
+src/core/Logger.s: src/core/Logger.cpp.s
+.PHONY : src/core/Logger.s
+
+# target to generate assembly for a file
+src/core/Logger.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/core/Logger.cpp.s
+.PHONY : src/core/Logger.cpp.s
+
 src/model/Component.obj: src/model/Component.cpp.obj
 .PHONY : src/model/Component.obj
 
@@ -563,6 +587,126 @@ src/reader/TextFileReader.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/reader/TextFileReader.cpp.s
 .PHONY : src/reader/TextFileReader.cpp.s
 
+src/ui/FilePlotSettings.obj: src/ui/FilePlotSettings.cpp.obj
+.PHONY : src/ui/FilePlotSettings.obj
+
+# target to build an object file
+src/ui/FilePlotSettings.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/ui/FilePlotSettings.cpp.obj
+.PHONY : src/ui/FilePlotSettings.cpp.obj
+
+src/ui/FilePlotSettings.i: src/ui/FilePlotSettings.cpp.i
+.PHONY : src/ui/FilePlotSettings.i
+
+# target to preprocess a source file
+src/ui/FilePlotSettings.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/ui/FilePlotSettings.cpp.i
+.PHONY : src/ui/FilePlotSettings.cpp.i
+
+src/ui/FilePlotSettings.s: src/ui/FilePlotSettings.cpp.s
+.PHONY : src/ui/FilePlotSettings.s
+
+# target to generate assembly for a file
+src/ui/FilePlotSettings.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/ui/FilePlotSettings.cpp.s
+.PHONY : src/ui/FilePlotSettings.cpp.s
+
+src/ui/FileSelectionWidget.obj: src/ui/FileSelectionWidget.cpp.obj
+.PHONY : src/ui/FileSelectionWidget.obj
+
+# target to build an object file
+src/ui/FileSelectionWidget.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/ui/FileSelectionWidget.cpp.obj
+.PHONY : src/ui/FileSelectionWidget.cpp.obj
+
+src/ui/FileSelectionWidget.i: src/ui/FileSelectionWidget.cpp.i
+.PHONY : src/ui/FileSelectionWidget.i
+
+# target to preprocess a source file
+src/ui/FileSelectionWidget.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/ui/FileSelectionWidget.cpp.i
+.PHONY : src/ui/FileSelectionWidget.cpp.i
+
+src/ui/FileSelectionWidget.s: src/ui/FileSelectionWidget.cpp.s
+.PHONY : src/ui/FileSelectionWidget.s
+
+# target to generate assembly for a file
+src/ui/FileSelectionWidget.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/ui/FileSelectionWidget.cpp.s
+.PHONY : src/ui/FileSelectionWidget.cpp.s
+
+src/ui/PlotBrowserWidget.obj: src/ui/PlotBrowserWidget.cpp.obj
+.PHONY : src/ui/PlotBrowserWidget.obj
+
+# target to build an object file
+src/ui/PlotBrowserWidget.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/ui/PlotBrowserWidget.cpp.obj
+.PHONY : src/ui/PlotBrowserWidget.cpp.obj
+
+src/ui/PlotBrowserWidget.i: src/ui/PlotBrowserWidget.cpp.i
+.PHONY : src/ui/PlotBrowserWidget.i
+
+# target to preprocess a source file
+src/ui/PlotBrowserWidget.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/ui/PlotBrowserWidget.cpp.i
+.PHONY : src/ui/PlotBrowserWidget.cpp.i
+
+src/ui/PlotBrowserWidget.s: src/ui/PlotBrowserWidget.cpp.s
+.PHONY : src/ui/PlotBrowserWidget.s
+
+# target to generate assembly for a file
+src/ui/PlotBrowserWidget.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/ui/PlotBrowserWidget.cpp.s
+.PHONY : src/ui/PlotBrowserWidget.cpp.s
+
+src/ui/PlotDisplayMapper.obj: src/ui/PlotDisplayMapper.cpp.obj
+.PHONY : src/ui/PlotDisplayMapper.obj
+
+# target to build an object file
+src/ui/PlotDisplayMapper.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/ui/PlotDisplayMapper.cpp.obj
+.PHONY : src/ui/PlotDisplayMapper.cpp.obj
+
+src/ui/PlotDisplayMapper.i: src/ui/PlotDisplayMapper.cpp.i
+.PHONY : src/ui/PlotDisplayMapper.i
+
+# target to preprocess a source file
+src/ui/PlotDisplayMapper.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/ui/PlotDisplayMapper.cpp.i
+.PHONY : src/ui/PlotDisplayMapper.cpp.i
+
+src/ui/PlotDisplayMapper.s: src/ui/PlotDisplayMapper.cpp.s
+.PHONY : src/ui/PlotDisplayMapper.s
+
+# target to generate assembly for a file
+src/ui/PlotDisplayMapper.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/ui/PlotDisplayMapper.cpp.s
+.PHONY : src/ui/PlotDisplayMapper.cpp.s
+
+src/ui/PlotDockWidget.obj: src/ui/PlotDockWidget.cpp.obj
+.PHONY : src/ui/PlotDockWidget.obj
+
+# target to build an object file
+src/ui/PlotDockWidget.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/ui/PlotDockWidget.cpp.obj
+.PHONY : src/ui/PlotDockWidget.cpp.obj
+
+src/ui/PlotDockWidget.i: src/ui/PlotDockWidget.cpp.i
+.PHONY : src/ui/PlotDockWidget.i
+
+# target to preprocess a source file
+src/ui/PlotDockWidget.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/ui/PlotDockWidget.cpp.i
+.PHONY : src/ui/PlotDockWidget.cpp.i
+
+src/ui/PlotDockWidget.s: src/ui/PlotDockWidget.cpp.s
+.PHONY : src/ui/PlotDockWidget.s
+
+# target to generate assembly for a file
+src/ui/PlotDockWidget.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\TAComparator.dir\build.make CMakeFiles/TAComparator.dir/src/ui/PlotDockWidget.cpp.s
+.PHONY : src/ui/PlotDockWidget.cpp.s
+
 src/ui/PlotWidget.obj: src/ui/PlotWidget.cpp.obj
 .PHONY : src/ui/PlotWidget.obj
 
@@ -642,6 +786,9 @@ help:
 	@echo ... mainwindow.obj
 	@echo ... mainwindow.i
 	@echo ... mainwindow.s
+	@echo ... src/core/Logger.obj
+	@echo ... src/core/Logger.i
+	@echo ... src/core/Logger.s
 	@echo ... src/model/Component.obj
 	@echo ... src/model/Component.i
 	@echo ... src/model/Component.s
@@ -669,6 +816,21 @@ help:
 	@echo ... src/reader/TextFileReader.obj
 	@echo ... src/reader/TextFileReader.i
 	@echo ... src/reader/TextFileReader.s
+	@echo ... src/ui/FilePlotSettings.obj
+	@echo ... src/ui/FilePlotSettings.i
+	@echo ... src/ui/FilePlotSettings.s
+	@echo ... src/ui/FileSelectionWidget.obj
+	@echo ... src/ui/FileSelectionWidget.i
+	@echo ... src/ui/FileSelectionWidget.s
+	@echo ... src/ui/PlotBrowserWidget.obj
+	@echo ... src/ui/PlotBrowserWidget.i
+	@echo ... src/ui/PlotBrowserWidget.s
+	@echo ... src/ui/PlotDisplayMapper.obj
+	@echo ... src/ui/PlotDisplayMapper.i
+	@echo ... src/ui/PlotDisplayMapper.s
+	@echo ... src/ui/PlotDockWidget.obj
+	@echo ... src/ui/PlotDockWidget.i
+	@echo ... src/ui/PlotDockWidget.s
 	@echo ... src/ui/PlotWidget.obj
 	@echo ... src/ui/PlotWidget.i
 	@echo ... src/ui/PlotWidget.s

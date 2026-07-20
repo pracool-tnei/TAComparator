@@ -3,6 +3,12 @@
 #include <QWidget>
 #include <QVector>
 #include <QString>
+#include <QColor>
+#include <QPoint>
+
+class QEvent;
+class QWheelEvent;
+class QMouseEvent;
 
 enum class PlotType
 {
@@ -15,6 +21,9 @@ struct PlotSeries
     QString mName;
     QVector<double> mXValues;
     QVector<double> mYValues;
+
+    QColor mColor;
+    int mLineThickness = 2;
 };
 
 class PlotWidget : public QWidget
@@ -36,13 +45,29 @@ public:
                    const QString& yAxisLabel);
 
     void setPlotType(PlotType plotType);
-
     PlotType getPlotType() const;
-
     void clear();
 
 protected:
-    void paintEvent(QPaintEvent* event) override;
+	void paintEvent(QPaintEvent* event) override;
+
+	// Hover / pan
+	void mousePressEvent(QMouseEvent* event) override;
+	void mouseMoveEvent(QMouseEvent* event) override;
+	void mouseReleaseEvent(QMouseEvent* event) override;
+	void leaveEvent(QEvent* event) override;
+
+	// Zoom
+	void wheelEvent(QWheelEvent* event) override;
+	void mouseDoubleClickEvent(QMouseEvent* event) override;
+
+	
+//zoom
+private:
+	QRect plotAreaRect() const;
+	bool dataXRange(double& minX,
+	                double& maxX) const;
+	void resetZoom();
 
 private:
     QVector<PlotSeries> mSeries;
@@ -50,6 +75,21 @@ private:
     QString mTitle;
     QString mXAxisLabel;
     QString mYAxisLabel;
+
+	//hover for details
+    QPoint mMousePosition;
+    bool mHasMousePosition = false;
+
+	//zoom
+	bool mHasCustomXRange = false;
+	double mCustomMinX = 0.0;
+	double mCustomMaxX = 0.0;
+
+	// Pan
+    bool mIsPanning = false;
+    QPoint mPanStartMousePosition;
+    double mPanStartMinX = 0.0;
+    double mPanStartMaxX = 0.0;
 
     PlotType mPlotType = PlotType::Line;
 };

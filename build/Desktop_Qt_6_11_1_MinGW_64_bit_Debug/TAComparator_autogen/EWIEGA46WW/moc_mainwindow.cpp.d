@@ -384,4 +384,5 @@ C:/Users/prakul.p/Documents/Workspace/github/TAComparator/build/Desktop_Qt_6_11_
   C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Component.h \
   C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/ObjectGroup.h \
   C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Signal.h \
-  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Study.h
+  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Study.h \
+  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotDisplayMapper.h
