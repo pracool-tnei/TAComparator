@@ -565,7 +565,7 @@ void PlotBrowserWidget::updatePlot()
 
 		mPlotWidget->setSeries(seriesList,
 							   title,
-							   "Time",
+							   "Time (s)",
 							   displaySignalName);
 
     }

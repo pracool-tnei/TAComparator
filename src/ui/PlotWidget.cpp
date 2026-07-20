@@ -1023,7 +1023,7 @@ void PlotWidget::paintEvent(QPaintEvent* event)
 				}
 
 				const QString timeLine =
-				    QString("Time: %1")
+				    QString("Time: %1 s")
 				        .arg(QString::number(nearestTime, 'g', 10));
 
 				const QFont originalFont = painter.font();
