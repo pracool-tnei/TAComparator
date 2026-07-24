@@ -58,6 +58,8 @@ private:
 	QString currentRawStudyType() const;
 	QString currentRawSignalName() const;	
 	void clearExportCache();
+	void showPlotContextMenu(const QPoint& position);
+	void exportCurrentPlotAsPng();
 
 private slots:
     void onStudyTypeChanged();

@@ -479,4 +479,16 @@ CMakeFiles/TAComparator.dir/src/ui/PlotBrowserWidget.cpp.obj: \
  C:/Qt/6.11.1/mingw_64/include/QtWidgets/qpushbutton.h \
  C:/Qt/6.11.1/mingw_64/include/QtWidgets/qabstractbutton.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/QDebug \
- C:/Qt/6.11.1/mingw_64/include/QtWidgets/QLayout
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/QLayout \
+ C:/Qt/6.11.1/mingw_64/include/QtGui/QAction \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/QFileDialog \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/qfiledialog.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qdir.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qdirlisting.h \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/qdialog.h \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMenu \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/qmenu.h \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMessageBox \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/qmessagebox.h \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QRegularExpression

@@ -18,6 +18,48 @@
 
 #include <QDebug>
 #include <QLayout>
+#include <QPoint>
+
+//right click
+#include <QAction>
+#include <QFileDialog>
+#include <QMenu>
+#include <QMessageBox>
+#include <QRegularExpression>
+
+namespace
+{
+    const QSize ContextExportPlotSize(1600, 900);
+
+    QString safePlotExportFileName(const QString& text)
+    {
+        QString safeName =
+            text.trimmed();
+
+        if (safeName.isEmpty())
+        {
+            safeName = "Plot";
+        }
+
+        safeName.replace(QRegularExpression("[\\\\/:*?\"<>|]+"),
+                         "_");
+
+        safeName.replace(QRegularExpression("\\s+"),
+                         "_");
+
+        while (safeName.contains("__"))
+        {
+            safeName.replace("__", "_");
+        }
+
+        if (safeName.size() > 120)
+        {
+            safeName = safeName.left(120);
+        }
+
+        return safeName;
+    }
+}
 
 PlotBrowserWidget::PlotBrowserWidget(QWidget* parent)
     : QWidget(parent)
@@ -65,6 +107,14 @@ PlotBrowserWidget::PlotBrowserWidget(QWidget* parent)
     mPlotWidget = new PlotWidget(this);
     mPlotWidget->setSizePolicy(QSizePolicy::Expanding,
                                QSizePolicy::Expanding);
+
+	mPlotWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+	
+	connect(mPlotWidget,
+			&QWidget::customContextMenuRequested,
+			this,
+			&PlotBrowserWidget::showPlotContextMenu);
+
 
     QHBoxLayout* mainLayout = new QHBoxLayout(this);
 	mainLayout->setSizeConstraint(QLayout::SetNoConstraint);
@@ -204,6 +254,92 @@ PlotBrowserWidget::PlotBrowserWidget(QWidget* parent)
             QOverload<int>::of(&QComboBox::currentIndexChanged),
             this,
             &PlotBrowserWidget::onPlotTypeChanged);
+}
+
+void PlotBrowserWidget::showPlotContextMenu(const QPoint& position)
+{
+    if (!mPlotWidget)
+    {
+        return;
+    }
+
+    QMenu menu(this);
+
+    QAction* exportAction =
+        menu.addAction("Export Plot as PNG...");
+
+    exportAction->setEnabled(!mExportSeriesList.isEmpty());
+
+    QAction* selectedAction =
+        menu.exec(mPlotWidget->mapToGlobal(position));
+
+    if (selectedAction == exportAction)
+    {
+        exportCurrentPlotAsPng();
+    }
+}
+
+void PlotBrowserWidget::exportCurrentPlotAsPng()
+{
+    if (mExportSeriesList.isEmpty())
+    {
+        QMessageBox::information(
+            this,
+            "No plot",
+            "There is no plot data to export.");
+
+        return;
+    }
+
+    QString defaultFileName =
+        safePlotExportFileName(exportPlotTitle());
+
+    if (!defaultFileName.endsWith(".png",
+                                  Qt::CaseInsensitive))
+    {
+        defaultFileName += ".png";
+    }
+
+    QString filePath =
+        QFileDialog::getSaveFileName(
+            this,
+            "Export Plot as PNG",
+            defaultFileName,
+            "PNG Files (*.png)");
+
+    if (filePath.isEmpty())
+    {
+        return;
+    }
+
+    if (!filePath.endsWith(".png",
+                           Qt::CaseInsensitive))
+    {
+        filePath += ".png";
+    }
+
+    const QPixmap pixmap =
+        exportPlotPixmap(ContextExportPlotSize);
+
+    if (pixmap.isNull())
+    {
+        QMessageBox::critical(
+            this,
+            "Export failed",
+            "Could not render the plot.");
+
+        return;
+    }
+
+    if (!pixmap.save(filePath, "PNG"))
+    {
+        QMessageBox::critical(
+            this,
+            "Export failed",
+            "Could not save the plot as PNG.");
+
+        return;
+    }
 }
 
 void PlotBrowserWidget::setStudies(

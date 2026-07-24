@@ -5341,6 +5341,7 @@ CMakeFiles/TAComparator.dir/src/ui/PlotBrowserWidget.cpp.obj: C:/Users/prakul.p/
   C:/Qt/6.11.1/mingw_64/include/QtCore/QList \
   C:/Qt/6.11.1/mingw_64/include/QtCore/QMap \
   C:/Qt/6.11.1/mingw_64/include/QtCore/QPoint \
+  C:/Qt/6.11.1/mingw_64/include/QtCore/QRegularExpression \
   C:/Qt/6.11.1/mingw_64/include/QtCore/QSize \
   C:/Qt/6.11.1/mingw_64/include/QtCore/QString \
   C:/Qt/6.11.1/mingw_64/include/QtCore/QStringList \
@@ -5387,6 +5388,8 @@ CMakeFiles/TAComparator.dir/src/ui/PlotBrowserWidget.cpp.obj: C:/Users/prakul.p/
   C:/Qt/6.11.1/mingw_64/include/QtCore/qdatastream.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/qdatetime.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/qdebug.h \
+  C:/Qt/6.11.1/mingw_64/include/QtCore/qdir.h \
+  C:/Qt/6.11.1/mingw_64/include/QtCore/qdirlisting.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/qendian.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/qexceptionhandling.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/qfile.h \
@@ -5485,6 +5488,7 @@ CMakeFiles/TAComparator.dir/src/ui/PlotBrowserWidget.cpp.obj: C:/Users/prakul.p/
   C:/Qt/6.11.1/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/qyieldcpu.h \
+  C:/Qt/6.11.1/mingw_64/include/QtGui/QAction \
   C:/Qt/6.11.1/mingw_64/include/QtGui/QColor \
   C:/Qt/6.11.1/mingw_64/include/QtGui/QPainter \
   C:/Qt/6.11.1/mingw_64/include/QtGui/QPixmap \
@@ -5521,11 +5525,14 @@ CMakeFiles/TAComparator.dir/src/ui/PlotBrowserWidget.cpp.obj: C:/Users/prakul.p/
   C:/Qt/6.11.1/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qwindowdefs_win.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QComboBox \
+  C:/Qt/6.11.1/mingw_64/include/QtWidgets/QFileDialog \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QFormLayout \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QFrame \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QHBoxLayout \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QLabel \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QLayout \
+  C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMenu \
+  C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMessageBox \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QPushButton \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QSizePolicy \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QVBoxLayout \
@@ -5536,12 +5543,17 @@ CMakeFiles/TAComparator.dir/src/ui/PlotBrowserWidget.cpp.obj: C:/Users/prakul.p/
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qabstractspinbox.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qboxlayout.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qcombobox.h \
+  C:/Qt/6.11.1/mingw_64/include/QtWidgets/qdialog.h \
+  C:/Qt/6.11.1/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
+  C:/Qt/6.11.1/mingw_64/include/QtWidgets/qfiledialog.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qformlayout.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qframe.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qgridlayout.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qlabel.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qlayout.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qlayoutitem.h \
+  C:/Qt/6.11.1/mingw_64/include/QtWidgets/qmenu.h \
+  C:/Qt/6.11.1/mingw_64/include/QtWidgets/qmessagebox.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qpushbutton.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qrubberband.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qsizepolicy.h \
