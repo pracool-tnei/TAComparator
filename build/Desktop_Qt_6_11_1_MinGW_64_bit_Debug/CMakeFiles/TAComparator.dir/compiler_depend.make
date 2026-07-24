@@ -4866,6 +4866,7 @@ CMakeFiles/TAComparator.dir/src/ui/FileSelectionWidget.cpp.obj: C:/Users/prakul.
   C:/Qt/6.11.1/mingw_64/include/QtCore/QFileInfo \
   C:/Qt/6.11.1/mingw_64/include/QtCore/QList \
   C:/Qt/6.11.1/mingw_64/include/QtCore/QMap \
+  C:/Qt/6.11.1/mingw_64/include/QtCore/QSignalBlocker \
   C:/Qt/6.11.1/mingw_64/include/QtCore/QString \
   C:/Qt/6.11.1/mingw_64/include/QtCore/QStringList \
   C:/Qt/6.11.1/mingw_64/include/QtCore/QVector \
@@ -5040,6 +5041,7 @@ CMakeFiles/TAComparator.dir/src/ui/FileSelectionWidget.cpp.obj: C:/Users/prakul.
   C:/Qt/6.11.1/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qwindowdefs_win.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QCheckBox \
+  C:/Qt/6.11.1/mingw_64/include/QtWidgets/QColorDialog \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QComboBox \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QFrame \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QGridLayout \
@@ -5054,7 +5056,9 @@ CMakeFiles/TAComparator.dir/src/ui/FileSelectionWidget.cpp.obj: C:/Users/prakul.
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qabstractspinbox.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qboxlayout.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qcheckbox.h \
+  C:/Qt/6.11.1/mingw_64/include/QtWidgets/qcolordialog.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qcombobox.h \
+  C:/Qt/6.11.1/mingw_64/include/QtWidgets/qdialog.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qframe.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qgridlayout.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qlabel.h \
@@ -8589,6 +8593,10 @@ C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/FilePlotSetting
 
 C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/FileSelectionWidget.cpp:
 
+C:/Qt/6.11.1/mingw_64/include/QtCore/QSignalBlocker:
+
+C:/Qt/6.11.1/mingw_64/include/QtWidgets/QColorDialog:
+
 C:/Qt/6.11.1/mingw_64/include/QtGui/QWheelEvent:
 
 C:/Qt/6.11.1/mingw_64/include/QtWidgets/QComboBox:
@@ -8602,6 +8610,8 @@ C:/Qt/6.11.1/mingw_64/include/QtWidgets/QFormLayout:
 C:/Qt/6.11.1/mingw_64/include/QtWidgets/qabstractbutton.h:
 
 C:/Qt/6.11.1/mingw_64/include/QtWidgets/qabstractslider.h:
+
+C:/Qt/6.11.1/mingw_64/include/QtWidgets/qcolordialog.h:
 
 C:/Qt/6.11.1/mingw_64/include/QtWidgets/qcombobox.h:
 

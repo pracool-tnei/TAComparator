@@ -167,9 +167,11 @@ void MainWindow::setupDockUi()
     mFileSelectionDock->setAllowedAreas(Qt::LeftDockWidgetArea |
                                         Qt::RightDockWidgetArea);
 
-    mFileSelectionDock->setFeatures(
-        QDockWidget::DockWidgetMovable |
-        QDockWidget::DockWidgetFloatable);
+	mFileSelectionDock->setFeatures(
+		QDockWidget::DockWidgetMovable |
+		QDockWidget::DockWidgetFloatable |
+		QDockWidget::DockWidgetClosable);
+
 
     addDockWidget(Qt::LeftDockWidgetArea,
                   mFileSelectionDock);
@@ -1301,6 +1303,67 @@ void MainWindow::createMenus()
 			this,
 			&MainWindow::useRawItfNames);
 
+	//hide file selection
+	viewMenu->addSeparator();
+	
+	mFilesPanelAction =
+		viewMenu->addAction("Files Panel");
+	
+	mFilesPanelAction->setCheckable(true);
+	mFilesPanelAction->setChecked(
+		mFileSelectionDock &&
+		mFileSelectionDock->isVisible());
+	
+	connect(mFilesPanelAction,
+			&QAction::triggered,
+			this,
+			[this](bool checked)
+			{
+				if (!mFileSelectionDock)
+				{
+					return;
+				}
+	
+				mFileSelectionDock->setVisible(checked);
+	
+				if (checked)
+				{
+					addDockWidget(Qt::LeftDockWidgetArea,
+								  mFileSelectionDock);
+	
+					mFileSelectionDock->raise();
+				}
+	
+				QTimer::singleShot(
+					0,
+					this,
+					[this]()
+					{
+						equalizePlotDockSizes();
+					});
+			});
+	
+	if (mFileSelectionDock)
+	{
+		connect(mFileSelectionDock,
+				&QDockWidget::visibilityChanged,
+				this,
+				[this](bool visible)
+				{
+					if (mFilesPanelAction)
+					{
+						mFilesPanelAction->setChecked(visible);
+					}
+	
+					QTimer::singleShot(
+						0,
+						this,
+						[this]()
+						{
+							equalizePlotDockSizes();
+						});
+				});
+	}
 
 	//
 	// Export menu fourth.

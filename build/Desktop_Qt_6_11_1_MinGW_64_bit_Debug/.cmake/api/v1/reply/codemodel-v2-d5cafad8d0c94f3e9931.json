@@ -1,0 +1,115 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-94291e9dd74c89e0a8a5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "TAComparator",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "TAComparator::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-TAComparator-Debug-aa66d9d70271cde9bc52.json",
+					"name" : "TAComparator",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "TAComparator_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-TAComparator_autogen-Debug-99c7441e5ad5ef6fb044.json",
+					"name" : "TAComparator_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "TAComparator_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-TAComparator_autogen_timestamp_deps-Debug-a9186d32d40fd79aae4f.json",
+					"name" : "TAComparator_autogen_timestamp_deps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "TAComparator_lrelease::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-TAComparator_lrelease-Debug-d47cd20a7ccf1ce51b58.json",
+					"name" : "TAComparator_lrelease",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "TAComparator_lupdate::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-TAComparator_lupdate-Debug-89dd83dcd1cf84212695.json",
+					"name" : "TAComparator_lupdate",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "release_translations::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-release_translations-Debug-36fc546dba17f46dd2a8.json",
+					"name" : "release_translations",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "update_translations::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-update_translations-Debug-2de91bea798786c31fe9.json",
+					"name" : "update_translations",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/prakul.p/Documents/Workspace/github/TAComparator/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug",
+		"source" : "C:/Users/prakul.p/Documents/Workspace/github/TAComparator"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

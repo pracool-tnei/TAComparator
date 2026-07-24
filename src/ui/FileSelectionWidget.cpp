@@ -11,6 +11,8 @@
 #include <QLabel>
 #include <QSizePolicy>
 #include <QVBoxLayout>
+#include <QColorDialog>
+#include <QSignalBlocker>
 
 namespace
 {
@@ -36,6 +38,8 @@ namespace
             { "Black", QColor(0, 0, 0) }
         };
     }
+
+	constexpr int CustomColorRole = Qt::UserRole + 1;
 }
 
 FileSelectionWidget::FileSelectionWidget(QWidget* parent)
@@ -202,13 +206,93 @@ void FileSelectionWidget::rebuildFileSelection()
                     emit settingsChanged();
                 });
 
-        connect(colorCombo,
-                QOverload<int>::of(&QComboBox::currentIndexChanged),
-                this,
-                [this](int)
-                {
-                    emit settingsChanged();
-                });
+		connect(colorCombo,
+				QOverload<int>::of(&QComboBox::currentIndexChanged),
+				this,
+				[this, colorCombo](int index)
+				{
+					if (!colorCombo)
+					{
+						return;
+					}
+		
+					const bool isCustomColor =
+						colorCombo->itemData(index,
+											 CustomColorRole).toBool();
+		
+					if (!isCustomColor)
+					{
+						const QColor selectedColor =
+							colorCombo->currentData().value<QColor>();
+		
+						if (selectedColor.isValid())
+						{
+							colorCombo->setProperty("selectedColor",
+													selectedColor);
+						}
+		
+						colorCombo->setProperty("previousColorIndex",
+												index);
+		
+						emit settingsChanged();
+						return;
+					}
+		
+					QColor initialColor =
+						colorCombo->property("selectedColor").value<QColor>();
+		
+					if (!initialColor.isValid())
+					{
+						initialColor = QColor(0, 90, 180);
+					}
+		
+					const QColor chosenColor =
+						QColorDialog::getColor(initialColor,
+											   this,
+											   "Select Plot Colour");
+		
+					if (!chosenColor.isValid())
+					{
+						const int previousIndex =
+							colorCombo->property("previousColorIndex").toInt();
+		
+						QSignalBlocker blocker(colorCombo);
+		
+						if (previousIndex >= 0 &&
+							previousIndex < colorCombo->count())
+						{
+							colorCombo->setCurrentIndex(previousIndex);
+						}
+		
+						return;
+					}
+		
+					{
+						QSignalBlocker blocker(colorCombo);
+		
+						colorCombo->setItemText(
+							index,
+							chosenColor.name().toUpper());
+		
+						colorCombo->setItemData(index,
+												chosenColor);
+		
+						colorCombo->setItemData(index,
+												true,
+												CustomColorRole);
+		
+						colorCombo->setCurrentIndex(index);
+					}
+		
+					colorCombo->setProperty("selectedColor",
+											chosenColor);
+		
+					colorCombo->setProperty("previousColorIndex",
+											index);
+		
+					emit settingsChanged();
+				});
+
 
         connect(thicknessCombo,
                 QOverload<int>::of(&QComboBox::currentIndexChanged),
@@ -281,17 +365,48 @@ void FileSelectionWidget::configureColorCombo(QComboBox* combo,
 
     combo->clear();
 
+    /*
+     * Custom colour appears first in the dropdown.
+     * But it is NOT selected by default.
+     */
+    combo->addItem("Custom...",
+                   QColor());
+
+    combo->setItemData(combo->count() - 1,
+                       true,
+                       CustomColorRole);
+
     const QVector<ColorOption> colors =
         comparisonColorOptions();
 
     for (const ColorOption& option : colors)
     {
-        combo->addItem(option.mName, option.mColor);
+        combo->addItem(option.mName,
+                       option.mColor);
+
+        combo->setItemData(combo->count() - 1,
+                           false,
+                           CustomColorRole);
     }
 
     if (!colors.isEmpty())
     {
-        combo->setCurrentIndex(fileIndex % colors.size());
+        const int defaultColorIndex =
+            fileIndex % colors.size();
+
+        /*
+         * +1 because index 0 is now Custom...
+         */
+        const int comboIndex =
+            defaultColorIndex + 1;
+
+        combo->setCurrentIndex(comboIndex);
+
+        combo->setProperty("previousColorIndex",
+                           comboIndex);
+
+        combo->setProperty("selectedColor",
+                           colors[defaultColorIndex].mColor);
     }
 }
 
@@ -301,15 +416,26 @@ QColor FileSelectionWidget::colorForFileIndex(int fileIndex) const
         fileIndex < mFileColorCombos.size() &&
         mFileColorCombos[fileIndex])
     {
-        const QColor color =
-            mFileColorCombos[fileIndex]
-                ->currentData()
-                .value<QColor>();
+		const QColor color =
+			mFileColorCombos[fileIndex]
+				->currentData()
+				.value<QColor>();
+		
+		if (color.isValid())
+		{
+			return color;
+		}
+		
+		const QColor storedColor =
+			mFileColorCombos[fileIndex]
+				->property("selectedColor")
+				.value<QColor>();
+		
+		if (storedColor.isValid())
+		{
+			return storedColor;
+		}
 
-        if (color.isValid())
-        {
-            return color;
-        }
     }
 
     const QVector<ColorOption> colors =

@@ -38,6 +38,26 @@ namespace
 	    return colors[index % colors.size()];
 	}
 
+	Qt::PenStyle penStyleForPlotType(PlotType plotType)
+	{
+		switch (plotType)
+		{
+		case PlotType::DashedLine:
+			return Qt::DashLine;
+	
+		case PlotType::DottedLine:
+			return Qt::DotLine;
+	
+		case PlotType::DashDotLine:
+			return Qt::DashDotLine;
+	
+		case PlotType::Line:
+		case PlotType::Bar:
+		default:
+			return Qt::SolidLine;
+		}
+	}
+
 	double niceNumber(double value,
 	                  bool round)
 	{
@@ -383,7 +403,7 @@ void PlotWidget::paintEvent(QPaintEvent* event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
 
-    painter.fillRect(rect(), palette().window());
+    painter.fillRect(rect(), Qt::white);
 
 	QRect plotRect = plotAreaRect();
 
@@ -743,35 +763,41 @@ void PlotWidget::paintEvent(QPaintEvent* event)
     painter.save();
 	painter.setClipRect(plotRect.adjusted(1, 1, -1, -1));
 
-	if (mPlotType == PlotType::Line)
+	if (mPlotType != PlotType::Bar)
 	{
-	    for (int seriesIndex = 0;
-	         seriesIndex < validSeries.size();
-	         ++seriesIndex)
-	    {
-	        const PlotSeries& series = validSeries[seriesIndex];
-
-	        QPolygonF polyline;
-
-	        for (int i = 0; i < series.mXValues.size(); ++i)
-	        {
-	            polyline.append(mapPoint(series.mXValues[i],
-	                                     series.mYValues[i]));
-	        }
-
-	        const QColor color =
-			    series.mColor.isValid()
-			        ? series.mColor
-			        : seriesColor(seriesIndex);
-
+		for (int seriesIndex = 0;
+			 seriesIndex < validSeries.size();
+			 ++seriesIndex)
+		{
+			const PlotSeries& series = validSeries[seriesIndex];
+	
+			QPolygonF polyline;
+	
+			for (int i = 0; i < series.mXValues.size(); ++i)
+			{
+				polyline.append(mapPoint(series.mXValues[i],
+										 series.mYValues[i]));
+			}
+	
+			const QColor color =
+				series.mColor.isValid()
+					? series.mColor
+					: seriesColor(seriesIndex);
+	
 			const int thickness =
-			    std::max(1, series.mLineThickness);
-
-			painter.setPen(QPen(color, thickness));
-	        painter.drawPolyline(polyline);
-	    }
+				std::max(1, series.mLineThickness);
+	
+			QPen linePen(color, thickness);
+			linePen.setStyle(penStyleForPlotType(mPlotType));
+			linePen.setCapStyle(Qt::RoundCap);
+			linePen.setJoinStyle(Qt::RoundJoin);
+	
+			painter.setPen(linePen);
+			painter.drawPolyline(polyline);
+		}
 	}
 	else if (mPlotType == PlotType::Bar)
+
 	{
 	    int maxPointCount = 0;
 
@@ -1322,7 +1348,12 @@ void PlotWidget::paintEvent(QPaintEvent* event)
 			const int lineEndX =
 				lineStartX + legendLineWidth;
 	
-			painter.setPen(QPen(color, 2));
+			QPen legendPen(color, 2);
+			legendPen.setStyle(penStyleForPlotType(mPlotType));
+			legendPen.setCapStyle(Qt::RoundCap);
+			
+			painter.setPen(legendPen);
+
 	
 			painter.drawLine(lineStartX,
 							 lineY,

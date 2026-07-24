@@ -13,6 +13,9 @@ class QMouseEvent;
 enum class PlotType
 {
     Line,
+    DashedLine,
+    DottedLine,
+    DashDotLine,
     Bar
 };
 

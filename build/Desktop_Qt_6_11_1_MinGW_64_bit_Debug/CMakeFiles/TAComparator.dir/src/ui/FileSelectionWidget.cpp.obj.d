@@ -466,4 +466,8 @@ CMakeFiles/TAComparator.dir/src/ui/FileSelectionWidget.cpp.obj: \
  C:/Qt/6.11.1/mingw_64/include/QtGui/qtextdocument.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qurl.h \
  C:/Qt/6.11.1/mingw_64/include/QtWidgets/QSizePolicy \
- C:/Qt/6.11.1/mingw_64/include/QtWidgets/QVBoxLayout
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/QVBoxLayout \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/QColorDialog \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/qcolordialog.h \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/qdialog.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QSignalBlocker

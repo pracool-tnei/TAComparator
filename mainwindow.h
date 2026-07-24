@@ -95,6 +95,8 @@ private:
 	QActionGroup* mNameDisplayActionGroup = nullptr;
 	QAction* mIpsaFriendlyNamesAction = nullptr;
 	QAction* mRawItfNamesAction = nullptr;
+
+	QAction* mFilesPanelAction = nullptr;
 	
 	NameDisplayMode mNameDisplayMode = NameDisplayMode::IpsaFriendly;
 

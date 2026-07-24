@@ -37,11 +37,23 @@ PlotBrowserWidget::PlotBrowserWidget(QWidget* parent)
 	mSignalCombo->setMinimumWidth(comboMinimumWidth);
 
 
-    mPlotTypeCombo = new QComboBox(this);
-    mPlotTypeCombo->addItem("Line",
-                            static_cast<int>(PlotType::Line));
-    mPlotTypeCombo->addItem("Bar",
-                            static_cast<int>(PlotType::Bar));
+	mPlotTypeCombo = new QComboBox(this);
+	
+	mPlotTypeCombo->addItem("Line",
+							static_cast<int>(PlotType::Line));
+	
+	mPlotTypeCombo->addItem("Dashed Line",
+							static_cast<int>(PlotType::DashedLine));
+	
+	mPlotTypeCombo->addItem("Dotted Line",
+							static_cast<int>(PlotType::DottedLine));
+	
+	mPlotTypeCombo->addItem("Dash-Dot Line",
+							static_cast<int>(PlotType::DashDotLine));
+	
+	mPlotTypeCombo->addItem("Bar",
+							static_cast<int>(PlotType::Bar));
+
 
     mSummaryLabel = new QLabel(this);
     mSummaryLabel->setWordWrap(true);
