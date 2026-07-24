@@ -72,7 +72,7 @@ PlotBrowserWidget::PlotBrowserWidget(QWidget* parent)
     mComponentCombo = new QComboBox(this);
     mSignalCombo = new QComboBox(this);
 
-	const int comboMinimumWidth = 240;
+	const int comboMinimumWidth = 150;
 	
 	mStudyTypeCombo->setMinimumWidth(comboMinimumWidth);
 	mComponentCombo->setMinimumWidth(comboMinimumWidth);
@@ -139,8 +139,8 @@ PlotBrowserWidget::PlotBrowserWidget(QWidget* parent)
 	//
 	mControlPanel = new QFrame(this);
 	mControlPanel->setFrameShape(QFrame::StyledPanel);
-	mControlPanel->setMinimumWidth(360);
-	mControlPanel->setMaximumWidth(440);
+	mControlPanel->setMinimumWidth(250);
+	mControlPanel->setMaximumWidth(310);
 
 	QVBoxLayout* leftLayout = new QVBoxLayout(mControlPanel);
 	leftLayout->setContentsMargins(10, 10, 10, 10);
@@ -172,8 +172,8 @@ PlotBrowserWidget::PlotBrowserWidget(QWidget* parent)
 
     selectionFormLayout->setLabelAlignment(Qt::AlignLeft);
     selectionFormLayout->setFormAlignment(Qt::AlignTop);
-    selectionFormLayout->setHorizontalSpacing(12);
-    selectionFormLayout->setVerticalSpacing(8);
+	selectionFormLayout->setHorizontalSpacing(8);
+	selectionFormLayout->setVerticalSpacing(6);
     selectionFormLayout->setFieldGrowthPolicy(
         QFormLayout::AllNonFixedFieldsGrow);
 

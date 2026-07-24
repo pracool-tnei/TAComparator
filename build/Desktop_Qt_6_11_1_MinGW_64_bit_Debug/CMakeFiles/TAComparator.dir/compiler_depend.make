@@ -937,6 +937,8 @@ CMakeFiles/TAComparator.dir/mainwindow.cpp.obj: C:/Users/prakul.p/Documents/Work
   C:/Qt/6.11.1/mingw_64/include/QtCore/qcontainerinfo.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/qcontainertools_impl.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/qcontiguouscache.h \
+  C:/Qt/6.11.1/mingw_64/include/QtCore/qcoreapplication.h \
+  C:/Qt/6.11.1/mingw_64/include/QtCore/qcoreapplication_platform.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/qcoreevent.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/qdarwinhelpers.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/qdatastream.h \
@@ -978,6 +980,7 @@ CMakeFiles/TAComparator.dir/mainwindow.cpp.obj: C:/Users/prakul.p/Documents/Work
   C:/Qt/6.11.1/mingw_64/include/QtCore/qmetatype.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/qminmax.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/qnamespace.h \
+  C:/Qt/6.11.1/mingw_64/include/QtCore/qnativeinterface.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/qnumeric.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/qobject.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/qobject_impl.h \
@@ -1063,8 +1066,11 @@ CMakeFiles/TAComparator.dir/mainwindow.cpp.obj: C:/Users/prakul.p/Documents/Work
   C:/Qt/6.11.1/mingw_64/include/QtGui/qfontinfo.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qfontmetrics.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qfontvariableaxis.h \
+  C:/Qt/6.11.1/mingw_64/include/QtGui/qguiapplication.h \
+  C:/Qt/6.11.1/mingw_64/include/QtGui/qguiapplication_platform.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qicon.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qimage.h \
+  C:/Qt/6.11.1/mingw_64/include/QtGui/qinputmethod.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qkeysequence.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qpagedpaintdevice.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qpagelayout.h \
@@ -1091,8 +1097,10 @@ CMakeFiles/TAComparator.dir/mainwindow.cpp.obj: C:/Users/prakul.p/Documents/Work
   C:/Qt/6.11.1/mingw_64/include/QtGui/qtransform.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qwindowdefs_win.h \
+  C:/Qt/6.11.1/mingw_64/include/QtWidgets/QApplication \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QDockWidget \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QFileDialog \
+  C:/Qt/6.11.1/mingw_64/include/QtWidgets/QFontDialog \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QInputDialog \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMainWindow \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMenu \
@@ -1101,11 +1109,13 @@ CMakeFiles/TAComparator.dir/mainwindow.cpp.obj: C:/Users/prakul.p/Documents/Work
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QStatusBar \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QVBoxLayout \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QWidget \
+  C:/Qt/6.11.1/mingw_64/include/QtWidgets/qapplication.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qboxlayout.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qdialog.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qdockwidget.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qfiledialog.h \
+  C:/Qt/6.11.1/mingw_64/include/QtWidgets/qfontdialog.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qframe.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qgridlayout.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qinputdialog.h \
@@ -8561,6 +8571,8 @@ C:/Qt/6.11.1/mingw_64/include/QtGui/qinputdevice.h:
 
 C:/Qt/6.11.1/mingw_64/include/QtGui/qtextoption.h:
 
+C:/Qt/6.11.1/mingw_64/include/QtWidgets/QFontDialog:
+
 C:/Qt/6.11.1/mingw_64/include/QtWidgets/QInputDialog:
 
 C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMenu:
@@ -8570,6 +8582,8 @@ C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMessageBox:
 C:/Qt/6.11.1/mingw_64/include/QtWidgets/QStatusBar:
 
 C:/Qt/6.11.1/mingw_64/include/QtWidgets/qdialogbuttonbox.h:
+
+C:/Qt/6.11.1/mingw_64/include/QtWidgets/qfontdialog.h:
 
 C:/Qt/6.11.1/mingw_64/include/QtWidgets/qinputdialog.h:
 

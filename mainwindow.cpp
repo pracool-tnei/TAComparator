@@ -37,6 +37,8 @@
 #include <QInputDialog>
 
 #include <QActionGroup>
+#include <QApplication>
+#include <QFontDialog>
 
 namespace
 {
@@ -1376,6 +1378,7 @@ void MainWindow::createMenus()
 				});
 	}
 
+	//sync-zoom option
 	viewMenu->addSeparator();
 	
 	mSyncPlotZoomAction =
@@ -1392,6 +1395,19 @@ void MainWindow::createMenus()
 				mSyncPlotZoom =
 					checked;
 			});
+
+	
+	//Text size/font
+	viewMenu->addSeparator();
+	
+	mChooseGlobalTextFontAction =
+		viewMenu->addAction("Text Font / Size...");
+	
+	connect(mChooseGlobalTextFontAction,
+			&QAction::triggered,
+			this,
+			&MainWindow::chooseGlobalTextFont);
+
 
 
 	//
@@ -1447,6 +1463,56 @@ void MainWindow::createMenus()
             &QAction::triggered,
             this,
             &MainWindow::showAbout);
+}
+
+void MainWindow::chooseGlobalTextFont()
+{
+    bool ok = false;
+
+    const QFont currentFont =
+        qApp->font();
+
+    const QFont selectedFont =
+        QFontDialog::getFont(&ok,
+                             currentFont,
+                             this,
+                             "Select Text Font and Size");
+
+    if (!ok)
+    {
+        return;
+    }
+
+    /*
+     * Apply globally to the whole application.
+     *
+     * This affects normal Qt widgets and also PlotWidget drawing,
+     * because PlotWidget uses painter.font() for axis labels,
+     * tick labels, title, legend and hover text.
+     */
+    qApp->setFont(selectedFont);
+
+    for (PlotBrowserWidget* plotWidget : mPlotBrowserWidgets)
+    {
+        if (!plotWidget)
+        {
+            continue;
+        }
+
+        plotWidget->updateGeometry();
+        plotWidget->update();
+    }
+
+    if (mFileSelectionWidget)
+    {
+        mFileSelectionWidget->updateGeometry();
+        mFileSelectionWidget->update();
+    }
+
+    statusBar()->showMessage(
+        QString("Text font changed to %1, %2 pt")
+            .arg(selectedFont.family())
+            .arg(selectedFont.pointSize()));
 }
 
 void MainWindow::onPlotXRangeChanged(PlotBrowserWidget* sourcePlot,

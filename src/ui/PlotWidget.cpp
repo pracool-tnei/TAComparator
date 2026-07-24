@@ -1269,121 +1269,229 @@ void PlotWidget::paintEvent(QPaintEvent* event)
 
 
 	//
-	// Legend drawn inside the plot area.
+	// Legend drawn inside plot area.
+	// Keep it bounded so it never overflows outside the graph.
 	//
 	if (!validSeries.isEmpty())
 	{
-		const int legendPadding = 8;
-		const int legendRowHeight = 20;
-		const int legendLineWidth = 24;
-		const int legendTextGap = 8;
-		const int legendOuterMargin = 10;
+		const int legendPadding = 6;
+		const int legendRowHeight = 18;
+		const int legendLineWidth = 22;
+		const int legendTextGap = 6;
+		const int legendOuterMargin = 8;
 	
-		const int maxLegendTextWidth =
-			qMax(100,
-				 qMin(260,
-					  plotRect.width() / 3));
-	
-		QVector<QString> legendTexts;
-		int actualTextWidth = 0;
-	
-		for (const PlotSeries& series : validSeries)
+		/*
+		 * Absolute minimum usable plot size for legend.
+		 * If plot is smaller than this, drawing a legend will only damage the graph.
+		 */
+		if (plotRect.width() >= 90 &&
+			plotRect.height() >= 45)
 		{
-			const QString legendText =
-				metrics.elidedText(series.mName,
-								   Qt::ElideRight,
-								   maxLegendTextWidth);
+			const int maxLegendBoxWidth =
+				qMax(70,
+					 qMin(240,
+						  plotRect.width() / 2));
 	
-			legendTexts.append(legendText);
+			const int maxLegendBoxHeight =
+				qMax(32,
+					 qMin(120,
+						  plotRect.height() / 2));
 	
-			actualTextWidth =
-				qMax(actualTextWidth,
-					 metrics.horizontalAdvance(legendText));
+			const int maxLegendTextWidth =
+				qMax(20,
+					 maxLegendBoxWidth
+					 - legendPadding * 2
+					 - legendLineWidth
+					 - legendTextGap);
+	
+			int maxRows =
+				(maxLegendBoxHeight - legendPadding * 2)
+				/ legendRowHeight;
+	
+			maxRows =
+				qMax(1,
+					 maxRows);
+	
+			int visibleSeriesCount =
+				qMin(validSeries.size(),
+					 maxRows);
+	
+			const bool needsMoreRow =
+				visibleSeriesCount < validSeries.size();
+	
+			/*
+			 * Reserve the final row for "+ N more" if not all files fit.
+			 */
+			if (needsMoreRow &&
+				visibleSeriesCount > 1)
+			{
+				visibleSeriesCount -= 1;
+			}
+	
+			QVector<QString> legendTexts;
+			int actualTextWidth = 0;
+	
+			for (int seriesIndex = 0;
+				 seriesIndex < visibleSeriesCount;
+				 ++seriesIndex)
+			{
+				const PlotSeries& series =
+					validSeries[seriesIndex];
+	
+				const QString legendText =
+					metrics.elidedText(series.mName,
+									   Qt::ElideRight,
+									   maxLegendTextWidth);
+	
+				legendTexts.append(legendText);
+	
+				actualTextWidth =
+					qMax(actualTextWidth,
+						 metrics.horizontalAdvance(legendText));
+			}
+	
+			if (needsMoreRow)
+			{
+				const QString moreText =
+					QString("+ %1 more")
+						.arg(validSeries.size() - visibleSeriesCount);
+	
+				const QString elidedMoreText =
+					metrics.elidedText(moreText,
+									   Qt::ElideRight,
+									   maxLegendTextWidth);
+	
+				legendTexts.append(elidedMoreText);
+	
+				actualTextWidth =
+					qMax(actualTextWidth,
+						 metrics.horizontalAdvance(elidedMoreText));
+			}
+	
+			const int legendBoxWidth =
+				qMin(maxLegendBoxWidth,
+					 legendPadding * 2
+					 + legendLineWidth
+					 + legendTextGap
+					 + actualTextWidth);
+	
+			const int legendBoxHeight =
+				qMin(maxLegendBoxHeight,
+					 legendPadding * 2
+					 + legendRowHeight * legendTexts.size());
+	
+			QRect legendRect(plotRect.right()
+								 - legendBoxWidth
+								 - legendOuterMargin,
+							 plotRect.top()
+								 + legendOuterMargin,
+							 legendBoxWidth,
+							 legendBoxHeight);
+	
+			/*
+			 * Final safety clamp: legend must stay inside plotRect.
+			 */
+			if (legendRect.left() < plotRect.left() + legendOuterMargin)
+			{
+				legendRect.moveLeft(plotRect.left() + legendOuterMargin);
+			}
+	
+			if (legendRect.top() < plotRect.top() + legendOuterMargin)
+			{
+				legendRect.moveTop(plotRect.top() + legendOuterMargin);
+			}
+	
+			if (legendRect.right() > plotRect.right() - legendOuterMargin)
+			{
+				legendRect.moveRight(plotRect.right() - legendOuterMargin);
+			}
+	
+			if (legendRect.bottom() > plotRect.bottom() - legendOuterMargin)
+			{
+				legendRect.moveBottom(plotRect.bottom() - legendOuterMargin);
+			}
+	
+			painter.save();
+	
+			/*
+			 * Extra safety: even if text measurement is wrong on some system,
+			 * nothing can paint outside the legend rectangle.
+			 */
+			painter.setClipRect(legendRect);
+	
+			painter.setPen(QPen(QColor(120, 120, 120), 1));
+			painter.setBrush(QColor(255, 255, 255, 220));
+			painter.drawRoundedRect(legendRect, 5, 5);
+	
+			int rowY =
+				legendRect.top() + legendPadding;
+	
+			for (int rowIndex = 0;
+				 rowIndex < legendTexts.size();
+				 ++rowIndex)
+			{
+				const bool isMoreRow =
+					needsMoreRow &&
+					rowIndex == legendTexts.size() - 1;
+	
+				const int lineY =
+					rowY + legendRowHeight / 2;
+	
+				const int lineStartX =
+					legendRect.left() + legendPadding;
+	
+				const int lineEndX =
+					lineStartX + legendLineWidth;
+	
+				if (!isMoreRow)
+				{
+					const PlotSeries& series =
+						validSeries[rowIndex];
+	
+					const QColor color =
+						series.mColor.isValid()
+							? series.mColor
+							: seriesColor(rowIndex);
+	
+					QPen legendPen(color, 2);
+	
+					if (mPlotType != PlotType::Bar)
+					{
+						legendPen.setStyle(
+							penStyleForPlotType(mPlotType));
+					}
+	
+					legendPen.setCapStyle(Qt::RoundCap);
+	
+					painter.setPen(legendPen);
+	
+					painter.drawLine(lineStartX,
+									 lineY,
+									 lineEndX,
+									 lineY);
+				}
+	
+				const QRect textRect(lineEndX + legendTextGap,
+									 rowY,
+									 legendRect.right()
+										 - lineEndX
+										 - legendTextGap
+										 - legendPadding,
+									 legendRowHeight);
+	
+				painter.setPen(QPen(palette().text().color(), 1));
+	
+				painter.drawText(textRect,
+								 Qt::AlignLeft | Qt::AlignVCenter,
+								 legendTexts[rowIndex]);
+	
+				rowY += legendRowHeight;
+			}
+	
+			painter.restore();
 		}
-	
-		const int legendBoxWidth =
-			legendPadding * 2 +
-			legendLineWidth +
-			legendTextGap +
-			actualTextWidth;
-	
-		const int legendBoxHeight =
-			legendPadding * 2 +
-			legendRowHeight * validSeries.size();
-	
-		QRect legendRect(plotRect.right() - legendBoxWidth - legendOuterMargin,
-						 plotRect.top() + legendOuterMargin,
-						 legendBoxWidth,
-						 legendBoxHeight);
-	
-		if (legendRect.left() < plotRect.left() + 4)
-		{
-			legendRect.moveLeft(plotRect.left() + 4);
-		}
-	
-		if (legendRect.bottom() > plotRect.bottom() - 4)
-		{
-			legendRect.moveBottom(plotRect.bottom() - 4);
-		}
-	
-		painter.save();
-	
-		painter.setPen(QPen(QColor(120, 120, 120), 1));
-		painter.setBrush(QColor(255, 255, 255, 220));
-		painter.drawRoundedRect(legendRect, 5, 5);
-	
-		int rowY =
-			legendRect.top() + legendPadding;
-	
-		for (int seriesIndex = 0;
-			 seriesIndex < validSeries.size();
-			 ++seriesIndex)
-		{
-			const PlotSeries& series =
-				validSeries[seriesIndex];
-	
-			const QColor color =
-				series.mColor.isValid()
-					? series.mColor
-					: seriesColor(seriesIndex);
-	
-			const int lineY =
-				rowY + legendRowHeight / 2;
-	
-			const int lineStartX =
-				legendRect.left() + legendPadding;
-	
-			const int lineEndX =
-				lineStartX + legendLineWidth;
-	
-			QPen legendPen(color, 2);
-			legendPen.setStyle(penStyleForPlotType(mPlotType));
-			legendPen.setCapStyle(Qt::RoundCap);
-			
-			painter.setPen(legendPen);
-
-	
-			painter.drawLine(lineStartX,
-							 lineY,
-							 lineEndX,
-							 lineY);
-	
-			const QRect textRect(lineEndX + legendTextGap,
-								 rowY,
-								 actualTextWidth,
-								 legendRowHeight);
-	
-			painter.setPen(QPen(palette().text().color(), 1));
-	
-			painter.drawText(textRect,
-							 Qt::AlignLeft | Qt::AlignVCenter,
-							 legendTexts.at(seriesIndex));
-	
-			rowY += legendRowHeight;
-		}
-	
-		painter.restore();
 	}
+
 
 	//
 	// Select-to-zoom rectangle.
@@ -1691,10 +1799,6 @@ void PlotWidget::mouseReleaseEvent(QMouseEvent* event)
         unsetCursor();
 
         update();
-
-		emit xRangeChanged(mCustomMinX,
-                   mCustomMaxX,
-                   mHasCustomXRange);
 
         event->accept();
         return;

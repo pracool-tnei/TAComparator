@@ -46,6 +46,7 @@ private slots:
                          double minX,
                          double maxX,
                          bool hasCustomRange);
+	void chooseGlobalTextFont();
 
 private:
     void createMenus();
@@ -106,6 +107,8 @@ private:
 	QAction* mFilesPanelAction = nullptr;
 
 	QAction* mSyncPlotZoomAction = nullptr;
+
+	QAction* mChooseGlobalTextFontAction = nullptr;
 	
 	bool mSyncPlotZoom = false;
 	bool mIsApplyingSynchronizedZoom = false;

@@ -59,7 +59,8 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         "sourcePlot",
         "minX",
         "maxX",
-        "hasCustomRange"
+        "hasCustomRange",
+        "chooseGlobalTextFont"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -95,6 +96,8 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         QtMocHelpers::SlotData<void(PlotBrowserWidget *, double, double, bool)>(16, 2, QMC::AccessPrivate, QMetaType::Void, {{
             { 0x80000000 | 17, 18 }, { QMetaType::Double, 19 }, { QMetaType::Double, 20 }, { QMetaType::Bool, 21 },
         }}),
+        // Slot 'chooseGlobalTextFont'
+        QtMocHelpers::SlotData<void()>(22, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -132,6 +135,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 11: _t->useRawItfNames(); break;
         case 12: _t->removeStudyFile((*reinterpret_cast<std::add_pointer_t<int>>(_a[1]))); break;
         case 13: _t->onPlotXRangeChanged((*reinterpret_cast<std::add_pointer_t<PlotBrowserWidget*>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<double>>(_a[2])),(*reinterpret_cast<std::add_pointer_t<double>>(_a[3])),(*reinterpret_cast<std::add_pointer_t<bool>>(_a[4]))); break;
+        case 14: _t->chooseGlobalTextFont(); break;
         default: ;
         }
     }
@@ -156,14 +160,14 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 14)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 14;
+        _id -= 15;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 14)
+        if (_id < 15)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 14;
+        _id -= 15;
     }
     return _id;
 }

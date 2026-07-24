@@ -502,4 +502,14 @@ CMakeFiles/TAComparator.dir/mainwindow.cpp.obj: \
  C:/Qt/6.11.1/mingw_64/include/QtGui/qtextdocument.h \
  C:/Qt/6.11.1/mingw_64/include/QtGui/qtextformat.h \
  C:/Qt/6.11.1/mingw_64/include/QtGui/QActionGroup \
- C:/Qt/6.11.1/mingw_64/include/QtGui/qactiongroup.h
+ C:/Qt/6.11.1/mingw_64/include/QtGui/qactiongroup.h \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/QApplication \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/qapplication.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qcoreapplication.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qnativeinterface.h \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/qcoreapplication_platform.h \
+ C:/Qt/6.11.1/mingw_64/include/QtGui/qguiapplication.h \
+ C:/Qt/6.11.1/mingw_64/include/QtGui/qinputmethod.h \
+ C:/Qt/6.11.1/mingw_64/include/QtGui/qguiapplication_platform.h \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/QFontDialog \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/qfontdialog.h
