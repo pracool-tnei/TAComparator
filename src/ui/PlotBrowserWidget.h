@@ -42,6 +42,15 @@ public:
 	QPixmap exportPlotPixmap(const QSize& exportSize = QSize(1600, 900)) const;
 	QString exportPlotTitle() const;
 
+	void applyExternalXRange(double minX,
+                         double maxX,
+                         bool hasCustomRange);
+signals:
+    void plotXRangeChanged(PlotBrowserWidget* sourcePlot,
+                           double minX,
+                           double maxX,
+                           bool hasCustomRange);
+
 private:
     void populateStudyTypes();
     void populateComponents();

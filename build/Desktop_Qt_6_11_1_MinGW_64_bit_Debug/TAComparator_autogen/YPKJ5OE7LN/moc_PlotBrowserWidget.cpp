@@ -39,8 +39,14 @@ template <> constexpr inline auto PlotBrowserWidget::qt_create_metaobjectdata<qt
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
         "PlotBrowserWidget",
-        "onStudyTypeChanged",
+        "plotXRangeChanged",
         "",
+        "PlotBrowserWidget*",
+        "sourcePlot",
+        "minX",
+        "maxX",
+        "hasCustomRange",
+        "onStudyTypeChanged",
         "onComponentChanged",
         "onSignalChanged",
         "onPlotTypeChanged",
@@ -48,16 +54,20 @@ template <> constexpr inline auto PlotBrowserWidget::qt_create_metaobjectdata<qt
     };
 
     QtMocHelpers::UintData qt_methods {
+        // Signal 'plotXRangeChanged'
+        QtMocHelpers::SignalData<void(PlotBrowserWidget *, double, double, bool)>(1, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 3, 4 }, { QMetaType::Double, 5 }, { QMetaType::Double, 6 }, { QMetaType::Bool, 7 },
+        }}),
         // Slot 'onStudyTypeChanged'
-        QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'onComponentChanged'
-        QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'onSignalChanged'
-        QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'onPlotTypeChanged'
-        QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(11, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'togglePlotSelectionPanel'
-        QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(12, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -81,15 +91,31 @@ void PlotBrowserWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
     auto *_t = static_cast<PlotBrowserWidget *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->onStudyTypeChanged(); break;
-        case 1: _t->onComponentChanged(); break;
-        case 2: _t->onSignalChanged(); break;
-        case 3: _t->onPlotTypeChanged(); break;
-        case 4: _t->togglePlotSelectionPanel(); break;
+        case 0: _t->plotXRangeChanged((*reinterpret_cast<std::add_pointer_t<PlotBrowserWidget*>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<double>>(_a[2])),(*reinterpret_cast<std::add_pointer_t<double>>(_a[3])),(*reinterpret_cast<std::add_pointer_t<bool>>(_a[4]))); break;
+        case 1: _t->onStudyTypeChanged(); break;
+        case 2: _t->onComponentChanged(); break;
+        case 3: _t->onSignalChanged(); break;
+        case 4: _t->onPlotTypeChanged(); break;
+        case 5: _t->togglePlotSelectionPanel(); break;
         default: ;
         }
     }
-    (void)_a;
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+        case 0:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< PlotBrowserWidget* >(); break;
+            }
+            break;
+        }
+    }
+    if (_c == QMetaObject::IndexOfMethod) {
+        if (QtMocHelpers::indexOfMethod<void (PlotBrowserWidget::*)(PlotBrowserWidget * , double , double , bool )>(_a, &PlotBrowserWidget::plotXRangeChanged, 0))
+            return;
+    }
 }
 
 const QMetaObject *PlotBrowserWidget::metaObject() const
@@ -111,15 +137,21 @@ int PlotBrowserWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
-            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 5;
+        if (_id < 6)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 6;
     }
     return _id;
+}
+
+// SIGNAL 0
+void PlotBrowserWidget::plotXRangeChanged(PlotBrowserWidget * _t1, double _t2, double _t3, bool _t4)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 0, nullptr, _t1, _t2, _t3, _t4);
 }
 QT_WARNING_POP

@@ -38,10 +38,19 @@ template <> constexpr inline auto PlotWidget::qt_create_metaobjectdata<qt_meta_t
 {
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
-        "PlotWidget"
+        "PlotWidget",
+        "xRangeChanged",
+        "",
+        "minX",
+        "maxX",
+        "hasCustomRange"
     };
 
     QtMocHelpers::UintData qt_methods {
+        // Signal 'xRangeChanged'
+        QtMocHelpers::SignalData<void(double, double, bool)>(1, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Double, 3 }, { QMetaType::Double, 4 }, { QMetaType::Bool, 5 },
+        }}),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -63,10 +72,16 @@ Q_CONSTINIT const QMetaObject PlotWidget::staticMetaObject = { {
 void PlotWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     auto *_t = static_cast<PlotWidget *>(_o);
-    (void)_t;
-    (void)_c;
-    (void)_id;
-    (void)_a;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: _t->xRangeChanged((*reinterpret_cast<std::add_pointer_t<double>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<double>>(_a[2])),(*reinterpret_cast<std::add_pointer_t<bool>>(_a[3]))); break;
+        default: ;
+        }
+    }
+    if (_c == QMetaObject::IndexOfMethod) {
+        if (QtMocHelpers::indexOfMethod<void (PlotWidget::*)(double , double , bool )>(_a, &PlotWidget::xRangeChanged, 0))
+            return;
+    }
 }
 
 const QMetaObject *PlotWidget::metaObject() const
@@ -85,6 +100,24 @@ void *PlotWidget::qt_metacast(const char *_clname)
 int PlotWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
+        _id -= 1;
+    }
     return _id;
+}
+
+// SIGNAL 0
+void PlotWidget::xRangeChanged(double _t1, double _t2, bool _t3)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 0, nullptr, _t1, _t2, _t3);
 }
 QT_WARNING_POP

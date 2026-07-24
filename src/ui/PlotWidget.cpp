@@ -363,9 +363,12 @@ void PlotWidget::setSeries(const QVector<PlotSeries>& series,
 	mCustomMaxX = 0.0;
 
 	mIsPanning = false;
+	mIsSelectingZoomArea = false;
+	
 	unsetCursor();
-
+	
 	update();
+
 }
 
 void PlotWidget::setPlotType(PlotType plotType)
@@ -391,9 +394,12 @@ void PlotWidget::clear()
 	mCustomMaxX = 0.0;
 
 	mIsPanning = false;
+	mIsSelectingZoomArea = false;
+	
 	unsetCursor();
-
+	
 	update();
+
 }
 
 void PlotWidget::paintEvent(QPaintEvent* event)
@@ -1378,6 +1384,45 @@ void PlotWidget::paintEvent(QPaintEvent* event)
 	
 		painter.restore();
 	}
+
+	//
+	// Select-to-zoom rectangle.
+	//
+	if (mIsSelectingZoomArea)
+	{
+		QRect selectionRect(mZoomSelectionStart,
+							mZoomSelectionEnd);
+	
+		selectionRect =
+			selectionRect.normalized()
+				.intersected(plotRect);
+	
+		if (selectionRect.width() >= 2 &&
+			selectionRect.height() >= 2)
+		{
+			painter.save();
+	
+			QColor fillColor =
+				palette().highlight().color();
+	
+			fillColor.setAlpha(45);
+	
+			QColor borderColor =
+				palette().highlight().color();
+	
+			borderColor.setAlpha(190);
+	
+			painter.setPen(QPen(borderColor,
+								1,
+								Qt::DashLine));
+	
+			painter.setBrush(fillColor);
+	
+			painter.drawRect(selectionRect);
+	
+			painter.restore();
+		}
+	}
 	
 }
 
@@ -1385,6 +1430,34 @@ void PlotWidget::mouseMoveEvent(QMouseEvent* event)
 {
     mMousePosition = event->position().toPoint();
     mHasMousePosition = true;
+
+	if (mIsSelectingZoomArea)
+	{
+		const QRect plotRect =
+			plotAreaRect();
+	
+		const QPoint mousePosition =
+			event->position().toPoint();
+	
+		const int clampedX =
+			std::max(plotRect.left(),
+					 std::min(mousePosition.x(),
+							  plotRect.right()));
+	
+		const int clampedY =
+			std::max(plotRect.top(),
+					 std::min(mousePosition.y(),
+							  plotRect.bottom()));
+	
+		mZoomSelectionEnd =
+			QPoint(clampedX,
+				   clampedY);
+	
+		update();
+	
+		event->accept();
+		return;
+	}
 
     if (mIsPanning)
     {
@@ -1451,6 +1524,10 @@ void PlotWidget::mouseMoveEvent(QMouseEvent* event)
 
         update();
 
+		emit xRangeChanged(mCustomMinX,
+                   mCustomMaxX,
+                   true);
+
         event->accept();
         return;
     }
@@ -1463,12 +1540,161 @@ void PlotWidget::mouseMoveEvent(QMouseEvent* event)
 void PlotWidget::mouseReleaseEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::LeftButton &&
-        mIsPanning)
+        mIsSelectingZoomArea)
     {
-        mIsPanning = false;
+        const QRect plotRect =
+            plotAreaRect();
+
+        mIsSelectingZoomArea = false;
+
+        const int selectionLeftX =
+            std::max(plotRect.left(),
+                     std::min(mZoomSelectionStart.x(),
+                              mZoomSelectionEnd.x()));
+
+        const int selectionRightX =
+            std::min(plotRect.right(),
+                     std::max(mZoomSelectionStart.x(),
+                              mZoomSelectionEnd.x()));
+
+        const int selectionWidth =
+            selectionRightX - selectionLeftX;
+
+        /*
+         * Ignore accidental clicks or tiny drags.
+         */
+        if (selectionWidth < 10 ||
+            plotRect.width() <= 0)
+        {
+            unsetCursor();
+            update();
+
+            event->accept();
+            return;
+        }
+
+        double dataMinX = 0.0;
+        double dataMaxX = 0.0;
+
+        if (!dataXRange(dataMinX,
+                        dataMaxX))
+        {
+            unsetCursor();
+            update();
+
+            event->accept();
+            return;
+        }
+
+        const double currentMinX =
+            mHasCustomXRange
+                ? mCustomMinX
+                : dataMinX;
+
+        const double currentMaxX =
+            mHasCustomXRange
+                ? mCustomMaxX
+                : dataMaxX;
+
+        const double currentRange =
+            currentMaxX - currentMinX;
+
+        const double fullRange =
+            dataMaxX - dataMinX;
+
+        if (currentRange <= 0.0 ||
+            fullRange <= 0.0)
+        {
+            unsetCursor();
+            update();
+
+            event->accept();
+            return;
+        }
+
+        const double leftRatio =
+            static_cast<double>(selectionLeftX - plotRect.left())
+            / static_cast<double>(plotRect.width());
+
+        const double rightRatio =
+            static_cast<double>(selectionRightX - plotRect.left())
+            / static_cast<double>(plotRect.width());
+
+        double newMinX =
+            currentMinX + leftRatio * currentRange;
+
+        double newMaxX =
+            currentMinX + rightRatio * currentRange;
+
+        if (newMinX > newMaxX)
+        {
+            std::swap(newMinX,
+                      newMaxX);
+        }
+
+        const double selectedRange =
+            newMaxX - newMinX;
+
+        const double minimumAllowedRange =
+            fullRange * 0.001;
+
+        if (selectedRange < minimumAllowedRange)
+        {
+            unsetCursor();
+            update();
+
+            event->accept();
+            return;
+        }
+
+        if (newMinX < dataMinX)
+        {
+            newMinX = dataMinX;
+        }
+
+        if (newMaxX > dataMaxX)
+        {
+            newMaxX = dataMaxX;
+        }
+
+        if (newMinX <= dataMinX &&
+            newMaxX >= dataMaxX)
+        {
+            mHasCustomXRange = false;
+            mCustomMinX = 0.0;
+            mCustomMaxX = 0.0;
+        }
+        else
+        {
+            mHasCustomXRange = true;
+            mCustomMinX = newMinX;
+            mCustomMaxX = newMaxX;
+        }
+
         unsetCursor();
 
         update();
+
+		emit xRangeChanged(mCustomMinX,
+                   mCustomMaxX,
+                   mHasCustomXRange);
+
+        event->accept();
+        return;
+    }
+
+    if (event->button() == Qt::LeftButton &&
+        mIsPanning)
+    {
+        mIsPanning = false;
+
+        unsetCursor();
+
+        update();
+
+		emit xRangeChanged(mCustomMinX,
+                   mCustomMaxX,
+                   mHasCustomXRange);
 
         event->accept();
         return;
@@ -1483,10 +1709,11 @@ void PlotWidget::leaveEvent(QEvent* event)
 
     mHasMousePosition = false;
 
-    if (!mIsPanning)
-    {
-        unsetCursor();
-    }
+	if (!mIsPanning &&
+		!mIsSelectingZoomArea)
+	{
+		unsetCursor();
+	}
 
     update();
 }
@@ -1583,8 +1810,88 @@ void PlotWidget::resetZoom()
     mCustomMaxX = 0.0;
 
     mIsPanning = false;
+    mIsSelectingZoomArea = false;
+
     unsetCursor();
 
+    update();
+
+    emit xRangeChanged(0.0,
+                       0.0,
+                       false);
+}
+
+void PlotWidget::applyExternalXRange(double minX,
+                                     double maxX,
+                                     bool hasCustomRange)
+{
+    /*
+     * Used by synchronized zoom.
+     * Do not emit xRangeChanged() from here, otherwise synced plots
+     * can trigger each other in a loop.
+     */
+    if (!hasCustomRange)
+    {
+        mHasCustomXRange = false;
+        mCustomMinX = 0.0;
+        mCustomMaxX = 0.0;
+
+        mIsPanning = false;
+        mIsSelectingZoomArea = false;
+
+        unsetCursor();
+        update();
+        return;
+    }
+
+    if (maxX <= minX)
+    {
+        return;
+    }
+
+    double dataMinX = 0.0;
+    double dataMaxX = 0.0;
+
+    if (!dataXRange(dataMinX,
+                    dataMaxX))
+    {
+        return;
+    }
+
+    /*
+     * Clamp the incoming zoom range to this plot's actual data range.
+     */
+    double clampedMinX =
+        std::max(minX,
+                 dataMinX);
+
+    double clampedMaxX =
+        std::min(maxX,
+                 dataMaxX);
+
+    if (clampedMaxX <= clampedMinX)
+    {
+        return;
+    }
+
+    if (clampedMinX <= dataMinX &&
+        clampedMaxX >= dataMaxX)
+    {
+        mHasCustomXRange = false;
+        mCustomMinX = 0.0;
+        mCustomMaxX = 0.0;
+    }
+    else
+    {
+        mHasCustomXRange = true;
+        mCustomMinX = clampedMinX;
+        mCustomMaxX = clampedMaxX;
+    }
+
+    mIsPanning = false;
+    mIsSelectingZoomArea = false;
+
+    unsetCursor();
     update();
 }
 
@@ -1724,9 +2031,13 @@ void PlotWidget::wheelEvent(QWheelEvent* event)
         mCustomMaxX = newMaxX;
     }
 
-    update();
-
-    event->accept();
+	update();
+	
+	emit xRangeChanged(mCustomMinX,
+					   mCustomMaxX,
+					   mHasCustomXRange);
+	
+	event->accept();
 }
 
 void PlotWidget::mouseDoubleClickEvent(QMouseEvent* event)
@@ -1745,20 +2056,19 @@ void PlotWidget::mouseDoubleClickEvent(QMouseEvent* event)
 
 void PlotWidget::mousePressEvent(QMouseEvent* event)
 {
-    const QRect plotRect = plotAreaRect();
-
-    if (event->button() != Qt::LeftButton ||
-        !plotRect.contains(event->position().toPoint()))
+    if (event->button() != Qt::LeftButton)
     {
         event->ignore();
         return;
     }
 
-    /*
-     * Pan only makes sense after zoom.
-     * If full range is visible, there is nowhere useful to pan.
-     */
-    if (!mHasCustomXRange)
+    const QPoint mousePosition =
+        event->position().toPoint();
+
+    const QRect plotRect =
+        plotAreaRect();
+
+    if (!plotRect.contains(mousePosition))
     {
         event->ignore();
         return;
@@ -1767,22 +2077,75 @@ void PlotWidget::mousePressEvent(QMouseEvent* event)
     double dataMinX = 0.0;
     double dataMaxX = 0.0;
 
-    if (!dataXRange(dataMinX, dataMaxX))
+    if (!dataXRange(dataMinX,
+                    dataMaxX))
     {
         event->ignore();
         return;
     }
 
-    if (mCustomMaxX <= mCustomMinX)
+    if (dataMinX == dataMaxX)
     {
         event->ignore();
         return;
     }
 
+    /*
+     * Normal state:
+     *   left-drag selects a zoom range.
+     *
+     * Already zoomed:
+     *   left-drag keeps the existing pan behaviour.
+     *
+     * Already zoomed + Shift:
+     *   Shift-left-drag selects another zoom range.
+     */
+    const bool forceSelectZoom =
+        event->modifiers().testFlag(Qt::ShiftModifier);
+
+    const bool shouldSelectZoom =
+        !mHasCustomXRange ||
+        forceSelectZoom;
+
+    if (shouldSelectZoom)
+    {
+        mIsSelectingZoomArea = true;
+        mIsPanning = false;
+
+        mZoomSelectionStart =
+            mousePosition;
+
+        mZoomSelectionEnd =
+            mousePosition;
+
+        mHasMousePosition = false;
+
+        setCursor(Qt::CrossCursor);
+
+        update();
+
+        event->accept();
+        return;
+    }
+
+    /*
+     * Existing pan behaviour for an already zoomed plot.
+     */
     mIsPanning = true;
-    mPanStartMousePosition = event->position().toPoint();
-    mPanStartMinX = mCustomMinX;
-    mPanStartMaxX = mCustomMaxX;
+    mIsSelectingZoomArea = false;
+
+    mPanStartMousePosition =
+        mousePosition;
+
+    mPanStartMinX =
+        mHasCustomXRange
+            ? mCustomMinX
+            : dataMinX;
+
+    mPanStartMaxX =
+        mHasCustomXRange
+            ? mCustomMaxX
+            : dataMaxX;
 
     setCursor(Qt::ClosedHandCursor);
 

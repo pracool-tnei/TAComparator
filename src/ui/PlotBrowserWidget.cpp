@@ -115,6 +115,19 @@ PlotBrowserWidget::PlotBrowserWidget(QWidget* parent)
 			this,
 			&PlotBrowserWidget::showPlotContextMenu);
 
+	connect(mPlotWidget,
+			&PlotWidget::xRangeChanged,
+			this,
+			[this](double minX,
+				   double maxX,
+				   bool hasCustomRange)
+			{
+				emit plotXRangeChanged(this,
+									   minX,
+									   maxX,
+									   hasCustomRange);
+			});
+			
 
     QHBoxLayout* mainLayout = new QHBoxLayout(this);
 	mainLayout->setSizeConstraint(QLayout::SetNoConstraint);
@@ -254,6 +267,20 @@ PlotBrowserWidget::PlotBrowserWidget(QWidget* parent)
             QOverload<int>::of(&QComboBox::currentIndexChanged),
             this,
             &PlotBrowserWidget::onPlotTypeChanged);
+}
+
+void PlotBrowserWidget::applyExternalXRange(double minX,
+                                            double maxX,
+                                            bool hasCustomRange)
+{
+    if (!mPlotWidget)
+    {
+        return;
+    }
+
+    mPlotWidget->applyExternalXRange(minX,
+                                     maxX,
+                                     hasCustomRange);
 }
 
 void PlotBrowserWidget::showPlotContextMenu(const QPoint& position)

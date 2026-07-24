@@ -56,6 +56,14 @@ public:
 	bool showMajorGrid() const;
 	bool showMinorGrid() const;
 
+	void applyExternalXRange(double minX,
+                         double maxX,
+                         bool hasCustomRange);
+signals:
+    void xRangeChanged(double minX,
+                       double maxX,
+                       bool hasCustomRange);
+
 
 
 protected:
@@ -94,6 +102,11 @@ private:
 	bool mHasCustomXRange = false;
 	double mCustomMinX = 0.0;
 	double mCustomMaxX = 0.0;
+
+	// Select-to-zoom
+	bool mIsSelectingZoomArea = false;
+	QPoint mZoomSelectionStart;
+	QPoint mZoomSelectionEnd;
 
 	// Pan
     bool mIsPanning = false;

@@ -219,6 +219,12 @@ void MainWindow::addPlotWindow()
 	
 	plotWidget->setNameDisplayMode(mNameDisplayMode);
 
+	connect(plotWidget,
+			&PlotBrowserWidget::plotXRangeChanged,
+			this,
+			&MainWindow::onPlotXRangeChanged);
+
+
     PlotDockWidget* plotDock =
     new PlotDockWidget(
         QString("Plot %1").arg(plotNumber),
@@ -1370,6 +1376,24 @@ void MainWindow::createMenus()
 				});
 	}
 
+	viewMenu->addSeparator();
+	
+	mSyncPlotZoomAction =
+		viewMenu->addAction("Sync Plot Zoom");
+	
+	mSyncPlotZoomAction->setCheckable(true);
+	mSyncPlotZoomAction->setChecked(mSyncPlotZoom);
+	
+	connect(mSyncPlotZoomAction,
+			&QAction::toggled,
+			this,
+			[this](bool checked)
+			{
+				mSyncPlotZoom =
+					checked;
+			});
+
+
 	//
 	// Export menu fourth.
 	//
@@ -1423,6 +1447,46 @@ void MainWindow::createMenus()
             &QAction::triggered,
             this,
             &MainWindow::showAbout);
+}
+
+void MainWindow::onPlotXRangeChanged(PlotBrowserWidget* sourcePlot,
+                                     double minX,
+                                     double maxX,
+                                     bool hasCustomRange)
+{
+    if (!mSyncPlotZoom)
+    {
+        return;
+    }
+
+    if (mIsApplyingSynchronizedZoom)
+    {
+        return;
+    }
+
+    if (!sourcePlot)
+    {
+        return;
+    }
+
+    mIsApplyingSynchronizedZoom =
+        true;
+
+    for (PlotBrowserWidget* plotWidget : mPlotBrowserWidgets)
+    {
+        if (!plotWidget ||
+            plotWidget == sourcePlot)
+        {
+            continue;
+        }
+
+        plotWidget->applyExternalXRange(minX,
+                                        maxX,
+                                        hasCustomRange);
+    }
+
+    mIsApplyingSynchronizedZoom =
+        false;
 }
 
 void MainWindow::addStudyFiles()

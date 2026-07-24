@@ -42,6 +42,11 @@ private slots:
 
 	void removeStudyFile(int studyIndex);
 
+	void onPlotXRangeChanged(PlotBrowserWidget* sourcePlot,
+                         double minX,
+                         double maxX,
+                         bool hasCustomRange);
+
 private:
     void createMenus();
 
@@ -99,6 +104,12 @@ private:
 	QAction* mRawItfNamesAction = nullptr;
 
 	QAction* mFilesPanelAction = nullptr;
+
+	QAction* mSyncPlotZoomAction = nullptr;
+	
+	bool mSyncPlotZoom = false;
+	bool mIsApplyingSynchronizedZoom = false;
+
 	
 	NameDisplayMode mNameDisplayMode = NameDisplayMode::IpsaFriendly;
 
