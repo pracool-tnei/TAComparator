@@ -30,7 +30,6 @@ public:
     void setFilePlotSettings(const QVector<FilePlotSettings>& settings);
 	
 	QPixmap exportPlotPixmap(int targetWidth = 1600) const;
-	QString exportPlotTitle() const;
 	
 	void setNameDisplayMode(NameDisplayMode mode);
 
@@ -39,6 +38,9 @@ public:
 
 	QSize sizeHint() const override;
 	QSize minimumSizeHint() const override;
+
+	QPixmap exportPlotPixmap(const QSize& exportSize = QSize(1600, 900)) const;
+	QString exportPlotTitle() const;
 
 private:
     void populateStudyTypes();
@@ -55,6 +57,7 @@ private:
 
 	QString currentRawStudyType() const;
 	QString currentRawSignalName() const;	
+	void clearExportCache();
 
 private slots:
     void onStudyTypeChanged();
@@ -79,4 +82,10 @@ private:
 	QPushButton* mToggleControlsButton = nullptr;
 
 	NameDisplayMode mNameDisplayMode = NameDisplayMode::IpsaFriendly;
+
+	QVector<PlotSeries> mExportSeriesList;
+	QString mExportTitle;
+	QString mExportXAxisLabel;
+	QString mExportYAxisLabel;
+	PlotType mExportPlotType = PlotType::Line;
 };

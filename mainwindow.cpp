@@ -41,6 +41,60 @@
 namespace
 {
     constexpr int MaxComparisonFiles = 5;
+	const QSize ExportPlotImageSize(1600, 900);
+
+	QRect centeredPixmapRect(const QRect& pageRect,
+							 const QSize& pixmapSize)
+	{
+		if (pageRect.isEmpty() ||
+			!pixmapSize.isValid() ||
+			pixmapSize.width() <= 0 ||
+			pixmapSize.height() <= 0)
+		{
+			return QRect();
+		}
+	
+		/*
+		 * Important:
+		 * Use only the printable area's size, not its x/y offset.
+		 *
+		 * QPdfWriter painting is already inside the page coordinate system.
+		 * Using paintRectPixels().x() / y() here can shift the image right/down.
+		 */
+		QRect availableRect(QPoint(0, 0),
+							pageRect.size());
+	
+		const int horizontalPadding =
+			qMax(40,
+				 availableRect.width() / 35);
+	
+		const int verticalPadding =
+			qMax(30,
+				 availableRect.height() / 35);
+	
+		QRect fitRect =
+			availableRect.adjusted(horizontalPadding,
+								   verticalPadding,
+								   -horizontalPadding,
+								   -verticalPadding);
+	
+		QSize scaledSize =
+			pixmapSize;
+	
+		scaledSize.scale(fitRect.size(),
+						 Qt::KeepAspectRatio);
+	
+		const int x =
+			fitRect.x() +
+			(fitRect.width() - scaledSize.width()) / 2;
+	
+		const int y =
+			fitRect.y() +
+			(fitRect.height() - scaledSize.height()) / 2;
+	
+		return QRect(QPoint(x, y),
+					 scaledSize);
+	}
 
 	QString safeExportFileName(const QString& text)
 	{
@@ -766,8 +820,11 @@ void MainWindow::exportAllPlotsAsPng()
         const QString filePath =
             directory.filePath(fileName);
 
-        const QPixmap pixmap =
-            plotBrowser->exportPlotPixmap(1600);
+		const QSize exportPlotSize(1600, 900);
+		
+		QPixmap pixmap =
+			plotBrowser->exportPlotPixmap(exportPlotSize);
+
 
         if (pixmap.isNull())
         {
@@ -808,147 +865,89 @@ void MainWindow::exportAllPlotsAsPdf()
 {
     if (mPlotBrowserWidgets.isEmpty())
     {
-        QMessageBox::information(
-            this,
-            "No plots",
-            "There are no plots to export.");
+        QMessageBox::information(this,
+                                 "No plots",
+                                 "There are no plots to export.");
 
         return;
     }
 
-    QString filePath =
+    const QString fileName =
         QFileDialog::getSaveFileName(
             this,
-            "Export All Plots as PDF Report",
+            "Export All Plots as PDF",
             QString(),
             "PDF Files (*.pdf)");
 
-    if (filePath.isEmpty())
+    if (fileName.isEmpty())
     {
         return;
     }
 
-    if (!filePath.endsWith(".pdf",
-                           Qt::CaseInsensitive))
-    {
-        filePath += ".pdf";
-    }
+    QPdfWriter pdfWriter(fileName);
 
-    QPdfWriter writer(filePath);
+    pdfWriter.setResolution(300);
 
-    writer.setResolution(300);
+    pdfWriter.setPageSize(QPageSize(QPageSize::A4));
+    pdfWriter.setPageOrientation(QPageLayout::Landscape);
 
-    QPageLayout pageLayout(
-        QPageSize(QPageSize::A4),
-        QPageLayout::Landscape,
-        QMarginsF(15, 15, 15, 15),
-        QPageLayout::Millimeter);
+    pdfWriter.setPageMargins(QMarginsF(12, 12, 12, 12),
+                             QPageLayout::Millimeter);
 
-    writer.setPageLayout(pageLayout);
-
-    QPainter painter(&writer);
+    QPainter painter(&pdfWriter);
 
     if (!painter.isActive())
     {
-        QMessageBox::critical(
-            this,
-            "Export failed",
-            "Could not create the PDF file.");
+        QMessageBox::critical(this,
+                              "Export Failed",
+                              "Unable to create PDF file.");
 
         return;
     }
 
-    bool firstPage = true;
-    int exportedCount = 0;
+    bool firstPage =
+        true;
 
-    for (int i = 0; i < mPlotBrowserWidgets.size(); ++i)
+    for (PlotBrowserWidget* plotWidget : mPlotBrowserWidgets)
     {
-        PlotBrowserWidget* plotBrowser =
-            mPlotBrowserWidgets[i];
-
-        if (!plotBrowser)
+        if (!plotWidget)
         {
             continue;
         }
 
-        const QPixmap pixmap =
-            plotBrowser->exportPlotPixmap(2200);
+        const QPixmap plotPixmap =
+            plotWidget->exportPlotPixmap(ExportPlotImageSize);
 
-        if (pixmap.isNull())
+        if (plotPixmap.isNull())
         {
             continue;
         }
 
         if (!firstPage)
         {
-            writer.newPage();
+            pdfWriter.newPage();
         }
 
-        firstPage = false;
+        firstPage =
+            false;
 
-        QRect pageRect =
-            writer.pageLayout()
-                  .paintRectPixels(writer.resolution());
+        const QRect pageRect =
+            pdfWriter.pageLayout()
+                .paintRectPixels(pdfWriter.resolution());
 
-        const QString title =
-            QString("Plot %1 - %2")
-                .arg(i + 1)
-                .arg(plotBrowser->exportPlotTitle());
-
-        QFont titleFont =
-            painter.font();
-
-        titleFont.setBold(true);
-        titleFont.setPointSize(12);
-
-        painter.setFont(titleFont);
-        painter.setPen(Qt::black);
-
-        const int titleHeight = 90;
-
-        QRect titleRect(
-            pageRect.left(),
-            pageRect.top(),
-            pageRect.width(),
-            titleHeight);
-
-        painter.drawText(titleRect,
-                         Qt::AlignCenter,
-                         title);
-
-        QRect imageArea =
-            pageRect.adjusted(0,
-                              titleHeight + 20,
-                              0,
-                              0);
-
-        QSize scaledSize =
-            pixmap.size();
-
-        scaledSize.scale(imageArea.size(),
-                         Qt::KeepAspectRatio);
-
-        QRect targetRect(
-            imageArea.left()
-                + (imageArea.width() - scaledSize.width()) / 2,
-            imageArea.top()
-                + (imageArea.height() - scaledSize.height()) / 2,
-            scaledSize.width(),
-            scaledSize.height());
+        const QRect targetRect =
+            centeredPixmapRect(pageRect,
+                               plotPixmap.size());
 
         painter.drawPixmap(targetRect,
-                           pixmap);
-
-        ++exportedCount;
+                           plotPixmap);
     }
 
     painter.end();
 
-    QMessageBox::information(
-        this,
-        "Export complete",
-        QString("Exported %1 plot(s) to PDF report.")
-            .arg(exportedCount));
+    statusBar()->showMessage(
+        QString("Exported PDF: %1")
+            .arg(fileName));
 }
 
 void MainWindow::exportSelectedPlotAsPng()
@@ -1056,8 +1055,11 @@ void MainWindow::exportSelectedPlotAsPng()
         filePath += ".png";
     }
 
-    const QPixmap pixmap =
-        plotBrowser->exportPlotPixmap(1600);
+	const QSize exportPlotSize(1600, 900);
+	
+	QPixmap pixmap =
+		plotBrowser->exportPlotPixmap(exportPlotSize);
+
 
     if (pixmap.isNull())
     {

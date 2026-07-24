@@ -410,6 +410,7 @@ void PlotBrowserWidget::updatePlot()
     if (!reference)
     {
         mSummaryLabel->setText("No study loaded.");
+		clearExportCache();
 
         if (mPlotWidget)
         {
@@ -436,6 +437,7 @@ void PlotBrowserWidget::updatePlot()
         signalName.isEmpty())
     {
         mSummaryLabel->setText("No signal selected.");
+		clearExportCache();
 
         if (mPlotWidget)
         {
@@ -514,6 +516,7 @@ void PlotBrowserWidget::updatePlot()
     if (enabledFileCount == 0)
     {
         mSummaryLabel->setText("No files selected for plotting.");
+		clearExportCache();
 
         if (mPlotWidget)
         {
@@ -559,16 +562,37 @@ void PlotBrowserWidget::updatePlot()
 			.arg(displaySignalName);
 
 
-    if (mPlotWidget)
-    {
-        mPlotWidget->setPlotType(currentPlotType());
+	const QString xAxisLabel =
+		"Time (s)";
+	
+	const QString yAxisLabel =
+		signalName;
+	
+	mExportSeriesList =
+		seriesList;
+	
+	mExportTitle =
+		title;
+	
+	mExportXAxisLabel =
+		xAxisLabel;
+	
+	mExportYAxisLabel =
+		yAxisLabel;
+	
+	mExportPlotType =
+		currentPlotType();
+	
+	if (mPlotWidget)
+	{
+		mPlotWidget->setPlotType(mExportPlotType);
+	
+		mPlotWidget->setSeries(mExportSeriesList,
+							   mExportTitle,
+							   mExportXAxisLabel,
+							   mExportYAxisLabel);
+	}
 
-		mPlotWidget->setSeries(seriesList,
-							   title,
-							   "Time (s)",
-							   displaySignalName);
-
-    }
 }
 
 const Study* PlotBrowserWidget::referenceStudy() const
@@ -590,6 +614,21 @@ QString PlotBrowserWidget::studyDisplayName(
     }
 
     const QFileInfo fileInfo(study->getFileName());
+
+    /*
+     * Show file name without .itf extension in plot legend / hover details.
+     *
+     * Example:
+     *   first.itf -> first
+     *   DynamicPluginProf.itf -> DynamicPluginProf
+     */
+    const QString nameWithoutExtension =
+        fileInfo.completeBaseName();
+
+    if (!nameWithoutExtension.isEmpty())
+    {
+        return nameWithoutExtension;
+    }
 
     if (!fileInfo.fileName().isEmpty())
     {
@@ -648,103 +687,22 @@ QString PlotBrowserWidget::currentRawSignalName() const
 
 QPixmap PlotBrowserWidget::exportPlotPixmap(int targetWidth) const
 {
-    if (!mPlotWidget)
-    {
-        return QPixmap();
-    }
-
-    const QSize sourceSize =
-        mPlotWidget->size();
-
-    if (sourceSize.width() <= 0 ||
-        sourceSize.height() <= 0)
-    {
-        return QPixmap();
-    }
-
+    /*
+     * Backward-compatible wrapper.
+     * Route the old API through the fixed-size export path.
+     */
     if (targetWidth <= 0)
     {
-        targetWidth = sourceSize.width();
+        targetWidth = 1600;
     }
 
     const int targetHeight =
         qMax(1,
              static_cast<int>(
-                 static_cast<double>(targetWidth)
-                 * static_cast<double>(sourceSize.height())
-                 / static_cast<double>(sourceSize.width())));
+                 static_cast<double>(targetWidth) * 9.0 / 16.0));
 
-    QPixmap pixmap(targetWidth,
-                   targetHeight);
-
-    pixmap.fill(Qt::white);
-
-    QPainter painter(&pixmap);
-    painter.setRenderHint(QPainter::Antialiasing,
-                          true);
-
-    const double scaleX =
-        static_cast<double>(targetWidth)
-        / static_cast<double>(sourceSize.width());
-
-    const double scaleY =
-        static_cast<double>(targetHeight)
-        / static_cast<double>(sourceSize.height());
-
-    painter.scale(scaleX,
-                  scaleY);
-
-    mPlotWidget->render(&painter);
-
-    return pixmap;
-}
-
-QString PlotBrowserWidget::exportPlotTitle() const
-{
-    const QString studyType =
-        mStudyTypeCombo
-            ? mStudyTypeCombo->currentText()
-            : QString();
-
-    const QString componentText =
-        mComponentCombo
-            ? mComponentCombo->currentText()
-            : QString();
-
-    const QString signalName =
-        mSignalCombo
-            ? mSignalCombo->currentText()
-            : QString();
-
-    QString title;
-
-    if (!studyType.isEmpty())
-    {
-        title += studyType;
-    }
-
-    if (!componentText.isEmpty())
-    {
-        if (!title.isEmpty())
-            title += " - ";
-
-        title += componentText;
-    }
-
-    if (!signalName.isEmpty())
-    {
-        if (!title.isEmpty())
-            title += " - ";
-
-        title += signalName;
-    }
-
-    if (title.isEmpty())
-    {
-        title = "Plot";
-    }
-
-    return title;
+    return exportPlotPixmap(QSize(targetWidth,
+                                  targetHeight));
 }
 
 void PlotBrowserWidget::onStudyTypeChanged()
@@ -827,6 +785,70 @@ QSize PlotBrowserWidget::minimumSizeHint() const
      * but this prevents QMainWindow from growing beyond the screen.
      */
     return QSize(320, 180);
+}
+
+void PlotBrowserWidget::clearExportCache()
+{
+    mExportSeriesList.clear();
+    mExportTitle.clear();
+    mExportXAxisLabel.clear();
+    mExportYAxisLabel.clear();
+    mExportPlotType = PlotType::Line;
+}
+
+QPixmap PlotBrowserWidget::exportPlotPixmap(
+    const QSize& exportSize) const
+{
+    QSize finalExportSize =
+        exportSize;
+
+    if (!finalExportSize.isValid() ||
+        finalExportSize.width() <= 0 ||
+        finalExportSize.height() <= 0)
+    {
+        finalExportSize = QSize(1600, 900);
+    }
+
+    /*
+     * Important:
+     * Do not export mPlotWidget directly.
+     *
+     * mPlotWidget is affected by the current UI/dock size.
+     * Instead, create a temporary off-screen PlotWidget with fixed export
+     * dimensions and render that.
+     */
+    PlotWidget exportWidget;
+
+    exportWidget.resize(finalExportSize);
+    exportWidget.setMinimumSize(finalExportSize);
+    exportWidget.setMaximumSize(finalExportSize);
+
+    exportWidget.setPlotType(mExportPlotType);
+
+    exportWidget.setSeries(mExportSeriesList,
+                           mExportTitle,
+                           mExportXAxisLabel,
+                           mExportYAxisLabel);
+
+    QPixmap pixmap(finalExportSize);
+    pixmap.fill(Qt::white);
+
+    QPainter painter(&pixmap);
+    painter.setRenderHint(QPainter::Antialiasing, true);
+
+    exportWidget.render(&painter);
+
+    return pixmap;
+}
+
+QString PlotBrowserWidget::exportPlotTitle() const
+{
+    if (!mExportTitle.isEmpty())
+    {
+        return mExportTitle;
+    }
+
+    return "Plot";
 }
 
 void PlotBrowserWidget::dumpLayoutDebug(const QString& label,

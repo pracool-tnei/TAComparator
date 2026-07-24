@@ -919,7 +919,14 @@ void PlotWidget::paintEvent(QPaintEvent* event)
 	
 			//
 			// Second pass:
-			// For every plotted series, find the value closest to nearestTime.
+			// For every plotted series, show a value only if nearestTime is inside
+			// that series' actual time span.
+			//
+			// Example:
+			//	 File A: 0s to 1s
+			//	 File B: 0s to 2s
+			//
+			// If hover time is 1.5s, File A must not show its last 1s value.
 			//
 			for (int seriesIndex = 0;
 				 seriesIndex < validSeries.size();
@@ -927,18 +934,45 @@ void PlotWidget::paintEvent(QPaintEvent* event)
 			{
 				const PlotSeries& series =
 					validSeries[seriesIndex];
-	
+			
+				if (series.mXValues.isEmpty() ||
+					series.mYValues.isEmpty() ||
+					series.mXValues.size() != series.mYValues.size())
+				{
+					continue;
+				}
+			
+				const auto minMaxTime =
+					std::minmax_element(series.mXValues.begin(),
+										series.mXValues.end());
+			
+				const double seriesMinTime =
+					*minMaxTime.first;
+			
+				const double seriesMaxTime =
+					*minMaxTime.second;
+			
+				const double tolerance =
+					std::max(1e-9,
+							 (seriesMaxTime - seriesMinTime) * 1e-9);
+			
+				if (nearestTime < seriesMinTime - tolerance ||
+					nearestTime > seriesMaxTime + tolerance)
+				{
+					continue;
+				}
+			
 				int nearestIndex = -1;
 				double nearestTimeDelta = 0.0;
 				bool foundPointForSeries = false;
-	
+			
 				for (int pointIndex = 0;
 					 pointIndex < series.mXValues.size();
 					 ++pointIndex)
 				{
 					const double timeDelta =
 						std::abs(series.mXValues[pointIndex] - nearestTime);
-	
+			
 					if (!foundPointForSeries ||
 						timeDelta < nearestTimeDelta)
 					{
@@ -947,12 +981,12 @@ void PlotWidget::paintEvent(QPaintEvent* event)
 						nearestIndex = pointIndex;
 					}
 				}
-	
+			
 				if (nearestIndex < 0)
 				{
 					continue;
 				}
-	
+			
 				HoverValue hoverValue;
 				hoverValue.mName = series.mName;
 				hoverValue.mTime = series.mXValues[nearestIndex];
@@ -964,9 +998,10 @@ void PlotWidget::paintEvent(QPaintEvent* event)
 						? series.mColor
 						: seriesColor(seriesIndex);
 				hoverValue.mValid = true;
-	
+			
 				hoverValues.append(hoverValue);
 			}
+
 	
 			if (!hoverValues.isEmpty())
 			{
@@ -1199,42 +1234,118 @@ void PlotWidget::paintEvent(QPaintEvent* event)
 	}
 
 
-    //
-    // Legend.
-    //
-    const int legendX = plotRect.right() + 20;
-    int legendY = plotRect.top() + 10;
-
-    for (int seriesIndex = 0;
-         seriesIndex < validSeries.size();
-         ++seriesIndex)
-    {
-        const PlotSeries& series = validSeries[seriesIndex];
-
-		const QColor color =
-		    series.mColor.isValid()
-		        ? series.mColor
-		        : seriesColor(seriesIndex);
-        painter.setPen(QPen(color, 2));
-
-        painter.drawLine(legendX,
-                         legendY + 6,
-                         legendX + 24,
-                         legendY + 6);
-
-        painter.setPen(QPen(palette().text().color(), 1));
-
-        const QString legendText =
-		    metrics.elidedText(series.mName,
-		                       Qt::ElideRight,
-		                       width() - legendX - 40);
-
-		painter.drawText(legendX + 32,
-		                 legendY + 11,
-		                 legendText);
-
-        legendY += 22;
-    }
+	//
+	// Legend drawn inside the plot area.
+	//
+	if (!validSeries.isEmpty())
+	{
+		const int legendPadding = 8;
+		const int legendRowHeight = 20;
+		const int legendLineWidth = 24;
+		const int legendTextGap = 8;
+		const int legendOuterMargin = 10;
+	
+		const int maxLegendTextWidth =
+			qMax(100,
+				 qMin(260,
+					  plotRect.width() / 3));
+	
+		QVector<QString> legendTexts;
+		int actualTextWidth = 0;
+	
+		for (const PlotSeries& series : validSeries)
+		{
+			const QString legendText =
+				metrics.elidedText(series.mName,
+								   Qt::ElideRight,
+								   maxLegendTextWidth);
+	
+			legendTexts.append(legendText);
+	
+			actualTextWidth =
+				qMax(actualTextWidth,
+					 metrics.horizontalAdvance(legendText));
+		}
+	
+		const int legendBoxWidth =
+			legendPadding * 2 +
+			legendLineWidth +
+			legendTextGap +
+			actualTextWidth;
+	
+		const int legendBoxHeight =
+			legendPadding * 2 +
+			legendRowHeight * validSeries.size();
+	
+		QRect legendRect(plotRect.right() - legendBoxWidth - legendOuterMargin,
+						 plotRect.top() + legendOuterMargin,
+						 legendBoxWidth,
+						 legendBoxHeight);
+	
+		if (legendRect.left() < plotRect.left() + 4)
+		{
+			legendRect.moveLeft(plotRect.left() + 4);
+		}
+	
+		if (legendRect.bottom() > plotRect.bottom() - 4)
+		{
+			legendRect.moveBottom(plotRect.bottom() - 4);
+		}
+	
+		painter.save();
+	
+		painter.setPen(QPen(QColor(120, 120, 120), 1));
+		painter.setBrush(QColor(255, 255, 255, 220));
+		painter.drawRoundedRect(legendRect, 5, 5);
+	
+		int rowY =
+			legendRect.top() + legendPadding;
+	
+		for (int seriesIndex = 0;
+			 seriesIndex < validSeries.size();
+			 ++seriesIndex)
+		{
+			const PlotSeries& series =
+				validSeries[seriesIndex];
+	
+			const QColor color =
+				series.mColor.isValid()
+					? series.mColor
+					: seriesColor(seriesIndex);
+	
+			const int lineY =
+				rowY + legendRowHeight / 2;
+	
+			const int lineStartX =
+				legendRect.left() + legendPadding;
+	
+			const int lineEndX =
+				lineStartX + legendLineWidth;
+	
+			painter.setPen(QPen(color, 2));
+	
+			painter.drawLine(lineStartX,
+							 lineY,
+							 lineEndX,
+							 lineY);
+	
+			const QRect textRect(lineEndX + legendTextGap,
+								 rowY,
+								 actualTextWidth,
+								 legendRowHeight);
+	
+			painter.setPen(QPen(palette().text().color(), 1));
+	
+			painter.drawText(textRect,
+							 Qt::AlignLeft | Qt::AlignVCenter,
+							 legendTexts.at(seriesIndex));
+	
+			rowY += legendRowHeight;
+		}
+	
+		painter.restore();
+	}
+	
 }
 
 void PlotWidget::mouseMoveEvent(QMouseEvent* event)
@@ -1350,9 +1461,9 @@ void PlotWidget::leaveEvent(QEvent* event)
 QRect PlotWidget::plotAreaRect() const
 {
     /*
-     * Use smaller margins when the plot widget is narrow.
-     * This prevents 4-plot layout from collapsing the graph into
-     * a thin vertical strip.
+     * Margins for title, axis labels and tick labels.
+     * Legend is now drawn inside the plot area, so no large right margin
+     * is needed anymore.
      */
     const int widgetWidth =
         width();
@@ -1360,20 +1471,20 @@ QRect PlotWidget::plotAreaRect() const
     const int widgetHeight =
         height();
 
-    int leftMargin = 85;
-    int rightMargin = 190;
-    int topMargin = 45;
-    int bottomMargin = 75;
+    int leftMargin = 95;
+    int rightMargin = 35;
+    int topMargin = 55;
+    int bottomMargin = 85;
 
     if (widgetWidth < 500)
     {
         leftMargin = 60;
-        rightMargin = 35;
+        rightMargin = 20;
     }
     else if (widgetWidth < 700)
     {
         leftMargin = 70;
-        rightMargin = 80;
+        rightMargin = 25;
     }
 
     if (widgetHeight < 320)
@@ -1388,7 +1499,8 @@ QRect PlotWidget::plotAreaRect() const
     const int plotHeight =
         widgetHeight - topMargin - bottomMargin;
 
-    if (plotWidth <= 20 || plotHeight <= 20)
+    if (plotWidth <= 20 ||
+        plotHeight <= 20)
     {
         return QRect();
     }
