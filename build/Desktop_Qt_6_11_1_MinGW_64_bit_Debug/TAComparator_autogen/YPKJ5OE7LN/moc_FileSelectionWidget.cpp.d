@@ -1,5 +1,6 @@
 C:/Users/prakul.p/Documents/Workspace/github/TAComparator/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/TAComparator_autogen/YPKJ5OE7LN/moc_FileSelectionWidget.cpp: C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/FileSelectionWidget.h \
   C:/Users/prakul.p/Documents/Workspace/github/TAComparator/build/Desktop_Qt_6_11_1_MinGW_64_bit_Debug/TAComparator_autogen/moc_predefs.h \
+  C:/Qt/6.11.1/mingw_64/include/QtCore/QStringList \
   C:/Qt/6.11.1/mingw_64/include/QtCore/QVector \
   C:/Qt/6.11.1/mingw_64/include/QtCore/q17memory.h \
   C:/Qt/6.11.1/mingw_64/include/QtCore/q20bit.h \

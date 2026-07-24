@@ -393,6 +393,21 @@ void PlotBrowserWidget::setFilePlotSettings(
 
 void PlotBrowserWidget::populateStudyTypes()
 {
+    /*
+     * Capture current selections before clearing any combo box.
+     * This preserves each plot window selection when files are added/removed.
+     */
+    const QString previouslySelectedStudyType =
+        currentRawStudyType();
+
+    const QVariant previouslySelectedComponent =
+        mComponentCombo
+            ? mComponentCombo->currentData()
+            : QVariant();
+
+    const QString previouslySelectedSignal =
+        currentRawSignalName();
+
     mStudyTypeCombo->blockSignals(true);
     mComponentCombo->blockSignals(true);
     mSignalCombo->blockSignals(true);
@@ -419,41 +434,62 @@ void PlotBrowserWidget::populateStudyTypes()
         return;
     }
 
-	const QString previouslySelectedStudyType =
-		currentRawStudyType();
-	
-	const QStringList studyTypes =
-		study->getStudyTypeNames();
-	
-	for (const QString& rawStudyType : studyTypes)
-	{
-		const QString displayStudyType =
-			PlotDisplayMapper::displayStudyTypeName(
-				rawStudyType,
-				mNameDisplayMode);
-	
-		mStudyTypeCombo->addItem(displayStudyType,
-								 rawStudyType);
-	}
-	
-	const int previousIndex =
-		mStudyTypeCombo->findData(previouslySelectedStudyType);
-	
-	if (previousIndex >= 0)
-	{
-		mStudyTypeCombo->setCurrentIndex(previousIndex);
-	}
-	else if (mStudyTypeCombo->count() > 0)
-	{
-		mStudyTypeCombo->setCurrentIndex(0);
-	}
+    const QStringList studyTypes =
+        study->getStudyTypeNames();
 
+    for (const QString& rawStudyType : studyTypes)
+    {
+        const QString displayStudyType =
+            PlotDisplayMapper::displayStudyTypeName(
+                rawStudyType,
+                mNameDisplayMode);
+
+        mStudyTypeCombo->addItem(displayStudyType,
+                                 rawStudyType);
+    }
+
+    const int previousStudyTypeIndex =
+        mStudyTypeCombo->findData(previouslySelectedStudyType);
+
+    if (previousStudyTypeIndex >= 0)
+    {
+        mStudyTypeCombo->setCurrentIndex(previousStudyTypeIndex);
+    }
+    else if (mStudyTypeCombo->count() > 0)
+    {
+        mStudyTypeCombo->setCurrentIndex(0);
+    }
 
     mStudyTypeCombo->blockSignals(false);
     mComponentCombo->blockSignals(false);
     mSignalCombo->blockSignals(false);
 
     populateComponents();
+
+    /*
+     * populateComponents() and populateSignals() already try to preserve
+     * their own current values, but during a full refresh the combo boxes
+     * were cleared above. Restore component/signal explicitly here.
+     */
+    const int previousComponentIndex =
+        mComponentCombo->findData(previouslySelectedComponent);
+
+    if (previousComponentIndex >= 0)
+    {
+        mComponentCombo->setCurrentIndex(previousComponentIndex);
+    }
+
+    populateSignals();
+
+    const int previousSignalIndex =
+        mSignalCombo->findData(previouslySelectedSignal);
+
+    if (previousSignalIndex >= 0)
+    {
+        mSignalCombo->setCurrentIndex(previousSignalIndex);
+    }
+
+    updatePlot();
 }
 
 void PlotBrowserWidget::populateComponents()

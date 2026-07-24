@@ -387,12 +387,12 @@ CMakeFiles/TAComparator.dir/src/ui/FileSelectionWidget.cpp.obj: \
  C:/Qt/6.11.1/mingw_64/include/QtCore/QVector \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qvector.h \
  C:/Qt/6.11.1/mingw_64/include/QtGui/QColor \
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QStringList \
  C:\Users\prakul.p\Documents\Workspace\github\TAComparator\src\ui\FilePlotSettings.h \
  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Study.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/QList \
  C:/Qt/6.11.1/mingw_64/include/QtCore/QMap \
  C:/Qt/6.11.1/mingw_64/include/QtCore/QString \
- C:/Qt/6.11.1/mingw_64/include/QtCore/QStringList \
  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/ObjectGroup.h \
  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Component.h \
  C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/model/Signal.h \
@@ -470,4 +470,6 @@ CMakeFiles/TAComparator.dir/src/ui/FileSelectionWidget.cpp.obj: \
  C:/Qt/6.11.1/mingw_64/include/QtWidgets/QColorDialog \
  C:/Qt/6.11.1/mingw_64/include/QtWidgets/qcolordialog.h \
  C:/Qt/6.11.1/mingw_64/include/QtWidgets/qdialog.h \
- C:/Qt/6.11.1/mingw_64/include/QtCore/QSignalBlocker
+ C:/Qt/6.11.1/mingw_64/include/QtCore/QSignalBlocker \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/QToolButton \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/qtoolbutton.h

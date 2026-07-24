@@ -13,6 +13,8 @@
 #include <QVBoxLayout>
 #include <QColorDialog>
 #include <QSignalBlocker>
+#include <QToolButton>
+#include <QStringList>
 
 namespace
 {
@@ -111,6 +113,64 @@ FileSelectionWidget::FileSelectionWidget(QWidget* parent)
 
 void FileSelectionWidget::setStudies(const QVector<const Study*>& studies)
 {
+    QStringList previouslySelectedFiles;
+    bool hasPreviousSelectionSnapshot = false;
+
+    /*
+     * Preferred path:
+     * MainWindow may provide a safe snapshot before removing a Study from
+     * its QVector. This avoids reading stale shifted Study* pointers here.
+     */
+    if (mUsePendingSelectedFileNames)
+    {
+        previouslySelectedFiles =
+            mPendingSelectedFileNames;
+
+        hasPreviousSelectionSnapshot =
+            true;
+
+        mPendingSelectedFileNames.clear();
+
+        mUsePendingSelectedFileNames =
+            false;
+    }
+    else
+    {
+        /*
+         * Normal refresh path.
+         * This is fine when the underlying Study vector has not just been
+         * modified before this function is called.
+         */
+        hasPreviousSelectionSnapshot =
+            !mStudies.isEmpty() &&
+            !mFileCheckBoxes.isEmpty();
+
+        if (hasPreviousSelectionSnapshot)
+        {
+            for (int i = 0; i < mStudies.size(); ++i)
+            {
+                if (i >= mFileCheckBoxes.size() ||
+                    !mFileCheckBoxes[i] ||
+                    !mStudies[i])
+                {
+                    continue;
+                }
+
+                if (mFileCheckBoxes[i]->isChecked())
+                {
+                    previouslySelectedFiles.append(
+                        mStudies[i]->getFileName());
+                }
+            }
+        }
+    }
+
+    setProperty("hasPreviousSelectionSnapshot",
+                hasPreviousSelectionSnapshot);
+
+    setProperty("previouslySelectedFiles",
+                previouslySelectedFiles);
+
     mStudies = studies;
 
     updateFileInfo();
@@ -178,12 +238,34 @@ void FileSelectionWidget::rebuildFileSelection()
         rowLayout->setContentsMargins(0, 0, 0, 0);
         rowLayout->setSpacing(6);
 
-        QCheckBox* checkBox =
-            new QCheckBox(studyDisplayName(study), rowWidget);
+		QCheckBox* checkBox =
+			new QCheckBox(studyDisplayName(study), rowWidget);
+		
+		const QStringList previouslySelectedFiles =
+			property("previouslySelectedFiles").toStringList();
+		
+		const bool hasPreviousSelectionSnapshot =
+			property("hasPreviousSelectionSnapshot").toBool();
+		
+		const bool shouldBeChecked =
+			hasPreviousSelectionSnapshot
+				? previouslySelectedFiles.contains(study->getFileName())
+				: (i == 0);
+		
+		checkBox->setChecked(shouldBeChecked);
 
-        checkBox->setChecked(i == 0);
-        checkBox->setSizePolicy(QSizePolicy::Expanding,
-                                QSizePolicy::Preferred);
+
+		checkBox->setSizePolicy(QSizePolicy::Preferred,
+								QSizePolicy::Preferred);
+		
+		QToolButton* removeButton =
+			new QToolButton(rowWidget);
+		
+		removeButton->setText("×");
+		removeButton->setToolTip("Remove file from comparison");
+		removeButton->setAutoRaise(true);
+		removeButton->setFixedSize(22, 22);
+
 
         QComboBox* colorCombo = new QComboBox(rowWidget);
         configureColorCombo(colorCombo, i);
@@ -302,9 +384,21 @@ void FileSelectionWidget::rebuildFileSelection()
                     emit settingsChanged();
                 });
 
-        rowLayout->addWidget(checkBox, 1);
-        rowLayout->addWidget(colorCombo);
-        rowLayout->addWidget(thicknessCombo);
+		connect(removeButton,
+				&QToolButton::clicked,
+				this,
+				[this, i]()
+				{
+					emit removeStudyRequested(i);
+				});
+
+
+		rowLayout->addWidget(checkBox);
+		rowLayout->addWidget(removeButton);
+		rowLayout->addStretch();
+		rowLayout->addWidget(colorCombo);
+		rowLayout->addWidget(thicknessCombo);
+
 
         mFileSelectionRows.append(rowWidget);
         mFileCheckBoxes.append(checkBox);
@@ -478,4 +572,14 @@ QString FileSelectionWidget::studyDisplayName(const Study* study) const
     }
 
     return study->getFileName();
+}
+
+void FileSelectionWidget::setPendingSelectedFileNames(
+    const QStringList& selectedFileNames)
+{
+    mPendingSelectedFileNames =
+        selectedFileNames;
+
+    mUsePendingSelectedFileNames =
+        true;
 }

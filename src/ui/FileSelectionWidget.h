@@ -3,6 +3,7 @@
 #include <QWidget>
 #include <QVector>
 #include <QColor>
+#include <QStringList>
 
 #include "FilePlotSettings.h"
 
@@ -28,9 +29,12 @@ public:
 
     QColor colorForFileIndex(int fileIndex) const;
     int thicknessForFileIndex(int fileIndex) const;
-
+	void setPendingSelectedFileNames(
+    const QStringList& selectedFileNames);
+	
 signals:
     void settingsChanged();
+	void removeStudyRequested(int studyIndex);
 
 private:
     void updateFileInfo();
@@ -54,4 +58,7 @@ private:
     QVector<QCheckBox*> mFileCheckBoxes;
     QVector<QComboBox*> mFileColorCombos;
     QVector<QComboBox*> mFileThicknessCombos;
+
+	QStringList mPendingSelectedFileNames;
+	bool mUsePendingSelectedFileNames = false;
 };

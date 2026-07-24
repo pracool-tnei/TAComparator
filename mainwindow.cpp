@@ -180,6 +180,12 @@ void MainWindow::setupDockUi()
             &FileSelectionWidget::settingsChanged,
             this,
             &MainWindow::onFileSelectionSettingsChanged);
+
+	connect(mFileSelectionWidget,
+			&FileSelectionWidget::removeStudyRequested,
+			this,
+			&MainWindow::removeStudyFile);
+
 }
 
 void MainWindow::addPlotWindow()
@@ -1137,13 +1143,8 @@ void MainWindow::refreshWidgets()
         studyPointers();
 
     /*
-     * Important:
-     * While refreshing programmatically, do not allow FileSelectionWidget
-     * to emit settingsChanged().
-     *
-     * During Clear Loaded Files, mStudies has already been cleared.
-     * If settingsChanged() fires before plot widgets are cleared, plot widgets
-     * may still try to use old Study pointers.
+     * Rebuild the Files panel first.
+     * Block signals so it does not trigger plot refresh halfway through.
      */
     if (mFileSelectionWidget)
     {
@@ -1172,11 +1173,15 @@ void MainWindow::refreshWidgets()
         }
 
         /*
-         * Set file settings first.
-         * When there are no studies, this makes updatePlot() harmless.
+         * Important:
+         * Set the new Study pointers first.
+         *
+         * setFilePlotSettings() calls updatePlot().
+         * If it is called before setStudies(), the plot may still contain
+         * stale Study pointers from before mStudies.removeAt().
          */
-        plotWidget->setFilePlotSettings(settings);
         plotWidget->setStudies(pointers);
+        plotWidget->setFilePlotSettings(settings);
     }
 }
 
@@ -1528,6 +1533,87 @@ void MainWindow::clearStudyFiles()
     setWindowTitle("TA Comparator");
 
     statusBar()->showMessage("Loaded files cleared.");
+}
+
+void MainWindow::removeStudyFile(int studyIndex)
+{
+    if (studyIndex < 0 ||
+        studyIndex >= mStudies.size())
+    {
+        return;
+    }
+
+    const QString fileName =
+        QFileInfo(mStudies[studyIndex].getFileName()).fileName();
+
+    const QMessageBox::StandardButton result =
+        QMessageBox::question(
+            this,
+            "Remove file",
+            QString("Remove this file from comparison?\n\n%1")
+                .arg(fileName),
+            QMessageBox::Yes | QMessageBox::No,
+            QMessageBox::No);
+
+    if (result != QMessageBox::Yes)
+    {
+        return;
+    }
+
+	QStringList selectedFilesAfterRemove;
+	
+	if (mFileSelectionWidget)
+	{
+		const QVector<FilePlotSettings> currentSettings =
+			mFileSelectionWidget->filePlotSettings();
+	
+		for (int i = 0; i < mStudies.size(); ++i)
+		{
+			if (i == studyIndex)
+			{
+				continue;
+			}
+	
+			if (i >= currentSettings.size())
+			{
+				continue;
+			}
+	
+			if (currentSettings[i].mEnabled)
+			{
+				selectedFilesAfterRemove.append(
+					mStudies[i].getFileName());
+			}
+		}
+	
+		mFileSelectionWidget->setPendingSelectedFileNames(
+			selectedFilesAfterRemove);
+	}
+
+
+    /*
+     * Remove the actual loaded Study from MainWindow.
+     * FileSelectionWidget only requested the removal;
+     * it does not own the Study data.
+     */
+    mStudies.removeAt(studyIndex);
+
+    refreshWidgets();
+
+    if (mStudies.isEmpty())
+    {
+        setWindowTitle("TA Comparator");
+    }
+    else
+    {
+        setWindowTitle(
+            QString("TA Comparator - %1 file(s)")
+                .arg(mStudies.size()));
+    }
+
+    statusBar()->showMessage(
+        QString("Removed file: %1")
+            .arg(fileName));
 }
 
 bool MainWindow::loadStudyFromFile(const QString& fileName,

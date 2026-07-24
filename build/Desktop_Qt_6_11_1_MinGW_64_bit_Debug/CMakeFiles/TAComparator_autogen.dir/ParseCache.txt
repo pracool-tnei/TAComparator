@@ -404,6 +404,7 @@ C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/PlotDockWidget.
 C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/reader/TextFileReader.h
 C:/Users/prakul.p/Documents/Workspace/github/TAComparator/src/ui/FileSelectionWidget.h
  mmc:Q_OBJECT
+ mdp:C:/Qt/6.11.1/mingw_64/include/QtCore/QStringList
  mdp:C:/Qt/6.11.1/mingw_64/include/QtCore/QVector
  mdp:C:/Qt/6.11.1/mingw_64/include/QtCore/q17memory.h
  mdp:C:/Qt/6.11.1/mingw_64/include/QtCore/q20bit.h

@@ -40,6 +40,8 @@ private slots:
 	void useIpsaFriendlyNames();
 	void useRawItfNames();
 
+	void removeStudyFile(int studyIndex);
+
 private:
     void createMenus();
 
