@@ -270,13 +270,46 @@ void PlotBrowserWidget::showPlotContextMenu(const QPoint& position)
 
     exportAction->setEnabled(!mExportSeriesList.isEmpty());
 
+    menu.addSeparator();
+
+	QAction* showMajorGridAction =
+		menu.addAction("Show Major Grid");
+	
+	showMajorGridAction->setCheckable(true);
+	showMajorGridAction->setChecked(mPlotWidget->showMajorGrid());
+	
+	QAction* showMinorGridAction =
+		menu.addAction("Show Minor Grid");
+	
+	showMinorGridAction->setCheckable(true);
+	showMinorGridAction->setChecked(mPlotWidget->showMinorGrid());
+
+
     QAction* selectedAction =
         menu.exec(mPlotWidget->mapToGlobal(position));
 
     if (selectedAction == exportAction)
     {
         exportCurrentPlotAsPng();
+        return;
     }
+
+	if (selectedAction == showMajorGridAction)
+	{
+		mPlotWidget->setShowMajorGrid(
+			showMajorGridAction->isChecked());
+	
+		return;
+	}
+	
+	if (selectedAction == showMinorGridAction)
+	{
+		mPlotWidget->setShowMinorGrid(
+			showMinorGridAction->isChecked());
+	
+		return;
+	}
+
 }
 
 void PlotBrowserWidget::exportCurrentPlotAsPng()
@@ -972,6 +1005,12 @@ QPixmap PlotBrowserWidget::exportPlotPixmap(
     exportWidget.setMaximumSize(finalExportSize);
 
     exportWidget.setPlotType(mExportPlotType);
+
+	if (mPlotWidget)
+	{
+		exportWidget.setShowMajorGrid(mPlotWidget->showMajorGrid());
+		exportWidget.setShowMinorGrid(mPlotWidget->showMinorGrid());
+	}
 
     exportWidget.setSeries(mExportSeriesList,
                            mExportTitle,

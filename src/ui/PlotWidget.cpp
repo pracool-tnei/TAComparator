@@ -580,57 +580,59 @@ void PlotWidget::paintEvent(QPaintEvent* event)
 						   maxY,
 						   yTicks,
 						   5);
-
-	//
-	// Minor vertical grid lines.
-	//
-	painter.setPen(minorGridPen);
-	
-	for (double value : minorXTicks)
+	if (mShowMinorGrid)
 	{
-		const double ratio =
-			(value - minX) / (maxX - minX);
-	
-		const int x =
-			plotRect.left()
-			+ static_cast<int>(ratio * plotRect.width());
-	
-		if (x <= plotRect.left() ||
-			x >= plotRect.right())
+		//
+		// Minor vertical grid lines.
+		//
+		painter.setPen(minorGridPen);
+		
+		for (double value : minorXTicks)
 		{
-			continue;
+			const double ratio =
+				(value - minX) / (maxX - minX);
+		
+			const int x =
+				plotRect.left()
+				+ static_cast<int>(ratio * plotRect.width());
+		
+			if (x <= plotRect.left() ||
+				x >= plotRect.right())
+			{
+				continue;
+			}
+		
+			painter.drawLine(x,
+							 plotRect.top(),
+							 x,
+							 plotRect.bottom());
 		}
-	
-		painter.drawLine(x,
-						 plotRect.top(),
-						 x,
-						 plotRect.bottom());
-	}
-	
-	//
-	// Minor horizontal grid lines.
-	//
-	for (double value : minorYTicks)
-	{
-		const double ratio =
-			(value - minY) / (maxY - minY);
-	
-		const int y =
-			plotRect.bottom()
-			- static_cast<int>(ratio * plotRect.height());
-	
-		if (y <= plotRect.top() ||
-			y >= plotRect.bottom())
+		
+		//
+		// Minor horizontal grid lines.
+		//
+		for (double value : minorYTicks)
 		{
-			continue;
+			const double ratio =
+				(value - minY) / (maxY - minY);
+		
+			const int y =
+				plotRect.bottom()
+				- static_cast<int>(ratio * plotRect.height());
+		
+			if (y <= plotRect.top() ||
+				y >= plotRect.bottom())
+			{
+				continue;
+			}
+		
+			painter.drawLine(plotRect.left(),
+							 y,
+							 plotRect.right(),
+							 y);
 		}
-	
-		painter.drawLine(plotRect.left(),
-						 y,
-						 plotRect.right(),
-						 y);
-	}
 
+	}
 	
 	for (double value : xTicks)
 	{
@@ -650,7 +652,7 @@ void PlotWidget::paintEvent(QPaintEvent* event)
 		//
 		// Vertical grid line inside plot area.
 		//
-		if (x > plotRect.left() &&
+		if (mShowMajorGrid  && x > plotRect.left() &&
 			x < plotRect.right())
 		{
 			painter.setPen(gridPen);
@@ -698,7 +700,7 @@ void PlotWidget::paintEvent(QPaintEvent* event)
 		//
 		// Horizontal grid line inside plot area.
 		//
-		if (y > plotRect.top() &&
+		if (mShowMajorGrid && y > plotRect.top() &&
 			y < plotRect.bottom())
 		{
 			painter.setPen(gridPen);
@@ -1584,6 +1586,38 @@ void PlotWidget::resetZoom()
     unsetCursor();
 
     update();
+}
+
+void PlotWidget::setShowMajorGrid(bool show)
+{
+    if (mShowMajorGrid == show)
+    {
+        return;
+    }
+
+    mShowMajorGrid = show;
+    update();
+}
+
+void PlotWidget::setShowMinorGrid(bool show)
+{
+    if (mShowMinorGrid == show)
+    {
+        return;
+    }
+
+    mShowMinorGrid = show;
+    update();
+}
+
+bool PlotWidget::showMajorGrid() const
+{
+    return mShowMajorGrid;
+}
+
+bool PlotWidget::showMinorGrid() const
+{
+    return mShowMinorGrid;
 }
 
 void PlotWidget::wheelEvent(QWheelEvent* event)

@@ -50,6 +50,13 @@ public:
     void setPlotType(PlotType plotType);
     PlotType getPlotType() const;
     void clear();
+	void setShowMajorGrid(bool show);
+	void setShowMinorGrid(bool show);
+	
+	bool showMajorGrid() const;
+	bool showMinorGrid() const;
+
+
 
 protected:
 	void paintEvent(QPaintEvent* event) override;
@@ -93,6 +100,9 @@ private:
     QPoint mPanStartMousePosition;
     double mPanStartMinX = 0.0;
     double mPanStartMaxX = 0.0;
+
+	bool mShowMajorGrid = true;
+	bool mShowMinorGrid = true;
 
     PlotType mPlotType = PlotType::Line;
 };
