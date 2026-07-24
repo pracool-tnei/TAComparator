@@ -363,13 +363,22 @@ void MainWindow::resetPlotLayout()
 						Qt::Vertical);
 	}
 	
-	if (mPlotDocks.size() >= 2 &&
+	if (mPlotDocks.size() == 2 &&
 		mPlotDocks[1])
 	{
 		mPlotDocks[1]->show();
 	
+		splitDockWidget(plot1,
+						mPlotDocks[1],
+						Qt::Vertical);
+	}
+	else if (mPlotDocks.size() >= 2 &&
+			 mPlotDocks[1])
+	{
+		mPlotDocks[1]->show();
+	
 		//
-		// Then split the top row.
+		// For 3 or 4 plots, keep the existing/simple layout.
 		//
 		splitDockWidget(plot1,
 						mPlotDocks[1],
@@ -417,12 +426,13 @@ void MainWindow::resetPlotLayout()
                             Qt::Horizontal);
             }
 
-            if (mPlotDocks.size() == 2)
-            {
-                resizeDocks({ mPlotDocks[0], mPlotDocks[1] },
-                            { 1, 1 },
-                            Qt::Horizontal);
-            }
+			if (mPlotDocks.size() == 2)
+			{
+				resizeDocks({ mPlotDocks[0], mPlotDocks[1] },
+							{ 1, 1 },
+							Qt::Vertical);
+			}
+
             else if (mPlotDocks.size() == 3)
             {
                 resizeDocks({ mPlotDocks[0], mPlotDocks[2] },
@@ -483,14 +493,14 @@ void MainWindow::equalizePlotDockSizes()
         return;
     }
 
-    if (mPlotDocks.size() == 2)
-    {
-        resizeDocks({ mPlotDocks[0], mPlotDocks[1] },
-                    { 1, 1 },
-                    Qt::Horizontal);
-
-        return;
-    }
+	if (mPlotDocks.size() == 2)
+	{
+		resizeDocks({ mPlotDocks[0], mPlotDocks[1] },
+					{ 1, 1 },
+					Qt::Vertical);
+	
+		return;
+	}
 
     if (mPlotDocks.size() == 3)
     {
@@ -581,14 +591,19 @@ void MainWindow::arrangePlotDocks()
         return;
     }
 
-    if (mPlotDocks.size() == 2)
-    {
-        splitDockWidget(mPlotDocks[0],
-                        mPlotDocks[1],
-                        Qt::Horizontal);
+	if (mPlotDocks.size() == 2)
+	{
+		splitDockWidget(mPlotDocks[0],
+						mPlotDocks[1],
+						Qt::Vertical);
+	
+		resizeDocks({ mPlotDocks[0], mPlotDocks[1] },
+					{ 1, 1 },
+					Qt::Vertical);
+	
+		return;
+	}
 
-        return;
-    }
 
     if (mPlotDocks.size() == 3)
     {
